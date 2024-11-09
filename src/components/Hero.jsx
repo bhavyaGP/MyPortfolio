@@ -43,7 +43,8 @@ const Hero = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 1.5, duration: 1 }}
-                            style={{ height: '450px', borderRadius: '50%' }}
+                            className="rounded-full object-cover"
+                            style={{ height: 'auto', maxHeight: '450px', width: '100%', maxWidth: '450px' }}
                         />
                     </div>
                 </div>
