@@ -1,11 +1,11 @@
 import { HERO_CONTENT } from '../constants'
 // import profilePic from '../assets/kevinRushProfile.jpg'
-import profilePic from '../assets/projects/bhavya2.jpg'
+import profilePic from '../assets/projects/bhavya3.jpg'
 import { motion } from "framer-motion"
 
 const Hero = () => {
     return (
-        <div className="border-neutral-900 pb-4 lg:mb-35 pl-20">
+        <div className="border-neutral-900 pb-4 lg:mb-35 pl-10">
             <div className="flex flex-wrap">
                 <div className="w-full lg:w-1/2">
                     <div className="flex flex-col items-center lg:items-start">
@@ -43,7 +43,7 @@ const Hero = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 1.5, duration: 1 }}
-                            style={{ height: '350px', background: 'none', borderRadius: '50%' }}
+                            style={{ height: '450px', borderRadius: '50%' }}
                         />
                     </div>
                 </div>
