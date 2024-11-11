@@ -42,7 +42,7 @@ export const PROJECTS = [
     description:
       "A personal portfolio website showcasing projects, skills, and contact information.",
     technologies: ["HTML", "CSS", "React", "Bootstrap"],
-    livelink: "https://www.google.com",
+    livelink: "https://my-portfolio-peach-delta-37.vercel.app/",
     githublink: "https://github.com/bhavyagp/myportfolio",
   },
   {
