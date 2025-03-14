@@ -4,9 +4,14 @@ import project3 from "../assets/projects/project-3.jpg";
 import project4 from "../assets/projects/project-4.jpg";
 import project5 from "../assets/projects/logo.webp";
 
-export const HERO_CONTENT = `I am a passionate Backend developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
+export const HERO_CONTENT = `I am a passionate Full Stack developer with a knack for crafting robust and scalable web applications. I have honed my skills in front-end technologies like React, as well as MERN technologies like React,Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
 
-export const ABOUT_TEXT = `I am a dedicated and versatile full stack developer with a passion for creating efficient and user-friendly web applications. With 5 years of professional experience, I have worked with a variety of technologies, including React, Node.js, MySQL, PostgreSQL, and MongoDB. My journey in web development began with a deep curiosity for how things work, and it has evolved into a career where I continuously strive to learn and adapt to new challenges. I thrive in collaborative environments and enjoy solving complex problems to deliver high-quality solutions. Outside of coding, I enjoy staying active, exploring new technologies, and contributing to open-source projects.`;
+export const ABOUT_TEXT = `I am a passionate and versatile full stack developer with expertise in building scalable and efficient web applications. With hands-on experience in React, Node.js, Express.js, Flask, MySQL, PostgreSQL, and MongoDB, I thrive on solving complex problems and optimizing performance.  
+
+I have developed impactful projects like QuickLearnAI, an AI-powered educational platform, and ProgressMatrix, a real-time student performance tracking system. My work also includes building secure authentication systems, integrating AI tools like Langchain, and optimizing data storage with VectorDB.  
+
+Beyond coding, I enjoy mentoring students, conducting workshops, and contributing to open-source projects. I have also competed in and won hackathons, demonstrating my ability to build innovative solutions under pressure. When I’m not coding, you’ll find me exploring new technologies or playing Valorant.`;
+
 
 export const EXPERIENCES = [
   {
@@ -47,6 +52,15 @@ export const PROJECTS = [
     githublink: "https://github.com/bhavyagp/studentflow",
   },
   {
+    title: "BhavyaAI",
+    image: project2,
+    description:
+      "A chatbot for answering questions and providing information about the user.which behaves like a personal assistant.",
+    technologies: ["Node.js", "Express", "Python", "Google Gemini API", "Pinecone", "React.js", "Tailwind CSS"],
+    livelink: "https://bhavya-ai.vercel.app/",
+    githublink: "https://github.com/bhavyagp/bhavyaai",
+  },
+  {
     title: "Portfolio Website",
     image: project3,
     description:
@@ -72,8 +86,8 @@ export const PROJECTS = [
     technologies: ["Node.js", "Express", "Python", "Apache Solr"],
     livelink: "https://www.google.com",
     githublink: "https://github.com/bhavyagp/mentorpedia",
-
   }
+
 ];
 
 export const CONTACT = {
