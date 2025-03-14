@@ -2,6 +2,7 @@ import project1 from "../assets/projects/project-1.jpg";
 import project2 from "../assets/projects/project-2.jpg";
 import project3 from "../assets/projects/project-3.jpg";
 import project4 from "../assets/projects/project-4.jpg";
+import project5 from "../assets/projects/logo.webp";
 
 export const HERO_CONTENT = `I am a passionate Backend developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
 
@@ -28,12 +29,21 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    "title": "QuickLearnAI",
+    "image": project5,
+    "description": "QuickLearnAI is an AI-powered platform that provides instant explanations, code assistance, and real-time learning resources for developers and students. It enhances understanding with interactive responses and tailored guidance.",
+    "technologies": ["React", "Node.js", "Express", "MongoDB", "Flask", "Tailwind CSS", "Langchain", "ChatGroq", "HuggingFaceAPI", "Redis"],
+    "livelink": "https://drive.google.com/file/d/1q2A8GW_S42ClBS07zmsKq_AyBSpnL_pO/view?usp=sharing",
+    "githublink": "https://github.com/bhavyagp/quicklearnai"
+  }
+  ,
+  {
     title: "ProgressMatrix",
     image: project1,
     description:
       "Engineeredareal-time system to track and evaluate students' learning progress across multiple schools, enhancing data accuracy and accessibility. Innovatedcomprehensive tools and dashboards to monitor academic performance, providing actionable insights for educational improvements. Integrated data from diverse sources to deliver a unified view of , data-driven decision-making.",
     technologies: ["React js", "Node.js", "PostgreSQL", "Express.js"],
-    livelink: "https://www.google.com",
+    livelink: "https://drive.google.com/file/d/1WiXgRdBA5mOWw5wJlWR21LIzW294a0uw/view?usp=drive_link",
     githublink: "https://github.com/bhavyagp/studentflow",
   },
   {

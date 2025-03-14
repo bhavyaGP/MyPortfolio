@@ -30,7 +30,7 @@ const Navbar = () => {
                     >
                         <FaFileAlt className="text-lg" />
                         <span>
-                           <a href="https://drive.google.com/file/d/1l7SIcECB2hnYBxDt4C6Y0FwHnOcLBXDf/view?usp=sharing" target="_blank">Resume</a>  
+                           <a href="https://drive.google.com/file/d/14O-V9dJKSNaT8MSxF9LVBRD62p22rJt0/view?usp=sharing" target="_blank">Resume</a>  
                             </span>
                     </motion.button>
 
