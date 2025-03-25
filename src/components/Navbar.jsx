@@ -59,6 +59,12 @@ const Navbar = () => {
                             <span>Certificates</span>
                         </Link>
                     </AnimatedButton>
+
+                    <AnimatedButton>
+                        <Link to="/achievements" className="flex items-center gap-2">
+                            <span>Achievements</span>
+                        </Link>
+                    </AnimatedButton>
                 </motion.div>
 
                 {/* Social Icons Section */}

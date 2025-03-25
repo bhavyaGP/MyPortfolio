@@ -6,6 +6,7 @@ import Project from './components/Project'
 import Technologies from './components/Technologies'
 import Contact from './components/Contact'
 import Certificates from './components/Certificates'
+import Achievements from './components/Achievements'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
               </>
             } />
             <Route path="/certificates" element={<Certificates />} />
+            <Route path="/achievements" element={<Achievements />} />
           </Routes>
         </div>
       </div>
