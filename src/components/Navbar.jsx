@@ -1,26 +1,90 @@
-import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFileAlt, FaCertificate } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFileAlt, FaCertificate, FaSun, FaMoon, FaFont, FaMinus, FaPlus } from 'react-icons/fa';
 import logo from '../assets/image.png';
 import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
-const AnimatedButton = ({ children, className = "" }) => {
+
+
+const NavbarButton = ({ children, to, isExternal = false }) => {
     return (
-        <motion.button
-            className={`relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ${className}`}
+        <motion.div
+            className="relative inline-flex overflow-hidden rounded-full p-[1px] focus:outline-none"
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.1 }}
         >
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-                {children}
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-4 py-2 text-sm font-medium text-white backdrop-blur-3xl">
+                {isExternal ? (
+                    <a
+                        href={to}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center"
+                    >
+                        {children}
+                    </a>
+                ) : (
+                    <Link
+                        to={to}
+                        className="inline-flex items-center justify-center"
+                    >
+                        {children}
+                    </Link>
+                )}
             </span>
-        </motion.button>
+        </motion.div>
+    );
+};
+
+const SocialButton = ({ icon, to }) => {
+    return (
+        <motion.div
+            className="relative inline-flex overflow-hidden rounded-full p-[1px] focus:outline-none h-10 w-10"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+        >
+            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 text-white backdrop-blur-3xl">
+                <a
+                    href={to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center"
+                >
+                    {icon}
+                </a>
+            </span>
+        </motion.div>
+    );
+};
+
+const ThemeToggleButton = ({ isDarkMode, toggleTheme }) => {
+    return (
+        <motion.div
+            className="relative inline-flex overflow-hidden rounded-full p-[1px] focus:outline-none h-10 w-10"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+        >
+            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 text-white backdrop-blur-3xl">
+                <button
+                    onClick={toggleTheme}
+                    className="inline-flex items-center justify-center"
+                    aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+                >
+                    {isDarkMode ? <FaSun className="text-lg" /> : <FaMoon className="text-lg" />}
+                </button>
+            </span>
+        </motion.div>
     );
 };
 
 const Navbar = () => {
+    const { isDarkMode, toggleTheme } = useTheme();
+
     return (
-        <nav className="mb-20 flex items-center justify-between py-6">
+        <nav className="mb-20 flex items-center justify-between py-6 px-4">
             <motion.div
                 className="flex flex-shrink-0 items-center justify-center h-14"
                 initial={{ opacity: 0, y: -20 }}
@@ -31,72 +95,70 @@ const Navbar = () => {
                 <Link to="/">
                     <div className="flex items-center">
                         <img className="mx-2 w-10" src={logo} alt="logo" style={{ borderRadius: '50%' }} />
-                        <span className="text-lg font-bold">Bhavya</span>
+                        <span className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Bhavya</span>
                     </div>
                 </Link>
             </motion.div>
 
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-6">
                 <motion.div
-                    className="flex items-center gap-4"
+                    className="flex items-center gap-3"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                    <AnimatedButton>
-                        <a href="https://drive.google.com/file/d/14O-V9dJKSNaT8MSxF9LVBRD62p22rJt0/view?usp=sharing"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2">
-                            <FaFileAlt className="text-lg" />
-                            <span>Resume</span>
-                        </a>
-                    </AnimatedButton>
+                    <NavbarButton 
+                        to="https://drive.google.com/file/d/14O-V9dJKSNaT8MSxF9LVBRD62p22rJt0/view?usp=sharing" 
+                        isExternal={true}
+                    >
+                        <FaFileAlt className="mr-2" /> Resume
+                    </NavbarButton>
 
-                    <AnimatedButton>
-                        <Link to="/certificates" className="flex items-center gap-2">
-                            <FaCertificate className="text-lg" />
-                            <span>Certificates</span>
-                        </Link>
-                    </AnimatedButton>
+                    <NavbarButton to="/certificates">
+                        <FaCertificate className="mr-2" /> Certificates
+                    </NavbarButton>
 
-                    <AnimatedButton>
-                        <Link to="/achievements" className="flex items-center gap-2">
-                            <span>Achievements</span>
-                        </Link>
-                    </AnimatedButton>
+                    <NavbarButton to="/achievements">
+                        Achievements
+                    </NavbarButton>
+                </motion.div>
+
+                {/* Theme Toggle Button */}
+                <motion.div
+                    className="flex items-center gap-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                    <ThemeToggleButton isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
                 </motion.div>
 
                 {/* Social Icons Section */}
                 <motion.div
-                    className="flex items-center justify-center gap-4 text-2xl"
+                    className="flex items-center gap-3"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
                 >
-                    <AnimatedButton className="h-10 w-10">
-                        <a href="https://www.linkedin.com/in/bhavya-prajapati-a8b001256/" target="_blank" rel="noopener noreferrer">
-                            <FaLinkedin />
-                        </a>
-                    </AnimatedButton>
+                    <SocialButton 
+                        icon={<FaLinkedin className="text-lg" />} 
+                        to="https://www.linkedin.com/in/bhavya-prajapati-a8b001256/" 
+                    />
 
-                    <AnimatedButton className="h-10 w-10">
-                        <a href="https://www.github.com/bhavyagp" target="_blank" rel="noopener noreferrer">
-                            <FaGithub />
-                        </a>
-                    </AnimatedButton>
+                    <SocialButton 
+                        icon={<FaGithub className="text-lg" />}
+                        to="https://www.github.com/bhavyagp"
+                    />
 
-                    <AnimatedButton className="h-10 w-10">
-                        <a href="https://www.twitter.com/5678_bhavya" target="_blank" rel="noopener noreferrer">
-                            <FaTwitter />
-                        </a>
-                    </AnimatedButton>
+                    <SocialButton 
+                        icon={<FaTwitter className="text-lg" />}
+                        to="https://www.twitter.com/5678_bhavya"
+                    />
 
-                    <AnimatedButton className="h-10 w-10">
-                        <a href="https://www.instagram.com/bhavya5.exe" target="_blank" rel="noopener noreferrer">
-                            <FaInstagram />
-                        </a>
-                    </AnimatedButton>
+                    <SocialButton
+                        icon={<FaInstagram className="text-lg" />}
+                        to="https://www.instagram.com/bhavya5.exe"
+                    />
                 </motion.div>
             </div>
         </nav>
