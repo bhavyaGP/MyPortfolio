@@ -71,9 +71,9 @@ const Certificates = () => {
         },
         {
             id: 2,
-            title: "React - The Complete Guide",
+            title: "Github Session @CE Department",
             issuer: "Coursera",
-            description: "I completed the React - The Complete Guide course to enhance my skills in using React, a popular JavaScript library for building user interfaces. This course provided me with a comprehensive understanding of React's core concepts, including components, state management, and routing. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
+            description: "I completed the Github Session course to enhance my skills in using Github, a popular platform for version control and collaboration. This course provided me with a comprehensive understanding of Github's core concepts, including repositories, branches, and pull requests. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
             date: "March 2023",
             imageUrl: certificate2,
             certificateUrl: "https://drive.google.com/file/d/1TlZJFxVlB-JlfjOj111g8YduM3MnxWXV/view?usp=drive_link"
@@ -89,18 +89,18 @@ const Certificates = () => {
         },
         {
             id: 4,
-            title: "Machine Learning Specialization",
+            title: "AI text Summarizer",
             issuer: "Coursera",
-            description: "I completed the Machine Learning Specialization course to enhance my skills in using machine learning, a popular programming language for building interactive web applications. This course provided me with a comprehensive understanding of machine learning's core concepts, including variables, functions, objects, and arrays. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
+            description: "I completed the AI text Summarizer course to enhance my skills in using AI, a popular programming language for building interactive web applications. This course provided me with a comprehensive understanding of AI's core concepts, including variables, functions, objects, and arrays. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
             date: "August 2023",
             imageUrl: certificate4,
             certificateUrl: "https://drive.google.com/file/d/15TTm6dKwvIgFyI4CkkS2Gp46NajunbOI/view?usp=drive_link"
         },
         {
             id: 5,
-            title: "Postman AI",
+            title: "Introduction to MongoDB",
             issuer: "Postman",
-            description: "I completed the Postman AI course to enhance my skills in using Postman, a popular tool for building interactive web applications. This course provided me with a comprehensive understanding of Postman's core concepts, including variables, functions, objects, and arrays. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
+            description: "I completed the Introduction to MongoDB course to enhance my skills in using MongoDB, a popular tool for building interactive web applications. This course provided me with a comprehensive understanding of MongoDB's core concepts, including variables, functions, objects, and arrays. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
             date: "September 2023",
             imageUrl: certificate5,
             certificateUrl: "https://drive.google.com/file/d/1ESiIj-XxVMiYrwAjHfeSSGCGpgIF7GbH/view?usp=drive_link"
