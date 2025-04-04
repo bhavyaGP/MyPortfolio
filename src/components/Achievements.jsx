@@ -11,30 +11,31 @@ const TimelineItem = ({ title, subtitle, date, isLeft, index, photo, isLast }) =
     
     return (
         <motion.div
-            initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="flex items-center relative mb-16"
+            className="flex relative mb-12 md:mb-16"
         >
             {/* Main content wrapper with proper positioning */}
-            <div className={`w-full flex ${isLeft ? 'justify-end' : 'justify-start'} relative`}>
-                {/* Card container - half width and properly positioned */}
-                <div className={`w-[45%] ${isLeft ? 'mr-8' : 'ml-8'}`}>
+            <div className="w-full relative">
+                {/* Card container with responsive width */}
+                <div className={`w-[calc(100%-20px)] sm:w-[90%] md:w-[45%] 
+                    ${isLeft ? 'md:ml-auto md:mr-8 ml-5' : 'md:mr-auto md:ml-8 ml-5'}`}>
                     <motion.div
-                        className={`p-6 rounded-2xl relative group shadow-lg
+                        className={`p-4 sm:p-5 rounded-xl relative group shadow-lg
                         ${isDarkMode 
-                            ? 'bg-slate-800/70 text-white' 
-                            : 'bg-white/90 text-gray-800 border border-gray-200'}`}
-                        whileHover={{ scale: 1.02, y: -5 }}
+                            ? 'bg-slate-800/80 text-white' 
+                            : 'bg-white/95 text-gray-800 border border-gray-200'}`}
+                        whileHover={{ scale: 1.01, y: -3 }}
                         transition={{ duration: 0.2 }}
                     >
                         {/* Animated border */}
-                        <div className="absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-r from-purple-500/50 to-blue-500/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 rounded-xl p-[1px] bg-gradient-to-r from-purple-500/50 to-blue-500/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                         {/* Content */}
                         <div className="relative">
                             <motion.div
-                                className="mb-4"
+                                className="mb-3 md:mb-4"
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 transition={{ delay: 0.2 }}
@@ -42,12 +43,12 @@ const TimelineItem = ({ title, subtitle, date, isLeft, index, photo, isLast }) =
                                 <img 
                                     src={photo} 
                                     alt={title}
-                                    className="w-full h-48 object-cover rounded-lg shadow-md"
+                                    className="w-full h-32 sm:h-40 md:h-48 object-cover rounded-lg shadow-md"
                                 />
                             </motion.div>
 
                             <motion.h3
-                                className={`text-xl font-bold mb-2 ${!isLeft && 'text-right'}`}
+                                className={`text-base sm:text-lg md:text-xl font-bold mb-1.5 md:mb-2`}
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 transition={{ delay: 0.3 }}
@@ -56,7 +57,7 @@ const TimelineItem = ({ title, subtitle, date, isLeft, index, photo, isLast }) =
                             </motion.h3>
 
                             <motion.div
-                                className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-sm mb-2 ${!isLeft && 'text-right'}`}
+                                className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-xs sm:text-sm mb-2`}
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 transition={{ delay: 0.4 }}
@@ -65,7 +66,7 @@ const TimelineItem = ({ title, subtitle, date, isLeft, index, photo, isLast }) =
                             </motion.div>
 
                             <motion.div
-                                className={`text-purple-500 text-xs font-medium ${!isLeft && 'text-right'}`}
+                                className={`text-purple-500 text-xs font-medium`}
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 transition={{ delay: 0.6 }}
@@ -77,11 +78,11 @@ const TimelineItem = ({ title, subtitle, date, isLeft, index, photo, isLast }) =
                 </div>
             </div>
 
-            {/* Timeline dot - improved to be less annoying */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 z-20">
+            {/* Timeline dot - positioned correctly for all screen sizes */}
+            <div className="absolute left-0 md:left-1/2 top-10 md:top-1/2 transform md:-translate-x-1/2 md:-translate-y-1/2 z-20">
                 <motion.div
-                    className={`w-3.5 h-3.5 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-purple-500'} 
-                    ${isDarkMode ? 'shadow-[0_0_8px_rgba(192,132,252,0.6)]' : 'shadow-[0_0_8px_rgba(168,85,247,0.4)]'}`}
+                    className={`w-2.5 md:w-3 h-2.5 md:h-3 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-purple-500'} 
+                    ${isDarkMode ? 'shadow-[0_0_5px_rgba(192,132,252,0.5)]' : 'shadow-[0_0_5px_rgba(168,85,247,0.4)]'}`}
                     initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ 
@@ -121,27 +122,27 @@ const Achievements = () => {
     ];
     
     return (
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-2 sm:px-4 py-12 md:py-16">
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-center mb-16"
+                className="text-center mb-10 md:mb-16"
             >
-                <h2 className={`text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Achievements</h2>
-                <div className="w-24 h-1 bg-purple-500 mx-auto"></div>
+                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-2 md:mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Achievements</h2>
+                <div className="w-16 sm:w-20 md:w-24 h-1 bg-purple-500 mx-auto"></div>
             </motion.div>
 
             {/* Timeline container with single continuous line */}
             <div className="max-w-6xl mx-auto relative">
-                {/* Single continuous timeline line - made thinner and more subtle */}
-                <div className={`absolute left-1/2 transform -translate-x-1/2 w-[1.5px] h-full 
+                {/* Single continuous timeline line - repositioned for mobile */}
+                <div className={`absolute left-0 md:left-1/2 top-0 bottom-0 w-[1px] md:w-[1.5px] h-full 
                 ${isDarkMode 
-                    ? 'bg-gradient-to-b from-purple-500/40 via-purple-400/70 to-purple-500/40' 
-                    : 'bg-gradient-to-b from-purple-300/50 via-purple-400/70 to-purple-300/50'}`} />
+                    ? 'bg-gradient-to-b from-purple-500/30 via-purple-400/60 to-purple-500/30' 
+                    : 'bg-gradient-to-b from-purple-300/40 via-purple-400/60 to-purple-300/40'}`} />
                 
                 {/* Timeline items */}
-                <div className="relative">
+                <div className="relative pl-0 md:pl-0">
                     {items.map((item, index) => (
                         <TimelineItem
                             key={index}
