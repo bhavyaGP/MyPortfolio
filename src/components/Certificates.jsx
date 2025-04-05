@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { useTheme } from '../context/ThemeContext';
 import certificate1 from '../assets/gsuitephoto.png';
 import certificate2 from '../assets/githubclass.png';
 import certificate3 from '../assets/infosysjs.png';
@@ -9,6 +10,8 @@ import certificate5 from '../assets/mongodb.png';
 
 
 const Certificate = ({ title, issuer, date, imageUrl, certificateUrl, index }) => {
+    const { isDarkMode } = useTheme();
+    
     return (
         <motion.div 
             className="relative border border-gray-700 rounded-lg overflow-hidden"
@@ -24,9 +27,9 @@ const Certificate = ({ title, issuer, date, imageUrl, certificateUrl, index }) =
                     <div className="absolute inset-[-1000%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"></div>
                 </div>
                 
-                <div className="relative bg-slate-900 rounded-lg p-5 h-full flex flex-col">
+                <div className={`relative ${isDarkMode ? 'bg-slate-900' : 'bg-white'} rounded-lg p-5 h-full flex flex-col`}>
                     {/* Certificate image with proper aspect ratio */}
-                    <div className="h-48 mb-4 overflow-hidden rounded-md bg-slate-800 flex items-center justify-center">
+                    <div className={`h-48 mb-4 overflow-hidden rounded-md ${isDarkMode ? 'bg-slate-800' : 'bg-gray-200'} flex items-center justify-center`}>
                         {imageUrl ? (
                             <img 
                                 src={imageUrl} 
@@ -34,19 +37,21 @@ const Certificate = ({ title, issuer, date, imageUrl, certificateUrl, index }) =
                                 className="w-full h-full object-contain"
                             />
                         ) : (
-                            <div className="text-gray-500 text-center">No image available</div>
+                            <div className={`text-center ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>No image available</div>
                         )}
                     </div>
                     
-                    <h3 className="text-xl font-semibold mb-1">{title}</h3>
-                    <p className="text-sm text-gray-400 mb-1">{issuer}</p>
-                    <p className="text-xs text-gray-500 mb-4">{date}</p>
+                    <h3 className={`text-xl font-semibold mb-1 ${isDarkMode ? 'text-white' : 'text-black'}`}>{title}</h3>
+                    <p className={`text-sm mb-1 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>{issuer}</p>
+                    <p className={`text-xs mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-700'}`}>{date}</p>
                     
                     <a 
                         href={certificateUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="mt-auto inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm group"
+                        className={`mt-auto inline-flex items-center gap-2 text-sm group ${
+                            isDarkMode ? 'text-blue-300 hover:text-blue-200' : 'text-blue-700 hover:text-blue-600'
+                        }`}
                     >
                         View Certificate 
                         <FaExternalLinkAlt size={12} className="group-hover:translate-x-1 transition-transform" />
@@ -58,6 +63,8 @@ const Certificate = ({ title, issuer, date, imageUrl, certificateUrl, index }) =
 };
 
 const Certificates = () => {
+    const { isDarkMode } = useTheme();
+    
     // Replace these with your actual certificates
     const certificates = [
         {
@@ -110,12 +117,13 @@ const Certificates = () => {
     return (
         <div className="container mx-auto px-4 py-8">
             <motion.h1 
-                className="text-4xl font-bold text-center mb-16"
+                className={`text-4xl font-bold text-center mb-16 ${isDarkMode ? 'text-white' : 'text-black'}`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                My <span className="text-purple-400">Certificates</span>
+                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-2 md:mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>My Certificates</h2>
+                <div className="w-16 sm:w-20 md:w-24 h-1 bg-purple-500 mx-auto"></div>
             </motion.h1>
             
             <div className="max-w-5xl mx-auto">
@@ -145,8 +153,8 @@ const Certificates = () => {
                                 transition={{ duration: 0.5, delay: 0.2 }}
                                 viewport={{ once: true }}
                             >
-                                <h4 className="text-2xl font-bold mb-3 text-purple-400">{`Certificate ${index + 1}`}</h4>
-                                <p className="text-gray-400">
+                                <h4 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-purple-300' : 'text-purple-700'}`}>{`Certificate ${index + 1}`}</h4>
+                                <p className={`${isDarkMode ? 'text-gray-200' : 'text-gray-900'}`}>
                                     {cert.description}
                                 </p>
                             </motion.div>
@@ -158,4 +166,4 @@ const Certificates = () => {
     );
 };
 
-export default Certificates; 
+export default Certificates;
