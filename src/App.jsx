@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import Navbar from './components/Navbar'
 import Project from './components/Project'
 import Technologies from './components/Technologies'
+import GitHubContributions from './components/GitHubContributions'
 import Contact from './components/Contact'
 import Certificates from './components/Certificates'
 import Achievements from './components/Achievements'
@@ -47,6 +48,7 @@ const AppContent = () => {
                 <Hero />
                 <About />
                 <Technologies />
+                <GitHubContributions />
                 <Experience />
                 <Project />
                 <Contact />
