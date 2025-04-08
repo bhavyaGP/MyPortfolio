@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import { useTheme } from './context/ThemeContext'
 
+
 // Background component that changes based on theme
 const ThemeBackground = () => {
   const { isDarkMode } = useTheme();
@@ -84,10 +85,14 @@ const AppContent = () => {
             <Route path="/achievements" element={<Achievements />} />
           </Routes>
         </div>
+
+        {/* 👇 Add SpeedInsights here */}
+        <SpeedInsights />
       </div>
     </Router>
   );
 };
+
 
 const App = () => {
   return (
