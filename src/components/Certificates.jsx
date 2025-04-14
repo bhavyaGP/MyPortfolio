@@ -2,11 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
-import certificate1 from '../assets/gsuitephoto.png';
-import certificate2 from '../assets/githubclass.png';
-import certificate3 from '../assets/infosysjs.png';
-import certificate4 from '../assets/postmanai.png';
-import certificate5 from '../assets/mongodb.png';
+import certificate1 from '../assets/TCScodevites12.png';
+import certificate2 from '../assets/gsuitephoto.png';
+import certificate3 from '../assets/githubclass.png';
+import certificate4 from '../assets/infosysjs.png';
+import certificate5 from '../assets/postmanai.png';
+import certificate6 from '../assets/mongodb.png';
+import { title } from 'framer-motion/client';
 
 
 const Certificate = ({ title, issuer, date, imageUrl, certificateUrl, index }) => {
@@ -69,47 +71,56 @@ const Certificates = () => {
     const certificates = [
         {
             id: 1,
+            title: "TCS CodeVita Season 12",
+            issuer: "TCS",
+            description: "Achieved a global rank of 2140 in TCS CodeVita Season 12, demonstrating strong coding skills in a competitive environment.",
+            date: "April 2025",
+            imageUrl: certificate1,
+            certificateUrl: "https://drive.google.com/file/d/1BqPdjfhR09ihj7elEa0QrZd7A5wL-PEg/view?usp=sharing"
+        },
+        {
+            id: 2,
             title: "Google Suite",
             issuer: "Udemy",
             description: "I completed the Google Suite course to enhance my skills in using Google Workspace tools, including Gmail, Google Docs, Sheets, and Drive. This course provided me with a comprehensive understanding of these essential tools and their features, enabling me to effectively manage my digital documents and collaborate with others.",
             date: "January 2023",
-            imageUrl: certificate1,
+            imageUrl: certificate2,
             certificateUrl: "https://drive.google.com/file/d/1Ixpl6U_NFTLklvyP8kIukaUcJcg5MmAM/view?usp=drive_link"
         },
         {
-            id: 2,
+            id: 3,
             title: "Github Session @CE Department",
             issuer: "Coursera",
             description: "I completed the Github Session course to enhance my skills in using Github, a popular platform for version control and collaboration. This course provided me with a comprehensive understanding of Github's core concepts, including repositories, branches, and pull requests. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
             date: "March 2023",
-            imageUrl: certificate2,
+            imageUrl: certificate3,
             certificateUrl: "https://drive.google.com/file/d/1TlZJFxVlB-JlfjOj111g8YduM3MnxWXV/view?usp=drive_link"
         },
         {
-            id: 3,
+            id: 4,
             title: "JavaScript Algorithms and Data Structures",
             issuer: "freeCodeCamp",
             description: "I completed the JavaScript Algorithms and Data Structures course to enhance my skills in using JavaScript, a popular programming language for building interactive web applications. This course provided me with a comprehensive understanding of JavaScript's core concepts, including variables, functions, objects, and arrays. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
             date: "May 2023",
-            imageUrl: certificate3,
+            imageUrl: certificate4,
             certificateUrl: "https://drive.google.com/file/d/1hzk1Z4-1-kwFhk8iVUPB8qJjthWkDmGh/view?usp=drive_link"
         },
         {
-            id: 4,
+            id: 5,
             title: "AI text Summarizer",
-            issuer: "Coursera",
+            issuer: "Postman",
             description: "I completed the AI text Summarizer course to enhance my skills in using AI, a popular programming language for building interactive web applications. This course provided me with a comprehensive understanding of AI's core concepts, including variables, functions, objects, and arrays. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
             date: "August 2023",
-            imageUrl: certificate4,
+            imageUrl: certificate5,
             certificateUrl: "https://drive.google.com/file/d/15TTm6dKwvIgFyI4CkkS2Gp46NajunbOI/view?usp=drive_link"
         },
         {
-            id: 5,
+            id: 6,
             title: "Introduction to MongoDB",
-            issuer: "Postman",
+            issuer: "MongoDB",
             description: "I completed the Introduction to MongoDB course to enhance my skills in using MongoDB, a popular tool for building interactive web applications. This course provided me with a comprehensive understanding of MongoDB's core concepts, including variables, functions, objects, and arrays. I gained hands-on experience through practical exercises and projects, which helped me apply my knowledge to real-world applications.",
             date: "September 2023",
-            imageUrl: certificate5,
+            imageUrl: certificate6,
             certificateUrl: "https://drive.google.com/file/d/1ESiIj-XxVMiYrwAjHfeSSGCGpgIF7GbH/view?usp=drive_link"
         }
     ];
