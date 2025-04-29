@@ -4,13 +4,22 @@
 @tailwind utilities;
 
 :root {
-    font-family: "Inter", sans-serif;
     --text-primary: #f3f4f6;
     --text-secondary: #9ca3af;
     --bg-primary: #000000;
     --bg-secondary: #1f2937;
     --accent-primary: #6366f1;
     --accent-secondary: #818cf8;
+}
+
+/* Apply font family to all elements */
+* {
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    color: var(--text-primary);
 }
 
 .light {
@@ -23,10 +32,6 @@
 }
 
 /* Apply theme text colors */
-body {
-    color: var(--text-primary);
-}
-
 .light body {
     color: var(--text-primary);
 }
