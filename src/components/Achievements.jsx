@@ -152,7 +152,7 @@ const Achievements = () => {
     const items = [
         {
             title: "Runner-Up @York.ie Hackathon 2024",
-            subtitle: "It's AI tools for developers hackthon in Ahmedabad",
+            subtitle: "Our team secured the Runner-Up position at the prestigious YORK.ie Hackathon 2025, competing against experienced teams in the AI & Automation category. Over 12 hours of intense development, the event brought together top student innovators, mentors, and tech leaders from the state. Out of several exceptional entries, our team’s solution stood out for its creativity, execution, and impact.",
             date: "May 2025",
             photo: achivement5
         },

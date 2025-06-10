@@ -3,6 +3,8 @@ import project2 from "../assets/projects/project-2.jpg";
 import project3 from "../assets/projects/project-3.jpg";
 import project4 from "../assets/projects/project-4.jpg";
 import project5 from "../assets/projects/logo.webp";
+import project6 from "../assets/projects/automation.webp"
+import { title } from "framer-motion/client";
 
 export const HERO_CONTENT = `I am a passionate Full Stack developer with a knack for crafting robust and scalable web applications. I have honed my skills in front-end technologies like React, as well as MERN technologies like React,Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
 
@@ -40,8 +42,16 @@ export const PROJECTS = [
     "technologies": ["React", "Node.js", "Express", "MongoDB", "Flask", "Tailwind CSS", "Langchain", "ChatGroq", "HuggingFaceAPI", "Redis"],
     "livelink": "https://drive.google.com/file/d/1q2A8GW_S42ClBS07zmsKq_AyBSpnL_pO/view?usp=sharing",
     "githublink": "https://github.com/bhavyagp/quicklearnai"
-  }
-  ,
+  },
+  {
+    title: "AI-Powered DevOps Automation Platform",
+    image: project6,
+    description:
+      "Autonomous Jira-to-code pipeline automating software development lifecycle from task planning to production deployment.\n◦ API Integration: Implemented OAuth2 authentication with Jira Cloud API for automated ticket parsing and requirement extraction.\n◦ AI Code Generation: Integrated LLM (GPT-4) for context-aware production-ready code generation and automated testing with lint compliance.\n◦ DevOps Automation: Built Git workflow automation with PR generation, test validation, and Jira status transitions achieving 80%+ coverage.",
+    technologies: ["Flask", "React.js", "Jira API", "OAuth2", "Git API", "LLM"],
+    livelink: "https://www.youtube.com/watch?v=jItTasCJciE&t=3s&ab_channel=NanditKalaria",
+    githublink: "https://github.com/bhavyaGP/NeuralFlow-York.ie.git",
+  },
   {
     title: "ProgressMatrix",
     image: project1,
