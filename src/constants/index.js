@@ -17,20 +17,11 @@ Beyond coding, I enjoy mentoring students, conducting workshops, and contributin
 
 export const EXPERIENCES = [
   {
-    year: "2024(May) - 2024(June)",
-    role: "Backend Developer Intern",
-    company: "Amul",
-    description: ` Developedanefficient gate pass system utilizing Node.js and MongoDB, integrating form-handling capabilities. and implemented a user-friendly interface to facilitate seamless interactions, resulting in streamlined gate pass
- processing and Improved overall user satisfaction.Elevated data management and communication processes, leading to Advanced operational efficiency and a more robust
- system performance`,
-    technologies: ["Javascript", "Node.js", "MongoDB"],
-  }, {
-    year: "2024(May) - 2024(June)",
-    role: "Intern",
-    company: "InternPe",
-    description: `Created Dynamic web applications utilizing HTML, CSS, and JavaScript, delivering engaging and interactive user
- experiences.Engineered a fully functional calculator and an online store with comprehensive product listings, demonstrating strong problem-solving and e-commerce capabilities.Designed and built intuitive interfaces for a to-do list application and a two-player Connect 4 game, enhancing user interaction and engagement.`,
-    technologies: ["Javascript", "HTML", "CSS"],
+    year: "Aug 2025 - Present",
+    role: "Backend AI Engineer Intern",
+    company: "CodemateAI (Remote)",
+    description: `Building Guruverse AI, an intelligent assistant platform using OpenAI and Gemini SDKs with embedding models for context-aware responses. Designed and optimized scalable backend services with Node.js, Express.js, and vector databases to support 400+ active users. Implemented embeddings-based semantic search and retrieval pipelines to improve response accuracy and personalization.`,
+    technologies: ["JavaScript", "Node.js", "Express.js", "OpenAI", "Gemini", "VectorDB"],
   }
 ];
 
