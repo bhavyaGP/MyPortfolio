@@ -3,9 +3,6 @@ import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import achivement1 from '../assets/projects/gec.jpg'
 import achivement2 from '../assets/projects/cvmu.jpg'
-import achivement3 from '../assets/projects/makersfest.jpeg'
-import achivement4 from '../assets/projects/ssip.jpeg'
-import achivement5 from '../assets/projects/ppl.jpg'
 import york from '../assets/projects/york.jpg'
 import '../styles/timeline.css'
 
@@ -44,46 +41,22 @@ const Achievements = () => {
 
     const items = [
         {
-            title: "Makers Fest 2026 Gold Award Winner",
-            subtitle: "Qualified among the top 100 teams across Gujarat for creating an AI-driven educational platform. Organized by Yuvalay Foundation & Gujarat Govt.",
-            date: "Jan 2026",
-            photo: achivement3
-        },
-        {
-            title: "SSIP Grantee 2026",
-            subtitle: "Received funding and mentorship from the Gujarat government for developing QuickLearn AI. Awarded by Govt. of Gujarat — SSIP.",
-            date: "Feb 2026",
-            photo: achivement4
-        },
-        {
-            title: "Runner-Up @York.ie Hackathon 2025",
-            subtitle: "Secured Runner-Up at YORK.ie Hackathon 2025 in the AI & Automation category, competing against top student innovators over 12 hours of intense development.",
-            date: "Apr 2025",
+            title: "Runner-Up @ YORK.ie Global Hackathon 2025",
+            subtitle: "Secured runner-up in the AI Automation category at YORK.ie Hackathon 2025, Ahmedabad, during a 12-hour intensive development challenge.",
+            date: "May 2025",
             photo: york
         },
         {
             title: "1st Place @ HackTheSpring 2025",
-            subtitle: "Won first place in the Open Innovation category, competing against 78 teams out of 188.",
-            date: "Feb 2026",
+            subtitle: "Won 1st place in the Open Innovation category at HackTheSpring 2025, GEC-28, Gandhinagar, competing against 78 teams from 188 participants.",
+            date: "Feb 2025",
             photo: achivement1
         },
         {
             title: "Runner-Up @ CVM University Hackathon 2025",
-            subtitle: "Secured 1st Runner-Up position with an AI-powered project, QuickLearnAI.",
-            date: "Feb 2025",
+            subtitle: "Secured 1st runner-up position at CVM University Hackathon 2025, ADIT Anand, with QuickLearn AI.",
+            date: "2025",
             photo: achivement2
-        },
-        {
-            title: "Ultimate Gamechanger Award | Playpower EdSprint 2025",
-            subtitle: "Won 1st place out of 50+ teams for PlayPower: Fix-It, an educational physics game. Recognized for Learning Impact, Gameplay Engagement, Aesthetics, and AI-powered hint systems.",
-            date: "Aug 2025",
-            photo: achivement5
-        },
-        {
-            title: "Web Expert @ Club Gamma",
-            subtitle: "Conducted technical & soft-skills training for 100+ students.",
-            date: "Nov 2024",
-            photo: "https://clubgamma.vercel.app/assets/logo-DJb3Nfol.jpeg"
         },
     ];
 

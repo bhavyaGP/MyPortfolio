@@ -1,156 +1,110 @@
-import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFileAlt, FaCertificate, FaSun, FaMoon } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFileAlt, FaCertificate, FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
 import logo from '../assets/image.png';
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from '../context/ThemeContext';
-
-
-
-const NavbarButton = ({ children, to, isExternal = false }) => {
-    return (
-        <motion.div
-            className="relative inline-flex overflow-hidden rounded-full p-[1px] focus:outline-none"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-        >
-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-4 py-2 text-sm font-medium text-white backdrop-blur-3xl">
-                <a
-                    href={to}
-                    target={isExternal ? '_blank' : '_self'}
-                    rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="inline-flex items-center justify-center"
-                >
-                    {children}
-                </a>
-            </span>
-        </motion.div>
-    );
-};
-
-const SocialButton = ({ icon, to }) => {
-    return (
-        <motion.div
-            className="relative inline-flex overflow-hidden rounded-full p-[1px] focus:outline-none h-10 w-10"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-        >
-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 text-white backdrop-blur-3xl">
-                <a
-                    href={to}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center"
-                >
-                    {icon}
-                </a>
-            </span>
-        </motion.div>
-    );
-};
-
-const ThemeToggleButton = ({ isDarkMode, toggleTheme }) => {
-    return (
-        <motion.div
-            className="relative inline-flex overflow-hidden rounded-full p-[1px] focus:outline-none h-10 w-10"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-        >
-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 text-white backdrop-blur-3xl">
-                <button
-                    onClick={toggleTheme}
-                    className="inline-flex items-center justify-center"
-                    aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-                >
-                    {isDarkMode ? <FaSun className="text-lg" /> : <FaMoon className="text-lg" />}
-                </button>
-            </span>
-        </motion.div>
-    );
-};
+import { Button } from './ui/button';
 
 const Navbar = () => {
     const { isDarkMode, toggleTheme } = useTheme();
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const navLinks = [
+        { href: "https://drive.google.com/file/d/14O-V9dJKSNaT8MSxF9LVBRD62p22rJt0/view?usp=sharing", label: "Resume", icon: <FaFileAlt />, external: true },
+        { href: "#certificates", label: "Certificates", icon: <FaCertificate /> },
+        { href: "#achievements", label: "Achievements", icon: null },
+    ];
+
+    const socials = [
+        { href: "https://www.linkedin.com/in/bhavya-prajapati-a8b001256/", icon: <FaLinkedin /> },
+        { href: "https://www.github.com/bhavyagp", icon: <FaGithub /> },
+        { href: "https://www.twitter.com/5678_bhavya", icon: <FaTwitter /> },
+        { href: "https://www.instagram.com/bhavya5.exe", icon: <FaInstagram /> },
+    ];
 
     return (
-        <nav className="mb-20 flex items-center justify-between py-6 px-4">
-            <motion.div
-                className="flex flex-shrink-0 items-center justify-center h-14"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                whileTap={{ scale: 0.97 }}
-            >
-                <a href="#hero">
-                    <div className="flex items-center">
-                        <img className="mx-2 w-10" src={logo} alt="logo" style={{ borderRadius: '50%' }} />
-                        <span className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Bhavya</span>
-                    </div>
-                </a>
-            </motion.div>
+        <nav className="mb-10 md:mb-20 py-6 px-4 relative z-50">
+            <div className="flex items-center justify-between">
+                {/* Logo */}
+                <motion.a
+                    href="#hero"
+                    className="flex items-center gap-2"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <img className="w-10 h-10 rounded-full object-cover" src={logo} alt="logo" />
+                    <span className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Bhavya</span>
+                </motion.a>
 
-            <div className="flex items-center gap-6">
+                {/* Desktop nav */}
                 <motion.div
-                    className="flex items-center gap-3"
+                    className="hidden md:flex items-center gap-3"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                    <NavbarButton 
-                        to="https://drive.google.com/file/d/14O-V9dJKSNaT8MSxF9LVBRD62p22rJt0/view?usp=sharing" 
-                        isExternal={true}
-                    >
-                        <FaFileAlt className="mr-2" /> Resume
-                    </NavbarButton>
+                    {navLinks.map(({ href, label, icon, external }) => (
+                        <Button key={label} variant="glow" size="default" asChild>
+                            <a href={href} target={external ? '_blank' : '_self'} rel={external ? 'noopener noreferrer' : undefined}>
+                                {icon} {label}
+                            </a>
+                        </Button>
+                    ))}
 
-                    <NavbarButton to="#certificates">
-                        <FaCertificate className="mr-2" /> Certificates
-                    </NavbarButton>
+                    <Button variant="glow" size="icon" onClick={toggleTheme}
+                        aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}>
+                        {isDarkMode ? <FaSun /> : <FaMoon />}
+                    </Button>
 
-                    <NavbarButton to="#achievements">
-                        Achievements
-                    </NavbarButton>
+                    {socials.map(({ href, icon }) => (
+                        <Button key={href} variant="glow" size="icon" asChild>
+                            <a href={href} target="_blank" rel="noopener noreferrer">{icon}</a>
+                        </Button>
+                    ))}
                 </motion.div>
 
-                {/* Theme Toggle Button */}
-                <motion.div
-                    className="flex items-center gap-3"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                    <ThemeToggleButton isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-                </motion.div>
-
-                {/* Social Icons Section */}
-                <motion.div
-                    className="flex items-center gap-3"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                >
-                    <SocialButton 
-                        icon={<FaLinkedin className="text-lg" />} 
-                        to="https://www.linkedin.com/in/bhavya-prajapati-a8b001256/" 
-                    />
-
-                    <SocialButton 
-                        icon={<FaGithub className="text-lg" />}
-                        to="https://www.github.com/bhavyagp"
-                    />
-
-                    <SocialButton 
-                        icon={<FaTwitter className="text-lg" />}
-                        to="https://www.twitter.com/5678_bhavya"
-                    />
-
-                    <SocialButton
-                        icon={<FaInstagram className="text-lg" />}
-                        to="https://www.instagram.com/bhavya5.exe"
-                    />
-                </motion.div>
+                {/* Mobile: theme + hamburger */}
+                <div className="flex md:hidden items-center gap-2">
+                    <Button variant="glow" size="icon" onClick={toggleTheme}>
+                        {isDarkMode ? <FaSun /> : <FaMoon />}
+                    </Button>
+                    <Button variant="glow" size="icon" onClick={() => setMenuOpen(o => !o)}>
+                        {menuOpen ? <FaTimes /> : <FaBars />}
+                    </Button>
+                </div>
             </div>
+
+            {/* Mobile menu */}
+            <AnimatePresence>
+                {menuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.2 }}
+                        className={`md:hidden mt-4 rounded-2xl p-4 flex flex-col gap-3
+                            ${isDarkMode ? 'bg-slate-900/95 border border-slate-700' : 'bg-white border border-gray-200'} shadow-xl`}
+                    >
+                        {navLinks.map(({ href, label, icon, external }) => (
+                            <Button key={label} variant="glow" size="default" asChild className="w-full justify-start">
+                                <a href={href} target={external ? '_blank' : '_self'} rel={external ? 'noopener noreferrer' : undefined}
+                                    onClick={() => setMenuOpen(false)}>
+                                    {icon} {label}
+                                </a>
+                            </Button>
+                        ))}
+
+                        <div className="flex gap-2 pt-1">
+                            {socials.map(({ href, icon }) => (
+                                <Button key={href} variant="glow" size="icon" asChild>
+                                    <a href={href} target="_blank" rel="noopener noreferrer">{icon}</a>
+                                </Button>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 };

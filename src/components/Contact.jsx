@@ -16,7 +16,7 @@ const Contact = () => {
             whileInView={{ opacity: 1 }}
         >
             <motion.h2
-                className='my-20 text-center text-4xl'
+                className='my-10 md:my-20 text-center text-2xl sm:text-4xl'
                 initial={{ x: -50, opacity: 0 }}
                 animate={isInView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
                 transition={{ duration: 0.5 }}

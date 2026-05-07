@@ -13,7 +13,7 @@ const Hero = () => {
                             initial={{ opacity: 0, x: -100 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 1 }}
-                            className="pb-16 text-6xl font-medium tracking-tight lg:mt-16 lg:text-6xl"
+                            className="pb-8 text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight lg:mt-16 text-center lg:text-left"
                         >
                             Bhavya Prajapati
                         </motion.h1>
@@ -21,15 +21,15 @@ const Hero = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 1 }}
-                            className="bg-gradient-to-r from-pink-400 viaslat-500 to-violet-500 bg-clip-text text-2xl tracking-tight text-transparent"
+                            className="bg-gradient-to-r from-pink-400 viaslat-500 to-violet-500 bg-clip-text text-xl sm:text-2xl tracking-tight text-transparent text-center lg:text-left"
                         >
-                            Full Stack Developer
+                            Backend AI Engineer | Full Stack Developer
                         </motion.span>
                         <motion.p
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 1, duration: 1 }}
-                            className="my-2 max-w-xl py-6 font-light tracking-tighter"
+                            className="my-2 max-w-xl py-6 font-light tracking-tighter text-center lg:text-left text-sm sm:text-base"
                         >
                             {HERO_CONTENT}
                         </motion.p>

@@ -7,7 +7,7 @@ const Experience = () => {
     
     return (
         <div className={`border-b ${isDarkMode ? 'border-neutral-700' : 'border-gray-300'} pb-8 mb-8`}>
-            <h2 className={`my-20 text-center text-4xl font-bold ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
+            <h2 className={`my-10 md:my-20 text-center text-2xl sm:text-4xl font-bold ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
                 Experience
             </h2>
             <div className="leading-relaxed">
@@ -38,7 +38,7 @@ const Experience = () => {
                             transition={{ duration: 0.5, delay: index * 0.2 }}
                             viewport={{ once: true }}
                         >
-                            <h6 className={`text-2xl font-semibold mb-3 ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
+                            <h6 className={`text-lg sm:text-2xl font-semibold mb-3 ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
                                 {role} - <span className={`text-lg font-medium ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}`}>{company}</span>
                             </h6>
                             <p className={`mb-5 leading-relaxed ${isDarkMode ? 'text-neutral-300' : 'text-gray-700'}`}>

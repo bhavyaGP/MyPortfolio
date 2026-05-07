@@ -36,20 +36,13 @@ const CodingStats = () => {
   
   return (
     <div className={`border-b ${isDarkMode ? 'border-neutral-700' : 'border-gray-300'} pb-16 mb-8`}>
-      <h2 className={`my-10 text-center text-4xl font-bold ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
+      <h2 className={`my-10 text-center text-2xl sm:text-4xl font-bold ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
         Coding Statistics
       </h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        {/* GitHub side */}
-        <div className={`${isDarkMode ? 'bg-slate-800/30' : 'bg-gray-50'} rounded-xl p-6 shadow-md h-full flex flex-col`}>
-          <GitHubContributions />
-        </div>
-        
-        {/* LeetCode side */}
-        <div className={`${isDarkMode ? 'bg-slate-800/30' : 'bg-gray-50'} rounded-xl p-6 shadow-md h-full flex flex-col`}>
-          <LeetCodeStats />
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <GitHubContributions />
+        <LeetCodeStats />
       </div>
     </div>
   );
@@ -63,7 +56,7 @@ const AppContent = () => {
     <div className={`overflow-x-hidden ${isDarkMode ? 'text-neutral-200' : 'text-gray-900'} antialiased selection:bg-cyan-300 selection:text-cyan-900 flex justify-center items-center min-h-screen`}>
       <ThemeBackground />
 
-      <div className='container mx-auto px-10'>
+      <div className='container mx-auto px-4 md:px-10'>
         <Navbar />
         <div id="hero"><Hero /></div>
         <About />

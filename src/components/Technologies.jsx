@@ -37,11 +37,11 @@ const TechnologiesAndTools = () => {
     const borderClass = isDarkMode ? 'border-gray-700' : 'border-gray-200';
     const sectionBorderClass = isDarkMode ? 'border-gray-700' : 'border-gray-300';
     const headingClass = isDarkMode ? 'text-neutral-100' : 'text-gray-900';
-    const iconContainerClass = `rounded border ${borderClass} p-4 bg-transparent hover:border-gray-500 transition-all duration-200 ease-in-out`;
+    const iconContainerClass = `rounded border ${borderClass} p-2 sm:p-4 bg-transparent hover:border-gray-500 transition-all duration-200 ease-in-out`;
     
     return (
         <div className={`border-b ${sectionBorderClass} pb-24`}>
-            <h2 className={`my-20 text-center text-4xl font-bold ${headingClass}`}>Technologies</h2>
+            <h2 className={`my-10 md:my-20 text-center text-2xl sm:text-4xl font-bold ${headingClass}`}>Technologies</h2>
             <div className='flex flex-wrap items-center justify-center gap-5'>
                 <motion.div 
                     variants={iconVariants(3.5)} 
@@ -55,7 +55,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <RiReactjsLine className='text-5xl text-cyan-400' />
+                        <RiReactjsLine className='text-3xl sm:text-5xl text-cyan-400' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -70,7 +70,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <RiNodejsLine className='text-5xl text-green-400' />
+                        <RiNodejsLine className='text-3xl sm:text-5xl text-green-400' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -85,7 +85,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiMongodb className='text-5xl text-green-600' />
+                        <SiMongodb className='text-3xl sm:text-5xl text-green-600' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -100,7 +100,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiMysql className='text-5xl text-blue-500' />
+                        <SiMysql className='text-3xl sm:text-5xl text-blue-500' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -115,7 +115,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiPostgresql className='text-5xl text-blue-700' />
+                        <SiPostgresql className='text-3xl sm:text-5xl text-blue-700' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -130,7 +130,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <DiRedis className='text-5xl text-red-600' />
+                        <DiRedis className='text-3xl sm:text-5xl text-red-600' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -145,7 +145,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiSupabase className='text-5xl text-emerald-500' />
+                        <SiSupabase className='text-3xl sm:text-5xl text-emerald-500' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -160,7 +160,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiFlask className={`text-5xl ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`} />
+                        <SiFlask className={`text-3xl sm:text-5xl ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`} />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -175,7 +175,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiTypescript className='text-5xl text-blue-600' />
+                        <SiTypescript className='text-3xl sm:text-5xl text-blue-600' />
                     </motion.div>
                 </motion.div>
             </div>
@@ -196,7 +196,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiGithub className={`text-5xl ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`} />
+                        <SiGithub className={`text-3xl sm:text-5xl ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`} />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -211,7 +211,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiPostman className='text-5xl text-orange-500' />
+                        <SiPostman className='text-3xl sm:text-5xl text-orange-500' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -226,7 +226,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiGit className='text-5xl text-red-500' />
+                        <SiGit className='text-3xl sm:text-5xl text-red-500' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -241,7 +241,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiDocker className='text-5xl text-blue-700' />
+                        <SiDocker className='text-3xl sm:text-5xl text-blue-700' />
                     </motion.div>
                 </motion.div>
                 <motion.div 
@@ -256,7 +256,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiPrisma className='text-5xl text-purple-700' />
+                        <SiPrisma className='text-3xl sm:text-5xl text-purple-700' />
                     </motion.div>
                 </motion.div>
             </div>
