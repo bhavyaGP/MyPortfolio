@@ -1,172 +1,83 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
-import { stagger } from 'framer-motion';
 import achivement1 from '../assets/projects/gec.jpg'
 import achivement2 from '../assets/projects/cvmu.jpg'
-import achivement3 from '../assets/projects/bhavya3.jpg'
-import achivement4 from '../assets/projects/bhavya3.jpg'
-import achivement5 from '../assets/projects/york.jpg'
-import '../styles/timeline.css' // Add this for custom timeline styles
+import achivement3 from '../assets/projects/makersfest.jpeg'
+import achivement4 from '../assets/projects/ssip.jpeg'
+import achivement5 from '../assets/projects/ppl.jpg'
+import york from '../assets/projects/york.jpg'
+import '../styles/timeline.css'
 
-// Custom timeline styles
-const timelineStyles = {
-    container: {
-        background: 'linear-gradient(135deg, rgba(168,85,247,0.05) 0%, rgba(192,132,252,0.05) 100%)',
-        padding: '2rem',
-        borderRadius: '1rem',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-    },
-    line: {
-        background: 'linear-gradient(to bottom, rgba(168,85,247,0.4) 0%, rgba(192,132,252,0.4) 100%)',
-        height: '100%',
-        width: '2px',
-        position: 'absolute',
-        left: '50%',
-        transform: 'translateX(-50%)',
-    },
-    dot: {
-        width: '12px',
-        height: '12px',
-        borderRadius: '50%',
-        background: 'linear-gradient(45deg, #A855F7, #C084FC)',
-        boxShadow: '0 0 15px rgba(168,85,247,0.3)',
-        transform: 'translate(-50%, -50%)',
-    },
-};
+const CARD_W = 340; // px — card width
+const CARD_GAP = 20; // px — gap between cards
 
-const TimelineItem = ({ title, subtitle, date, isLeft, index, photo, isLast }) => {
-    const { isDarkMode } = useTheme();
-    
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-                duration: 0.5, 
-                delay: index * 0.2,
-                type: 'spring',
-                stiffness: 300,
-                damping: 20
-            }}
-            className="flex relative mb-12 md:mb-16"
-        >
-            {/* Main content wrapper with proper positioning */}
-            <div className="w-full relative">
-                {/* Card container with responsive width */}
-                <div className={`w-[calc(100%-20px)] sm:w-[90%] md:w-[45%] 
-                    ${isLeft ? 'md:ml-auto md:mr-8 ml-5' : 'md:mr-auto md:ml-8 ml-5'}`}>
-                    <motion.div
-                        className={`p-4 sm:p-5 rounded-xl relative group shadow-lg
-                        ${isDarkMode 
-                            ? 'bg-slate-800/80 text-white' 
-                            : 'bg-white/95 text-gray-800 border border-gray-200'}`}
-                        whileHover={{ scale: 1.01, y: -3 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        {/* Animated border */}
-                        <div className="absolute inset-0 rounded-xl p-[1px] bg-gradient-to-r from-purple-500/50 to-blue-500/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+const StoryCard = ({ title, subtitle, date, photo }) => (
+    <div
+        className="flex-shrink-0 relative rounded-2xl overflow-hidden shadow-2xl group"
+        style={{ width: CARD_W, marginRight: CARD_GAP }}
+    >
+        {/* Full-card image */}
+        {photo ? (
+            <img
+                src={photo}
+                alt={title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 absolute inset-0"
+            />
+        ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-900" />
+        )}
 
-                        {/* Content */}
-                        <div className="relative">
-                            <motion.div
-                                className="mb-3 md:mb-4 relative overflow-hidden rounded-lg"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.2, type: 'spring', stiffness: 300 }}
-                            >
-                                <img 
-                                    src={photo} 
-                                    alt={title}
-                                    className="w-full h-32 sm:h-40 md:h-48 object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-105"
-                                />
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
-                                    initial={{ height: 0 }}
-                                    whileHover={{ height: '100%' }}
-                                    transition={{ duration: 0.3 }}
-                                />
-                            </motion.div>
+        {/* Bottom gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-                            <motion.h3
-                                className={`text-base sm:text-lg md:text-xl font-bold mb-1.5 md:mb-2`}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                transition={{ delay: 0.3 }}
-                            >
-                                {title}
-                            </motion.h3>
-
-                            <motion.div
-                                className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-xs sm:text-sm mb-2`}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                transition={{ delay: 0.4 }}
-                            >
-                                {subtitle}
-                            </motion.div>
-
-                            <motion.div
-                                className={`text-purple-500 text-xs font-medium`}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                transition={{ delay: 0.6 }}
-                            >
-                                {date}
-                            </motion.div>
-                        </div>
-                    </motion.div>
-                </div>
-            </div>
-
-            {/* Enhanced Timeline Dot */}
-            <div className="absolute left-0 md:left-1/2 top-10 md:top-1/2 transform md:-translate-x-1/2 md:-translate-y-1/2 z-20">
-                <motion.div
-                    className={`w-3.5 h-3.5 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-purple-500'} 
-                    ${isDarkMode ? 'shadow-[0_0_10px_rgba(192,132,252,0.6)]' : 'shadow-[0_0_10px_rgba(168,85,247,0.5)]'}`}
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ 
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                        delay: index * 0.1 + 0.2
-                    }}
-                />
-                <motion.div
-                    className={`absolute w-1.5 h-1.5 rounded-full ${isDarkMode ? 'bg-purple-400/20' : 'bg-purple-500/20'}
-                    ${isDarkMode ? 'shadow-[0_0_5px_rgba(192,132,252,0.3)]' : 'shadow-[0_0_5px_rgba(168,85,247,0.2)]'}`}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: index * 0.1 + 0.3 }}
-                />
-            </div>
-        </motion.div>
-    );
-};
+        {/* Content pinned to bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
+            <h3 className="text-white text-base font-bold leading-snug mb-1.5">{title}</h3>
+            <p className="text-gray-300 text-xs leading-relaxed line-clamp-3">{subtitle}</p>
+        </div>
+    </div>
+);
 
 const Achievements = () => {
     const { isDarkMode } = useTheme();
-    
+
     const items = [
         {
-            title: "Runner-Up @York.ie Hackathon 2024",
-            subtitle: "Our team secured the Runner-Up position at the prestigious YORK.ie Hackathon 2025, competing against experienced teams in the AI & Automation category. Over 12 hours of intense development, the event brought together top student innovators, mentors, and tech leaders from the state. Out of several exceptional entries, our team’s solution stood out for its creativity, execution, and impact.",
-            date: "May 2025",
-            photo: achivement5
+            title: "Makers Fest 2026 Gold Award Winner",
+            subtitle: "Qualified among the top 100 teams across Gujarat for creating an AI-driven educational platform. Organized by Yuvalay Foundation & Gujarat Govt.",
+            date: "Jan 2026",
+            photo: achivement3
+        },
+        {
+            title: "SSIP Grantee 2026",
+            subtitle: "Received funding and mentorship from the Gujarat government for developing QuickLearn AI. Awarded by Govt. of Gujarat — SSIP.",
+            date: "Feb 2026",
+            photo: achivement4
+        },
+        {
+            title: "Runner-Up @York.ie Hackathon 2025",
+            subtitle: "Secured Runner-Up at YORK.ie Hackathon 2025 in the AI & Automation category, competing against top student innovators over 12 hours of intense development.",
+            date: "Apr 2025",
+            photo: york
         },
         {
             title: "1st Place @ HackTheSpring 2025",
             subtitle: "Won first place in the Open Innovation category, competing against 78 teams out of 188.",
-            date: "Feb 2025",
+            date: "Feb 2026",
             photo: achivement1
         },
         {
             title: "Runner-Up @ CVM University Hackathon 2025",
             subtitle: "Secured 1st Runner-Up position with an AI-powered project, QuickLearnAI.",
-            date: "2025",
+            date: "Feb 2025",
             photo: achivement2
+        },
+        {
+            title: "Ultimate Gamechanger Award | Playpower EdSprint 2025",
+            subtitle: "Won 1st place out of 50+ teams for PlayPower: Fix-It, an educational physics game. Recognized for Learning Impact, Gameplay Engagement, Aesthetics, and AI-powered hint systems.",
+            date: "Aug 2025",
+            photo: achivement5
         },
         {
             title: "Web Expert @ Club Gamma",
@@ -174,52 +85,78 @@ const Achievements = () => {
             date: "Nov 2024",
             photo: "https://clubgamma.vercel.app/assets/logo-DJb3Nfol.jpeg"
         },
-        
     ];
-    
+
+    const doubled = [...items, ...items];
+
     return (
-        <div className="container mx-auto px-2 sm:px-4 py-12 md:py-16">
+        <div className="py-12 md:py-16 overflow-hidden">
+            {/* Heading */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-center mb-10 md:mb-16"
+                className="text-center mb-12"
             >
-                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-2 md:mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Achievements</h2>
-                <div className="w-16 sm:w-20 md:w-24 h-1 bg-purple-500 mx-auto"></div>
+                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                    Achievements
+                </h2>
+                <div className="w-16 sm:w-20 md:w-24 h-1 bg-purple-500 mx-auto rounded-full" />
             </motion.div>
 
-            {/* Enhanced Timeline Container */}
-            <div className="max-w-6xl mx-auto relative overflow-hidden">
-                {/* Animated Timeline Line */}
-                <motion.div
-                    className={`absolute left-0 md:left-1/2 top-0 bottom-0 w-[1px] md:w-[1.5px] h-full 
-                    ${isDarkMode 
-                        ? 'bg-gradient-to-b from-purple-500/30 via-purple-400/60 to-purple-500/30' 
-                        : 'bg-gradient-to-b from-purple-300/40 via-purple-400/60 to-purple-300/40'}`}
-                    initial={{ height: 0 }}
-                    animate={{ height: '100%' }}
-                    transition={{ duration: 1, ease: 'easeOut' }}
-                />
-                
-                {/* Timeline items */}
-                <div className="relative pl-0 md:pl-0">
-                    {items.map((item, index) => (
-                        <TimelineItem
-                            key={index}
-                            title={item.title}
-                            subtitle={item.subtitle}
-                            date={item.date}
-                            photo={item.photo}
-                            isLeft={index % 2 === 0}
-                            index={index}
-                            isLast={index === items.length - 1}
-                        />
+            {/* Scroll + timeline wrapper */}
+            <div className="achievements-wrapper relative">
+                {/* Left / right fades */}
+                <div className={`absolute left-0 top-0 bottom-0 w-24 z-20 pointer-events-none
+                    ${isDarkMode ? 'bg-gradient-to-r from-neutral-950 to-transparent' : 'bg-gradient-to-r from-white to-transparent'}`} />
+                <div className={`absolute right-0 top-0 bottom-0 w-24 z-20 pointer-events-none
+                    ${isDarkMode ? 'bg-gradient-to-l from-neutral-950 to-transparent' : 'bg-gradient-to-l from-white to-transparent'}`} />
+
+                {/* ── Cards row ── */}
+                <div className="achievements-scroll-track flex" style={{ height: 460 }}>
+                    {doubled.map((item, i) => (
+                        <StoryCard key={i} {...item} />
                     ))}
+                </div>
+
+                {/* ── Timeline row (scrolls in sync) ── */}
+                <div className="relative mt-6" style={{ height: 56 }}>
+                    {/* Static full-width horizontal line */}
+                    <div className={`absolute top-[10px] left-0 right-0 h-[2px]
+                        ${isDarkMode
+                            ? 'bg-gradient-to-r from-transparent via-purple-500/70 to-transparent'
+                            : 'bg-gradient-to-r from-transparent via-purple-400/70 to-transparent'}`}
+                    />
+
+                    {/* Scrolling dots + labels */}
+                    <div className="achievements-timeline-track absolute top-0 left-0 flex">
+                        {doubled.map((item, i) => (
+                            <div
+                                key={i}
+                                className="flex-shrink-0 flex flex-col items-center"
+                                style={{ width: CARD_W, marginRight: CARD_GAP }}
+                            >
+                                {/* Dot centered on the line */}
+                                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center
+                                    ${isDarkMode
+                                        ? 'bg-slate-900 border-purple-400 shadow-[0_0_10px_rgba(192,132,252,0.6)]'
+                                        : 'bg-white border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)]'}`}
+                                >
+                                    <div className="w-2 h-2 rounded-full bg-purple-500" />
+                                </div>
+
+                                {/* Year label */}
+                                <span className={`mt-2 text-xs font-semibold tracking-wide
+                                    ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>
+                                    {item.date}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Achievements; 
+export default Achievements;

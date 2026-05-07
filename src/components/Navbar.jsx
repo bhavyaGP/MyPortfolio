@@ -1,7 +1,6 @@
-import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFileAlt, FaCertificate, FaSun, FaMoon, FaFont, FaMinus, FaPlus } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFileAlt, FaCertificate, FaSun, FaMoon } from 'react-icons/fa';
 import logo from '../assets/image.png';
 import { motion } from "framer-motion";
-import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 
 
@@ -15,23 +14,14 @@ const NavbarButton = ({ children, to, isExternal = false }) => {
         >
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-4 py-2 text-sm font-medium text-white backdrop-blur-3xl">
-                {isExternal ? (
-                    <a
-                        href={to}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center"
-                    >
-                        {children}
-                    </a>
-                ) : (
-                    <Link
-                        to={to}
-                        className="inline-flex items-center justify-center"
-                    >
-                        {children}
-                    </Link>
-                )}
+                <a
+                    href={to}
+                    target={isExternal ? '_blank' : '_self'}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                    className="inline-flex items-center justify-center"
+                >
+                    {children}
+                </a>
             </span>
         </motion.div>
     );
@@ -92,12 +82,12 @@ const Navbar = () => {
                 transition={{ duration: 0.5 }}
                 whileTap={{ scale: 0.97 }}
             >
-                <Link to="/">
+                <a href="#hero">
                     <div className="flex items-center">
                         <img className="mx-2 w-10" src={logo} alt="logo" style={{ borderRadius: '50%' }} />
                         <span className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Bhavya</span>
                     </div>
-                </Link>
+                </a>
             </motion.div>
 
             <div className="flex items-center gap-6">
@@ -114,11 +104,11 @@ const Navbar = () => {
                         <FaFileAlt className="mr-2" /> Resume
                     </NavbarButton>
 
-                    <NavbarButton to="/certificates">
+                    <NavbarButton to="#certificates">
                         <FaCertificate className="mr-2" /> Certificates
                     </NavbarButton>
 
-                    <NavbarButton to="/achievements">
+                    <NavbarButton to="#achievements">
                         Achievements
                     </NavbarButton>
                 </motion.div>

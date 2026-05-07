@@ -101,6 +101,36 @@
     opacity: 1;
 }
 
+.achievements-wrapper:hover .achievements-scroll-track,
+.achievements-wrapper:hover .achievements-timeline-track {
+    animation-play-state: paused;
+}
+
+.achievements-scroll-track {
+    animation: achievements-scroll 40s linear infinite;
+    width: max-content;
+}
+
+.achievements-timeline-track {
+    animation: achievements-scroll 40s linear infinite;
+    width: max-content;
+}
+
+@keyframes achievements-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Certificates */
+.certificates-wrapper:hover .certificates-scroll-track {
+    animation-play-state: paused;
+}
+
+.certificates-scroll-track {
+    animation: achievements-scroll 30s linear infinite;
+    width: max-content;
+}
+
 @media (max-width: 768px) {
     .timeline-line {
         left: 20px;

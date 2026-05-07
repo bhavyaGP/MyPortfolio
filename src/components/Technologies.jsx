@@ -1,5 +1,5 @@
 import { RiReactjsLine, RiNodejsLine } from "react-icons/ri";
-import { SiMongodb, SiMysql, SiPostgresql, SiGithub, SiGit, SiDocker } from "react-icons/si";
+import { SiMongodb, SiMysql, SiPostgresql, SiGithub, SiGit, SiDocker, SiSupabase, SiFlask, SiTypescript } from "react-icons/si";
 import { DiRedis } from "react-icons/di";
 import { SiPostman, SiPrisma } from "react-icons/si";
 import { motion } from "framer-motion";
@@ -131,6 +131,51 @@ const TechnologiesAndTools = () => {
                         transition={iconRotateVariants.transition}
                     >
                         <DiRedis className='text-5xl text-red-600' />
+                    </motion.div>
+                </motion.div>
+                <motion.div 
+                    variants={iconVariants(3.5)} 
+                    initial="initial" 
+                    animate="animate" 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`${iconContainerClass} rounded-lg`}
+                >
+                    <motion.div
+                        animate={iconRotateVariants.animate}
+                        transition={iconRotateVariants.transition}
+                    >
+                        <SiSupabase className='text-5xl text-emerald-500' />
+                    </motion.div>
+                </motion.div>
+                <motion.div 
+                    variants={iconVariants(3.5)} 
+                    initial="initial" 
+                    animate="animate" 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`${iconContainerClass} rounded-lg`}
+                >
+                    <motion.div
+                        animate={iconRotateVariants.animate}
+                        transition={iconRotateVariants.transition}
+                    >
+                        <SiFlask className={`text-5xl ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`} />
+                    </motion.div>
+                </motion.div>
+                <motion.div 
+                    variants={iconVariants(3.5)} 
+                    initial="initial" 
+                    animate="animate" 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`${iconContainerClass} rounded-lg`}
+                >
+                    <motion.div
+                        animate={iconRotateVariants.animate}
+                        transition={iconRotateVariants.transition}
+                    >
+                        <SiTypescript className='text-5xl text-blue-600' />
                     </motion.div>
                 </motion.div>
             </div>

@@ -30,8 +30,8 @@ export const PROJECTS = [
     "title": "QuickLearnAI",
     "image": project5,
     "description": "QuickLearnAI is an AI-powered platform that provides instant explanations, code assistance, and real-time learning resources for developers and students. It enhances understanding with interactive responses and tailored guidance.",
-    "technologies": ["React", "Node.js", "Express", "MongoDB", "Flask", "Tailwind CSS", "Langchain", "ChatGroq", "HuggingFaceAPI", "Redis"],
-    "livelink": "https://drive.google.com/file/d/1q2A8GW_S42ClBS07zmsKq_AyBSpnL_pO/view?usp=sharing",
+    "technologies": ["React", "Node.js", "Express", "MongoDB", "Flask", "Tailwind CSS", "Langchain", "OpenAI", "GeminiAPI", "Redis"],
+    "livelink": "http://quicklearn.ai.in/",
     "githublink": "https://github.com/bhavyagp/quicklearnai"
   },
   {

@@ -9,7 +9,6 @@ import LeetCodeStats from './components/LeetCodeStats'
 import Contact from './components/Contact'
 import Certificates from './components/Certificates'
 import Achievements from './components/Achievements'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import { useTheme } from './context/ThemeContext'
 // Background component that changes based on theme
@@ -61,30 +60,22 @@ const AppContent = () => {
   const { isDarkMode } = useTheme();
   
   return (
-    <Router>
-      <div className={`overflow-x-hidden ${isDarkMode ? 'text-neutral-200' : 'text-gray-900'} antialiased selection:bg-cyan-300 selection:text-cyan-900 flex justify-center items-center min-h-screen`}>
-        <ThemeBackground />
+    <div className={`overflow-x-hidden ${isDarkMode ? 'text-neutral-200' : 'text-gray-900'} antialiased selection:bg-cyan-300 selection:text-cyan-900 flex justify-center items-center min-h-screen`}>
+      <ThemeBackground />
 
-        <div className='container mx-auto px-10'>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={
-              <>
-                <Hero />
-                <About />
-                <Technologies />
-                <CodingStats />
-                <Experience />
-                <Project />
-                <Contact />
-              </>
-            } />
-            <Route path="/certificates" element={<Certificates />} />
-            <Route path="/achievements" element={<Achievements />} />
-          </Routes>
-        </div>
+      <div className='container mx-auto px-10'>
+        <Navbar />
+        <div id="hero"><Hero /></div>
+        <About />
+        <Technologies />
+        <CodingStats />
+        <Experience />
+        <Project />
+        <div id="achievements"><Achievements /></div>
+        <div id="certificates"><Certificates /></div>
+        <Contact />
       </div>
-    </Router>
+    </div>
   );
 };
 
