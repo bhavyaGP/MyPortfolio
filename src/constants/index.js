@@ -8,9 +8,9 @@ import { title } from "framer-motion/client";
 
 export const HERO_CONTENT = `Backend AI engineer and full stack developer focused on building intelligent products and reliable web services. I work with React.js, Node.js, Express.js, Flask, SQL, and vector databases to deliver fast, secure, and scalable solutions.`;
 
-export const ABOUT_TEXT = `I am a B.Tech Computer Engineering student at CHARUSAT University (CGPA 8.98, 2022-2026) and a Backend AI Engineer Intern at CodemateAI. I build full stack and AI-driven applications with React.js, Node.js, Express.js, Flask, and SQL.
+export const ABOUT_TEXT = `I am a B.Tech Computer Engineering student at CHARUSAT University (CGPA 9.11, 2022-2026) and a Backend AI Engineer Intern at CodemateAI. I build full stack and AI-driven applications with React.js, Node.js, Express.js, Flask, and SQL.
 
-I have worked on projects like QuickLearnAI, ProgressMatrix, and an AI-powered DevOps automation platform, focusing on clean APIs, scalable backend services, and practical AI integrations. My skills include C++, JavaScript, SQL, Langchain.js, and tools like Postman, Docker, Git, PostgreSQL, MySQL, Prisma ORM, Pinecone, and HeidiSQL.
+I have worked on projects like QuickLearnAI, ProgressMatrix, and an AI-powered DevOps automation platform, focusing on clean APIs, scalable backend services, and practical AI integrations. My skills include C++, Typescript, JavaScript, SQL, Langchain.js, and tools like Postman, Docker, Git, PostgreSQL, MySQL, Prisma ORM, Pinecone, and HeidiSQL.
 
 I also volunteer as a Web Expert at Club Gamma and tutor students in web technologies through hands-on projects.`;
 

@@ -15,7 +15,7 @@ const buttonVariants = cva(
         outline:
           "border border-slate-700 bg-transparent text-white hover:bg-slate-800",
         glow:
-          "relative overflow-hidden bg-slate-950 text-white border border-transparent before:absolute before:inset-[-1000%] before:animate-[spin_3s_linear_infinite] before:bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)] before:z-[-1] after:absolute after:inset-[1px] after:rounded-full after:bg-slate-950 after:z-[-1]",
+          "relative overflow-hidden bg-slate-950 text-white border border-transparent shadow-[0_0_8px_rgba(255,255,255,0.35)] hover:shadow-[0_0_18px_rgba(255,255,255,0.75)] transition-shadow duration-300 [.light_&]:shadow-[0_0_8px_rgba(168,85,247,0.4)] [.light_&]:hover:shadow-[0_0_18px_rgba(168,85,247,0.75)] before:absolute before:inset-[-1000%] before:animate-[spin_2.5s_linear_infinite] before:bg-[conic-gradient(from_90deg_at_50%_50%,#f8fafc_0%,#ffffff_25%,#e2e8f0_50%,#ffffff_75%,#f8fafc_100%)] [.light_&]:before:bg-[conic-gradient(from_90deg_at_50%_50%,#a855f7_0%,#6366f1_25%,#E2CBFF_50%,#6366f1_75%,#a855f7_100%)] before:z-[-1] after:absolute after:inset-[1px] after:rounded-full after:bg-slate-950 after:z-[-1]",
       },
       size: {
         default: "h-9 px-5 py-2",
