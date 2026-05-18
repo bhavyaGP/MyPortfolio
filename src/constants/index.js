@@ -34,7 +34,8 @@ export const PROJECTS = [
     "description": "AI-powered educational platform with real-time learning systems and secure authentication.\n- Implemented Langchain and Llama API for intelligent content analysis and personalized learning materials.\n- Built a React.js frontend with Express.js and Flask backend services, WebSocket real-time features, and OAuth 2.0 authentication.\n- Deployed VectorDB for efficient content storage and retrieval with optimized AI responses.",
     "technologies": ["React.js", "Express.js", "Flask", "WebSocket", "Langchain", "VectorDB", "Llama API", "OAuth 2.0"],
     "livelink": "http://quicklearn.ai.in/",
-    "githublink": "https://github.com/bhavyagp/quicklearnai"
+    "githublink": "https://github.com/bhavyagp/quicklearnai",
+    "demoVideo": "https://www.youtube.com/embed/nMuUx2Ylit8"
   },
   {
     title: "AI-Powered DevOps Automation Platform",
@@ -44,6 +45,7 @@ export const PROJECTS = [
     technologies: ["Flask", "React.js", "Jira API", "OAuth2", "Git API", "GPT-4", "LLM"],
     livelink: "https://www.youtube.com/watch?v=jItTasCJciE&t=3s&ab_channel=NanditKalaria",
     githublink: "https://github.com/bhavyaGP/NeuralFlow-York.ie.git",
+    demoVideo: "https://www.youtube.com/embed/jItTasCJciE",
   },
   {
     title: "ProgressMatrix",
@@ -53,6 +55,7 @@ export const PROJECTS = [
     technologies: ["React.js", "Express.js", "MySQL", "Prisma", "Tailwind"],
     livelink: "https://drive.google.com/file/d/1WiXgRdBA5mOWw5wJlWR21LIzW294a0uw/view?usp=drive_link",
     githublink: "https://github.com/bhavyagp/studentflow",
+    demoVideo: "https://drive.google.com/file/d/1WiXgRdBA5mOWw5wJlWR21LIzW294a0uw/preview",
   },
   // {
   //   title: "BhavyaAI",
