@@ -1,16 +1,24 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { PROJECTS } from '../constants'
 import { motion, useInView } from "framer-motion"
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaGithub, FaPlay } from 'react-icons/fa'
 import { useTheme } from '../context/ThemeContext'
+
+const getYouTubeThumbnail = (embedUrl) => {
+  const match = embedUrl.match(/embed\/([^?]+)/)
+  return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : null
+}
 
 const ProjectCard = ({ project, index, isDarkMode }) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.4 })
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const videoSrc = project.demoVideo
-    ? `${project.demoVideo}${isInView ? '?autoplay=1&mute=1&rel=0' : ''}`
+    ? `${project.demoVideo}?autoplay=1&mute=1&rel=0`
     : null
+
+  const thumbnail = project.demoVideo ? getYouTubeThumbnail(project.demoVideo) : null
 
   return (
     <motion.div
@@ -25,15 +33,34 @@ const ProjectCard = ({ project, index, isDarkMode }) => {
         {project.demoVideo ? (
           <div className={`w-full rounded-2xl overflow-hidden shadow-lg border ${isDarkMode ? 'border-neutral-700' : 'border-gray-200'}`}>
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-              <iframe
-                key={isInView ? 'playing' : 'idle'}
-                src={videoSrc}
-                title={`${project.title} demo`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-                style={{ border: 'none' }}
-              />
+              {isPlaying ? (
+                <iframe
+                  src={videoSrc}
+                  title={`${project.title} demo`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                  style={{ border: 'none' }}
+                />
+              ) : (
+                <div className="absolute inset-0 w-full h-full">
+                  {thumbnail && (
+                    <img
+                      src={thumbnail}
+                      alt={`${project.title} preview`}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                    <button
+                      onClick={() => setIsPlaying(true)}
+                      className="flex items-center gap-2 px-5 py-2.5 bg-purple-700 hover:bg-purple-600 text-white font-semibold rounded-full shadow-lg transition-colors"
+                    >
+                      <FaPlay className="text-sm" /> Start
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         ) : (
