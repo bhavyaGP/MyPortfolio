@@ -256,7 +256,7 @@ const TechnologiesAndTools = () => {
                         animate={iconRotateVariants.animate}
                         transition={iconRotateVariants.transition}
                     >
-                        <SiPrisma className='text-3xl sm:text-5xl text-purple-700' />
+                        <SiPrisma className='text-3xl sm:text-5xl text-neutral-300' />
                     </motion.div>
                 </motion.div>
             </div>

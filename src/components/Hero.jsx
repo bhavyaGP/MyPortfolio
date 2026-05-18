@@ -21,7 +21,7 @@ const Hero = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 1 }}
-                            className="bg-gradient-to-r from-pink-400 viaslat-500 to-violet-500 bg-clip-text text-xl sm:text-2xl tracking-tight text-transparent text-center lg:text-left"
+                            className="text-xl sm:text-2xl tracking-tight text-white text-center lg:text-left"
                         >
                             Backend AI Engineer | Full Stack Developer
                         </motion.span>

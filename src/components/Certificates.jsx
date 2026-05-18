@@ -36,7 +36,7 @@ const CertCard = ({ title, issuer, date, imageUrl, certificateUrl }) => {
 
                 <h3 className={`text-sm font-bold mb-1 leading-snug ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h3>
                 <p className={`text-xs mb-0.5 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{issuer}</p>
-                <p className={`text-xs mb-3 ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}`}>{date}</p>
+                <p className="text-xs mb-3 text-neutral-400">{date}</p>
 
                 <a
                     href={certificateUrl}
@@ -121,7 +121,7 @@ const Certificates = () => {
                 <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
                     Certificates
                 </h2>
-                <div className="w-16 sm:w-20 md:w-24 h-1 bg-purple-500 mx-auto rounded-full" />
+                <div className="w-16 sm:w-20 md:w-24 h-1 bg-white/30 mx-auto rounded-full" />
             </motion.div>
 
             {/* Scroll strip */}

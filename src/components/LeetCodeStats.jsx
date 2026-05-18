@@ -113,7 +113,7 @@ const LeetCodeStats = () => {
                             </div>
                             <div>
                                 <p className={`text-xs mb-0.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Acceptance</p>
-                                <p className={`text-lg font-semibold ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>
+                                <p className="text-lg font-semibold text-neutral-200">
                                     {data.acceptanceRate ?? '—'}%
                                 </p>
                             </div>

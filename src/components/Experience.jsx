@@ -39,14 +39,14 @@ const Experience = () => {
                             viewport={{ once: true }}
                         >
                             <h6 className={`text-lg sm:text-2xl font-semibold mb-3 ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
-                                {role} - <span className={`text-lg font-medium ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}`}>{company}</span>
+                                {role} - <span className="text-lg font-medium text-neutral-300">{company}</span>
                             </h6>
                             <p className={`mb-5 leading-relaxed ${isDarkMode ? 'text-neutral-300' : 'text-gray-700'}`}>
                                 {description}
                             </p>
                             <div className="flex flex-wrap">
                                 {technologies.map((technology, techIndex) => (
-                                    <span key={techIndex} className="mr-2 mt-2 rounded bg-black-900 px-2 py-1 text-sm font-medium text-purple-800">
+                                    <span key={techIndex} className="mr-2 mt-2 rounded border border-white/15 bg-white/5 px-2 py-1 text-sm font-medium text-neutral-200">
                                         {technology}
                                     </span>
                                 ))}

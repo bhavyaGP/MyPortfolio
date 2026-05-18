@@ -8,8 +8,8 @@ const USERNAME = "bhavyagp";
 
 const StatTile = ({ icon, label, value, isDarkMode }) => (
     <div className={`flex flex-col items-center justify-center p-3 rounded-xl transition-colors
-        ${isDarkMode ? 'bg-slate-700/60 border border-slate-600/30' : 'bg-purple-50 border border-purple-100'}`}>
-        <div className="text-purple-400 mb-1">{icon}</div>
+        bg-slate-700/60 border border-slate-600/30`}>
+        <div className="text-neutral-300 mb-1">{icon}</div>
         <span className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{value ?? '—'}</span>
         <span className={`text-[11px] ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{label}</span>
     </div>
@@ -43,17 +43,17 @@ const GitHubContributions = () => {
             className={`rounded-2xl p-6 flex flex-col gap-5 h-full transition-colors
                 ${isDarkMode
                     ? 'bg-slate-800/50 border border-slate-700/50'
-                    : 'bg-white border border-purple-100 shadow-sm'}`}
+                    : 'bg-slate-800/50 border border-slate-700/50'}`}
         >
             {/* Header */}
             <div className="flex items-center gap-4">
                 {profile?.avatar_url ? (
                     <img src={profile.avatar_url} alt="avatar"
-                        className="w-14 h-14 rounded-full ring-2 ring-purple-500/50 object-cover" />
+                        className="w-14 h-14 rounded-full ring-2 ring-white/20 object-cover" />
                 ) : (
                     <div className={`w-14 h-14 rounded-full flex items-center justify-center
-                        ${isDarkMode ? 'bg-slate-700' : 'bg-purple-100'}`}>
-                        <FaGithub className={`text-2xl ${isDarkMode ? 'text-white' : 'text-purple-600'}`} />
+                        bg-slate-700`}>
+                        <FaGithub className="text-2xl text-white" />
                     </div>
                 )}
                 <div>
@@ -61,7 +61,7 @@ const GitHubContributions = () => {
                         {profile?.name ?? 'Bhavya Prajapati'}
                     </p>
                     <a href={`https://github.com/${USERNAME}`} target="_blank" rel="noopener noreferrer"
-                        className="text-purple-400 text-sm hover:text-purple-300 transition-colors">
+                        className="text-neutral-400 text-sm hover:text-white transition-colors">
                         @{USERNAME}
                     </a>
                 </div>
@@ -97,7 +97,7 @@ const GitHubContributions = () => {
             <div className={`rounded-xl overflow-hidden transition-colors
                 ${isDarkMode
                     ? 'bg-slate-900/80 border border-slate-700/30'
-                    : 'bg-purple-50 border border-purple-100'}`}>
+                    : 'bg-slate-800/50 border border-slate-700/50'}`}>
                 {!imgErr ? (
                     <img
                         key={`langs-${isDarkMode}`}

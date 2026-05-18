@@ -74,7 +74,7 @@ const Achievements = () => {
                 <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
                     Achievements
                 </h2>
-                <div className="w-16 sm:w-20 md:w-24 h-1 bg-purple-500 mx-auto rounded-full" />
+                <div className="w-16 sm:w-20 md:w-24 h-1 bg-white/30 mx-auto rounded-full" />
             </motion.div>
 
             {/* Scroll + timeline wrapper */}
@@ -96,9 +96,7 @@ const Achievements = () => {
                 <div className="relative mt-6" style={{ height: 56 }}>
                     {/* Static full-width horizontal line */}
                     <div className={`absolute top-[10px] left-0 right-0 h-[2px]
-                        ${isDarkMode
-                            ? 'bg-gradient-to-r from-transparent via-purple-500/70 to-transparent'
-                            : 'bg-gradient-to-r from-transparent via-purple-400/70 to-transparent'}`}
+                        bg-gradient-to-r from-transparent via-white/25 to-transparent`}
                     />
 
                     {/* Scrolling dots + labels */}
@@ -110,17 +108,12 @@ const Achievements = () => {
                                 style={{ width: CARD_W, marginRight: CARD_GAP }}
                             >
                                 {/* Dot centered on the line */}
-                                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center
-                                    ${isDarkMode
-                                        ? 'bg-slate-900 border-purple-400 shadow-[0_0_10px_rgba(192,132,252,0.6)]'
-                                        : 'bg-white border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)]'}`}
-                                >
-                                    <div className="w-2 h-2 rounded-full bg-purple-500" />
+                                <div className="w-5 h-5 rounded-full border-2 flex items-center justify-center bg-black border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+                                    <div className="w-2 h-2 rounded-full bg-white/70" />
                                 </div>
 
                                 {/* Year label */}
-                                <span className={`mt-2 text-xs font-semibold tracking-wide
-                                    ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>
+                                <span className="mt-2 text-xs font-semibold tracking-wide text-neutral-300">
                                     {item.date}
                                 </span>
                             </div>

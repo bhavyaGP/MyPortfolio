@@ -23,7 +23,7 @@ export const EXPERIENCES = [
     description: `Building Guruverse AI, an intelligent assistant platform using OpenAI and Gemini SDKs with embedding models for context-aware responses.
 - Designed and optimized backend services with Node.js, Express.js, and vector databases to support 400+ active users.
 - Implemented semantic search and retrieval pipelines to improve accuracy and personalization.`,
-    technologies: ["JavaScript", "Node.js", "Express.js", "OpenAI", "Gemini", "VectorDB"],
+    technologies: ["JavaScript", "Node.js", "Flask", "OpenAI", "Gemini", "MongoDB", "Pinecone"],
   }
 ];
 
@@ -31,11 +31,12 @@ export const PROJECTS = [
   {
     "title": "QuickLearnAI",
     "image": project5,
-    "description": "AI-powered educational platform with real-time learning systems and secure authentication.\n- Implemented Langchain and Llama API for intelligent content analysis and personalized learning materials.\n- Built a React.js frontend with Express.js and Flask backend services, WebSocket real-time features, and OAuth 2.0 authentication.\n- Deployed VectorDB for efficient content storage and retrieval with optimized AI responses.",
+    "description": "Major project - live AI-powered educational platform with 300+ active users and recipient of SSIP Grant worth ₹1,00,000.\n- Implemented Langchain and Llama API for intelligent content analysis and personalized learning materials.\n- Built a React.js frontend with Express.js and Flask backend services, WebSocket real-time features, and OAuth 2.0 authentication.\n- Deployed VectorDB for efficient content storage and retrieval with optimized AI responses.",
     "technologies": ["React.js", "Express.js", "Flask", "WebSocket", "Langchain", "VectorDB", "Llama API", "OAuth 2.0"],
     "livelink": "http://quicklearn.ai.in/",
     "githublink": "https://github.com/bhavyagp/quicklearnai",
-    "demoVideo": "https://www.youtube.com/embed/nMuUx2Ylit8"
+    "demoVideo": "https://www.youtube.com/embed/nMuUx2Ylit8",
+    "featured": true
   },
   {
     title: "AI-Powered DevOps Automation Platform",

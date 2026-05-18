@@ -11,22 +11,33 @@ import Certificates from './components/Certificates'
 import Achievements from './components/Achievements'
 import { ThemeProvider } from './context/ThemeContext'
 import { useTheme } from './context/ThemeContext'
-// Background component that changes based on theme
 const ThemeBackground = () => {
-  const { isDarkMode } = useTheme();
-  
+  const { bgVariant } = useTheme();
+
   return (
     <div className='fixed top-0 -z-10 h-full w-full'>
-    {isDarkMode ? (
-      // Dark mode background
-      <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-    ) : (
-      // Light mode background
-      <div className="absolute top-0 -z-10 h-full w-full bg-white">
-        <div className="absolute bottom-auto left-auto right-0 top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(120,119,198,10)] opacity-70 blur-[80px]"></div>
-      </div>
-    )}
-  </div>
+      {bgVariant === 'old-purple' && (
+        <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.4),rgba(255,255,255,0))]" />
+      )}
+      {bgVariant === 'dark-purple' && (
+        <div className="relative h-full w-full bg-black">
+          <div className="absolute inset-0 bg-gradient-to-br from-neutral-950 via-black to-neutral-900" />
+          <div className="absolute inset-0 bg-fuchsia-400 bg-[size:20px_20px] opacity-10 blur-[100px]" />
+        </div>
+      )}
+      {bgVariant === 'blue-black' && (
+        <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_150%_at_50%_80%,#000_40%,#63e_100%)]" />
+      )}
+      {bgVariant === 'dot' && (
+        <div className="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]" />
+      )}
+      {bgVariant === 'lines' && (
+        <div className="relative h-full w-full bg-black">
+          <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
+          <div className="absolute left-0 right-0 top-[-10%] h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]" />
+        </div>
+      )}
+    </div>
   );
 };
 

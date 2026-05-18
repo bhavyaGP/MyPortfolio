@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { PROJECTS } from '../constants'
 import { motion, useInView } from "framer-motion"
-import { FaExternalLinkAlt, FaGithub, FaPlay } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaGithub, FaPlay, FaStar } from 'react-icons/fa'
 import { useTheme } from '../context/ThemeContext'
 
 const getYouTubeThumbnail = (embedUrl) => {
@@ -31,7 +31,13 @@ const ProjectCard = ({ project, index, isDarkMode }) => {
       {/* Left: video or image */}
       <div className='w-full lg:w-2/5 flex justify-center lg:justify-start'>
         {project.demoVideo ? (
-          <div className={`w-full rounded-2xl overflow-hidden shadow-lg border ${isDarkMode ? 'border-neutral-700' : 'border-gray-200'}`}>
+          <div className="w-full relative">
+            {project.featured && (
+              <div className="absolute -top-3 -left-3 z-10 w-8 h-8 flex items-center justify-center bg-neutral-900 border border-yellow-400/60 rounded shadow-lg rotate-[-10deg]">
+                <FaStar className="text-yellow-400 text-sm" />
+              </div>
+            )}
+          <div className={`w-full rounded-2xl overflow-hidden shadow-lg border ${project.featured ? (isDarkMode ? 'border-yellow-500/60 ring-2 ring-yellow-400/40' : 'border-yellow-400/70 ring-2 ring-yellow-400/50') : (isDarkMode ? 'border-neutral-700' : 'border-gray-200')}`}>
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
               {isPlaying ? (
                 <iframe
@@ -54,7 +60,7 @@ const ProjectCard = ({ project, index, isDarkMode }) => {
                   <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                     <button
                       onClick={() => setIsPlaying(true)}
-                      className="flex items-center gap-2 px-5 py-2.5 bg-purple-700 hover:bg-purple-600 text-white font-semibold rounded-full shadow-lg transition-colors"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-semibold rounded-full shadow-lg transition-colors backdrop-blur-sm"
                     >
                       <FaPlay className="text-sm" /> Start
                     </button>
@@ -62,6 +68,7 @@ const ProjectCard = ({ project, index, isDarkMode }) => {
                 </div>
               )}
             </div>
+          </div>
           </div>
         ) : (
           <motion.img
@@ -87,7 +94,7 @@ const ProjectCard = ({ project, index, isDarkMode }) => {
         </p>
         <div className='flex flex-wrap'>
           {project.technologies.map((technology, techIndex) => (
-            <span key={techIndex} className='mr-2 mt-2 rounded bg-black-900 px-2 py-1 text-sm font-medium text-purple-900'>
+            <span key={techIndex} className='mr-2 mt-2 rounded border border-white/15 bg-white/5 px-2 py-1 text-sm font-medium text-neutral-200'>
               {technology}
             </span>
           ))}
@@ -97,7 +104,7 @@ const ProjectCard = ({ project, index, isDarkMode }) => {
             href={project.livelink}
             target="_blank"
             rel="noopener noreferrer"
-            className='mt-4 inline-flex items-center text-purple-900'
+            className='mt-4 inline-flex items-center text-neutral-300 hover:text-white transition-colors'
           >
             <FaExternalLinkAlt className='mr-2' /> Live Project
           </a>
@@ -105,7 +112,7 @@ const ProjectCard = ({ project, index, isDarkMode }) => {
             href={project.githublink}
             target="_blank"
             rel="noopener noreferrer"
-            className='mt-4 inline-flex items-center text-purple-900 ml-4'
+            className='mt-4 inline-flex items-center text-neutral-300 hover:text-white transition-colors ml-4'
           >
             <FaGithub className='mr-1' /> GitHub Repo
           </a>

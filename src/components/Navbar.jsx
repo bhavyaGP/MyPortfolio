@@ -1,12 +1,62 @@
-import { useState } from 'react';
-import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFileAlt, FaCertificate, FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
+import { useState, useRef, useEffect } from 'react';
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFileAlt, FaCertificate, FaBars, FaTimes, FaPalette } from 'react-icons/fa';
 import logo from '../assets/image.png';
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from '../context/ThemeContext';
+import { useTheme, BG_VARIANTS } from '../context/ThemeContext';
 import { Button } from './ui/button';
 
+const BG_PREVIEWS = {
+  'old-purple':  'bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.5),rgba(0,0,0,0))] bg-neutral-950',
+  'dark-purple': 'bg-fuchsia-950',
+  'blue-black':  'bg-[radial-gradient(circle_at_50%_120%,#6633ee,#000)]',
+  'dot':         'bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:6px_6px] bg-[#000]',
+  'lines':       'bg-black',
+};
+
+const BgPicker = () => {
+    const { bgVariant, setBgVariant } = useTheme();
+    const [open, setOpen] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, []);
+
+    return (
+        <div className="relative" ref={ref}>
+            <Button variant="glow" size="icon" onClick={() => setOpen(o => !o)} aria-label="Change background">
+                <FaPalette />
+            </Button>
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute right-0 top-12 z-50 flex flex-col gap-2 rounded-xl border border-white/10 bg-black/90 p-2 shadow-2xl backdrop-blur-md w-36"
+                    >
+                        {BG_VARIANTS.map(({ id, label }) => (
+                            <button
+                                key={id}
+                                onClick={() => { setBgVariant(id); setOpen(false); }}
+                                className={`flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs font-medium transition-colors
+                                    ${bgVariant === id ? 'bg-white/15 text-white' : 'text-neutral-400 hover:bg-white/10 hover:text-white'}`}
+                            >
+                                <span className={`w-5 h-5 rounded-sm border border-white/20 shrink-0 ${BG_PREVIEWS[id]}`} />
+                                {label}
+                            </button>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
+
 const Navbar = () => {
-    const { isDarkMode, toggleTheme } = useTheme();
     const [menuOpen, setMenuOpen] = useState(false);
 
     const navLinks = [
@@ -34,7 +84,7 @@ const Navbar = () => {
                     transition={{ duration: 0.5 }}
                 >
                     <img className="w-10 h-10 rounded-full object-cover" src={logo} alt="logo" />
-                    <span className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Bhavya</span>
+                    <span className="text-lg font-bold text-white">Bhavya</span>
                 </motion.a>
 
                 {/* Desktop nav */}
@@ -52,10 +102,7 @@ const Navbar = () => {
                         </Button>
                     ))}
 
-                    <Button variant="glow" size="icon" onClick={toggleTheme}
-                        aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}>
-                        {isDarkMode ? <FaSun /> : <FaMoon />}
-                    </Button>
+                    <BgPicker />
 
                     {socials.map(({ href, icon }) => (
                         <Button key={href} variant="glow" size="icon" asChild>
@@ -64,11 +111,9 @@ const Navbar = () => {
                     ))}
                 </motion.div>
 
-                {/* Mobile: theme + hamburger */}
+                {/* Mobile: bg picker + hamburger */}
                 <div className="flex md:hidden items-center gap-2">
-                    <Button variant="glow" size="icon" onClick={toggleTheme}>
-                        {isDarkMode ? <FaSun /> : <FaMoon />}
-                    </Button>
+                    <BgPicker />
                     <Button variant="glow" size="icon" onClick={() => setMenuOpen(o => !o)}>
                         {menuOpen ? <FaTimes /> : <FaBars />}
                     </Button>
@@ -83,8 +128,7 @@ const Navbar = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
                         transition={{ duration: 0.2 }}
-                        className={`md:hidden mt-4 rounded-2xl p-4 flex flex-col gap-3
-                            ${isDarkMode ? 'bg-slate-900/95 border border-slate-700' : 'bg-white border border-gray-200'} shadow-xl`}
+                        className="md:hidden mt-4 rounded-2xl p-4 flex flex-col gap-3 bg-black/90 border border-white/10 shadow-xl backdrop-blur-md"
                     >
                         {navLinks.map(({ href, label, icon, external }) => (
                             <Button key={label} variant="glow" size="default" asChild className="w-full justify-start">
