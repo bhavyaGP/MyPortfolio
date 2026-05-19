@@ -9,6 +9,9 @@ import LeetCodeStats from './components/LeetCodeStats'
 import Contact from './components/Contact'
 import Certificates from './components/Certificates'
 import Achievements from './components/Achievements'
+import ScrollToTop from './components/ScrollToTop'
+import PageLoader from './components/PageLoader'
+import CustomCursor from './components/CustomCursor'
 import { ThemeProvider } from './context/ThemeContext'
 import { useTheme } from './context/ThemeContext'
 import { motion } from 'framer-motion'
@@ -94,7 +97,10 @@ const AppContent = () => {
 const App = () => {
   return (
     <ThemeProvider>
+      <CustomCursor />
+      <PageLoader />
       <AppContent />
+      <ScrollToTop />
     </ThemeProvider>
   );
 };
