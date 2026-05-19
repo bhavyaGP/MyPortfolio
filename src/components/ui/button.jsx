@@ -16,6 +16,8 @@ const buttonVariants = cva(
           "border border-white/20 bg-transparent text-white hover:bg-white/10",
         glow:
           "relative overflow-hidden bg-black text-white border border-transparent shadow-[0_0_8px_rgba(255,255,255,0.25)] hover:shadow-[0_0_18px_rgba(255,255,255,0.6)] transition-shadow duration-300 before:absolute before:inset-[-1000%] before:animate-[spin_2.5s_linear_infinite] before:bg-[conic-gradient(from_90deg_at_50%_50%,#f8fafc_0%,#ffffff_25%,#e2e8f0_50%,#ffffff_75%,#f8fafc_100%)] before:z-[-1] after:absolute after:inset-[1px] after:rounded-full after:bg-black after:z-[-1]",
+        glass:
+          "liquid-glass text-white hover:bg-white/12 active:bg-white/18 transition-all duration-200",
       },
       size: {
         default: "h-9 px-5 py-2",

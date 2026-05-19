@@ -26,7 +26,7 @@ const BgPicker = () => {
 
     return (
         <div className="relative" ref={ref}>
-            <Button variant="glow" size="icon" onClick={() => setOpen(o => !o)} aria-label="Change background">
+            <Button variant="glass" size="icon" onClick={() => setOpen(o => !o)} aria-label="Change background">
                 <FaPalette />
             </Button>
             <AnimatePresence>
@@ -36,7 +36,7 @@ const BgPicker = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -8, scale: 0.95 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute right-0 top-12 z-50 flex flex-col gap-2 rounded-xl border border-white/10 bg-black/90 p-2 shadow-2xl backdrop-blur-md w-36"
+                        className="absolute right-0 top-12 z-50 flex flex-col gap-2 rounded-xl p-2 w-36 liquid-glass-subtle"
                     >
                         {BG_VARIANTS.map(({ id, label }) => (
                             <button
@@ -73,7 +73,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="mb-10 md:mb-20 py-6 px-4 relative z-50">
+        <nav className="mb-10 md:mb-20 py-3 px-4 relative z-50 rounded-full liquid-glass mx-4 mt-4">
             <div className="flex items-center justify-between">
                 {/* Logo */}
                 <motion.a
@@ -95,7 +95,7 @@ const Navbar = () => {
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
                     {navLinks.map(({ href, label, icon, external }) => (
-                        <Button key={label} variant="glow" size="default" asChild>
+                        <Button key={label} variant="glass" size="default" asChild>
                             <a href={href} target={external ? '_blank' : '_self'} rel={external ? 'noopener noreferrer' : undefined}>
                                 {icon} {label}
                             </a>
@@ -105,7 +105,7 @@ const Navbar = () => {
                     <BgPicker />
 
                     {socials.map(({ href, icon }) => (
-                        <Button key={href} variant="glow" size="icon" asChild>
+                        <Button key={href} variant="glass" size="icon" asChild>
                             <a href={href} target="_blank" rel="noopener noreferrer">{icon}</a>
                         </Button>
                     ))}
@@ -114,7 +114,7 @@ const Navbar = () => {
                 {/* Mobile: bg picker + hamburger */}
                 <div className="flex md:hidden items-center gap-2">
                     <BgPicker />
-                    <Button variant="glow" size="icon" onClick={() => setMenuOpen(o => !o)}>
+                    <Button variant="glass" size="icon" onClick={() => setMenuOpen(o => !o)}>
                         {menuOpen ? <FaTimes /> : <FaBars />}
                     </Button>
                 </div>
@@ -128,10 +128,10 @@ const Navbar = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
                         transition={{ duration: 0.2 }}
-                        className="md:hidden mt-4 rounded-2xl p-4 flex flex-col gap-3 bg-black/90 border border-white/10 shadow-xl backdrop-blur-md"
+                        className="md:hidden mt-4 rounded-2xl p-4 flex flex-col gap-3 liquid-glass"
                     >
                         {navLinks.map(({ href, label, icon, external }) => (
-                            <Button key={label} variant="glow" size="default" asChild className="w-full justify-start">
+                            <Button key={label} variant="glass" size="default" asChild className="w-full justify-start">
                                 <a href={href} target={external ? '_blank' : '_self'} rel={external ? 'noopener noreferrer' : undefined}
                                     onClick={() => setMenuOpen(false)}>
                                     {icon} {label}
@@ -141,7 +141,7 @@ const Navbar = () => {
 
                         <div className="flex gap-2 pt-1">
                             {socials.map(({ href, icon }) => (
-                                <Button key={href} variant="glow" size="icon" asChild>
+                                <Button key={href} variant="glass" size="icon" asChild>
                                     <a href={href} target="_blank" rel="noopener noreferrer">{icon}</a>
                                 </Button>
                             ))}

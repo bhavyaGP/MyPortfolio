@@ -40,10 +40,7 @@ const GitHubContributions = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`rounded-2xl p-6 flex flex-col gap-5 h-full transition-colors
-                ${isDarkMode
-                    ? 'bg-slate-800/50 border border-slate-700/50'
-                    : 'bg-slate-800/50 border border-slate-700/50'}`}
+            className="rounded-2xl p-6 flex flex-col gap-5 h-full liquid-glass-strong"
         >
             {/* Header */}
             <div className="flex items-center gap-4">

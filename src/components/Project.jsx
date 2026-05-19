@@ -33,11 +33,11 @@ const ProjectCard = ({ project, index, isDarkMode }) => {
         {project.demoVideo ? (
           <div className="w-full relative">
             {project.featured && (
-              <div className="absolute -top-3 -left-3 z-10 w-8 h-8 flex items-center justify-center bg-neutral-900 border border-yellow-400/60 rounded shadow-lg rotate-[-10deg]">
+              <div className="absolute -top-3 -left-3 z-10 w-8 h-8 flex items-center justify-center liquid-glass-subtle rounded shadow-lg rotate-[-10deg]">
                 <FaStar className="text-yellow-400 text-sm" />
               </div>
             )}
-          <div className={`w-full rounded-2xl overflow-hidden shadow-lg border ${project.featured ? (isDarkMode ? 'border-yellow-500/60 ring-2 ring-yellow-400/40' : 'border-yellow-400/70 ring-2 ring-yellow-400/50') : (isDarkMode ? 'border-neutral-700' : 'border-gray-200')}`}>
+          <div className={`w-full rounded-2xl overflow-hidden liquid-glass ${project.featured ? 'ring-2 ring-yellow-400/40' : ''}`}>
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
               {isPlaying ? (
                 <iframe
@@ -94,7 +94,7 @@ const ProjectCard = ({ project, index, isDarkMode }) => {
         </p>
         <div className='flex flex-wrap'>
           {project.technologies.map((technology, techIndex) => (
-            <span key={techIndex} className='mr-2 mt-2 rounded border border-white/15 bg-white/5 px-2 py-1 text-sm font-medium text-neutral-200'>
+            <span key={techIndex} className='mr-2 mt-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm font-medium text-neutral-200'>
               {technology}
             </span>
           ))}

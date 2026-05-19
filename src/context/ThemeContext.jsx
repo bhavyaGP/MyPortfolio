@@ -14,7 +14,7 @@ export const ThemeProvider = ({ children }) => {
     const isDarkMode = true;
 
     const [bgVariant, setBgVariantState] = useState(() => {
-        return localStorage.getItem('bgVariant') || 'old-purple';
+        return localStorage.getItem('bgVariant') || 'lines';
     });
 
     const [fontSize, setFontSize] = useState(() => {
