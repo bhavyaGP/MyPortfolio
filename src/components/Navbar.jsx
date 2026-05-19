@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaFileAlt, FaCertificate, FaBars, FaTimes, FaPalette } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaCertificate, FaBars, FaTimes, FaPalette } from 'react-icons/fa';
 import logo from '../assets/image.png';
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme, BG_VARIANTS } from '../context/ThemeContext';
@@ -60,7 +60,6 @@ const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const navLinks = [
-        { href: "https://drive.google.com/file/d/14O-V9dJKSNaT8MSxF9LVBRD62p22rJt0/view?usp=sharing", label: "Resume", icon: <FaFileAlt />, external: true },
         { href: "#certificates", label: "Certificates", icon: <FaCertificate /> },
         { href: "#achievements", label: "Achievements", icon: null },
     ];

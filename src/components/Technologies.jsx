@@ -1,267 +1,94 @@
 import { RiReactjsLine, RiNodejsLine } from "react-icons/ri";
-import { SiMongodb, SiMysql, SiPostgresql, SiGithub, SiGit, SiDocker, SiSupabase, SiFlask, SiTypescript } from "react-icons/si";
+import { SiMongodb, SiMysql, SiPostgresql, SiGithub, SiGit, SiDocker,
+         SiFlask, SiTypescript, SiPostman, SiPrisma, SiSupabase,
+         SiLangchain, SiExpress } from "react-icons/si";
 import { DiRedis } from "react-icons/di";
-import { SiPostman, SiPrisma } from "react-icons/si";
+import { TbBrandCpp } from "react-icons/tb";
 import { motion } from "framer-motion";
-import { useTheme } from "../context/ThemeContext";
 
-const iconVariants = (duration) => ({
-    initial: { y: 0 },
-    animate: {
-        y: [-8, 8],
-        transition: {
-            duration: duration,
-            ease: "linear",
-            repeat: Infinity,
-            repeatType: "reverse",
-        },
-    }
-});
+const TECH_ROW1 = [
+  { icon: <RiReactjsLine   className="text-4xl text-cyan-400" />,      label: "React.js"    },
+  { icon: <RiNodejsLine    className="text-4xl text-green-400" />,     label: "Node.js"     },
+  { icon: <SiExpress       className="text-4xl text-neutral-200" />,   label: "Express.js"  },
+  { icon: <SiFlask         className="text-4xl text-neutral-200" />,   label: "Flask"       },
+  { icon: <SiTypescript    className="text-4xl text-blue-500" />,      label: "TypeScript"  },
+  { icon: <TbBrandCpp      className="text-4xl text-blue-400" />,      label: "C++"         },
+  { icon: <SiMongodb       className="text-4xl text-green-500" />,     label: "MongoDB"     },
+  { icon: <SiMysql         className="text-4xl text-blue-400" />,      label: "MySQL"       },
+];
 
-const iconRotateVariants = {
-    animate: { 
-        rotate: [0, 10, 0, -10, 0],
-        scale: [1, 1.05, 1, 1.05, 1]
-    },
-    transition: { 
-        duration: 3, 
-        ease: "easeInOut", 
-        repeat: Infinity,
-        repeatType: "loop"
-    }
+const TECH_ROW2 = [
+  { icon: <SiPostgresql    className="text-4xl text-blue-600" />,      label: "PostgreSQL"  },
+  { icon: <DiRedis         className="text-4xl text-red-500" />,       label: "Redis"       },
+  { icon: <SiSupabase      className="text-4xl text-emerald-400" />,   label: "Supabase"    },
+  { icon: <SiPrisma        className="text-4xl text-neutral-300" />,   label: "Prisma"      },
+  { icon: <SiDocker        className="text-4xl text-blue-500" />,      label: "Docker"      },
+  { icon: <SiGit           className="text-4xl text-red-400" />,       label: "Git"         },
+  { icon: <SiGithub        className="text-4xl text-neutral-200" />,   label: "GitHub"      },
+  { icon: <SiPostman       className="text-4xl text-orange-500" />,    label: "Postman"     },
+  { icon: <SiLangchain     className="text-4xl text-emerald-300" />,   label: "LangChain"   },
+];
+
+const TechCard = ({ icon, label }) => (
+  <div className="flex flex-col items-center gap-2 liquid-glass rounded-2xl px-5 py-4 mx-3 min-w-[90px] cursor-default select-none hover:scale-105 transition-transform duration-200">
+    {icon}
+    <span className="text-neutral-400 text-xs font-medium whitespace-nowrap">{label}</span>
+  </div>
+);
+
+const MarqueeRow = ({ items, direction = "left" }) => {
+  const doubled = [...items, ...items];
+  return (
+    <div className={`marquee-wrap overflow-hidden w-full`}>
+      <div className={`flex w-max ${direction === "left" ? "marquee-left" : "marquee-right"}`}>
+        {doubled.map((item, i) => (
+          <TechCard key={i} {...item} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 const TechnologiesAndTools = () => {
-    const { isDarkMode } = useTheme();
-    
-    const borderClass = isDarkMode ? 'border-gray-700' : 'border-gray-200';
-    const sectionBorderClass = isDarkMode ? 'border-gray-700' : 'border-gray-300';
-    const headingClass = isDarkMode ? 'text-neutral-100' : 'text-gray-900';
-    const iconContainerClass = `rounded border ${borderClass} p-2 sm:p-4 bg-transparent hover:border-gray-500 transition-all duration-200 ease-in-out`;
-    
-    return (
-        <div className={`border-b ${sectionBorderClass} pb-24`}>
-            <h2 className={`my-10 md:my-20 text-center text-2xl sm:text-4xl font-bold ${headingClass}`}>Technologies</h2>
-            <div className='flex flex-wrap items-center justify-center gap-5'>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <RiReactjsLine className='text-3xl sm:text-5xl text-cyan-400' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <RiNodejsLine className='text-3xl sm:text-5xl text-green-400' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiMongodb className='text-3xl sm:text-5xl text-green-600' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiMysql className='text-3xl sm:text-5xl text-blue-500' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiPostgresql className='text-3xl sm:text-5xl text-blue-700' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <DiRedis className='text-3xl sm:text-5xl text-red-600' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiSupabase className='text-3xl sm:text-5xl text-emerald-500' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiFlask className={`text-3xl sm:text-5xl ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`} />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiTypescript className='text-3xl sm:text-5xl text-blue-600' />
-                    </motion.div>
-                </motion.div>
-            </div>
+  return (
+    <div className="border-b border-white/10 pb-20 mb-8">
+      {/* Heading */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-14"
+      >
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          Tech <span className="bg-gradient-to-r from-neutral-200 to-neutral-500 bg-clip-text text-transparent">Stack</span>
+        </h2>
+        <p className="text-neutral-500 text-sm">Technologies & tools I work with daily</p>
+        <div className="w-16 h-1 bg-white/20 mx-auto rounded-full mt-3" />
+      </motion.div>
 
-            <div className={`my-16 mx-auto w-3/4 border-b ${sectionBorderClass}`}></div>
-
-            <h2 className={`my-20 text-center text-4xl font-bold ${headingClass}`}>Tools</h2>
-            <div className='flex flex-wrap items-center justify-center gap-5'>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiGithub className={`text-3xl sm:text-5xl ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`} />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiPostman className='text-3xl sm:text-5xl text-orange-500' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiGit className='text-3xl sm:text-5xl text-red-500' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiDocker className='text-3xl sm:text-5xl text-blue-700' />
-                    </motion.div>
-                </motion.div>
-                <motion.div 
-                    variants={iconVariants(3.5)} 
-                    initial="initial" 
-                    animate="animate" 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`${iconContainerClass} rounded-lg`}
-                >
-                    <motion.div
-                        animate={iconRotateVariants.animate}
-                        transition={iconRotateVariants.transition}
-                    >
-                        <SiPrisma className='text-3xl sm:text-5xl text-neutral-300' />
-                    </motion.div>
-                </motion.div>
-            </div>
+      {/* Marquee rows */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="flex flex-col gap-6"
+      >
+        {/* Left — edge fades */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none bg-gradient-to-r from-black/80 to-transparent" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none bg-gradient-to-l from-black/80 to-transparent" />
+          <MarqueeRow items={TECH_ROW1} direction="left" />
         </div>
-    );
+
+        {/* Right */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none bg-gradient-to-r from-black/80 to-transparent" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none bg-gradient-to-l from-black/80 to-transparent" />
+          <MarqueeRow items={TECH_ROW2} direction="right" />
+        </div>
+      </motion.div>
+    </div>
+  );
 };
 
 export default TechnologiesAndTools;

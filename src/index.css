@@ -54,6 +54,10 @@
 }
 
 /* Apply font family to all elements */
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     font-family: "Inter", sans-serif;
 }
@@ -120,6 +124,20 @@ body::-webkit-scrollbar {
         max-width: none;
     }
 }
+
+/* Tech marquee */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.marquee-left  { animation: marquee-left  30s linear infinite; }
+.marquee-right { animation: marquee-right 35s linear infinite; }
+.marquee-wrap:hover .marquee-left,
+.marquee-wrap:hover .marquee-right { animation-play-state: paused; }
 
 /* Keyboard focus styles for accessibility */
 button:focus-visible,

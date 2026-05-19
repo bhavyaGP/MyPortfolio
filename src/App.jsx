@@ -11,6 +11,7 @@ import Certificates from './components/Certificates'
 import Achievements from './components/Achievements'
 import { ThemeProvider } from './context/ThemeContext'
 import { useTheme } from './context/ThemeContext'
+import { motion } from 'framer-motion'
 const ThemeBackground = () => {
   const { bgVariant } = useTheme();
 
@@ -41,16 +42,22 @@ const ThemeBackground = () => {
   );
 };
 
-// Coding Stats section that displays GitHub and LeetCode side by side
 const CodingStats = () => {
-  const { isDarkMode } = useTheme();
-  
   return (
-    <div className={`border-b ${isDarkMode ? 'border-neutral-700' : 'border-gray-300'} pb-16 mb-8`}>
-      <h2 className={`my-10 text-center text-2xl sm:text-4xl font-bold ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
-        Coding Statistics
-      </h2>
-      
+    <div className="border-b border-white/10 pb-16 mb-8">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-center my-10"
+      >
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+          Dev <span className="bg-gradient-to-r from-neutral-200 to-neutral-500 bg-clip-text text-transparent">Activity</span>
+        </h2>
+        <p className="text-neutral-500 text-sm">GitHub contributions & LeetCode submissions</p>
+        <div className="w-16 h-1 bg-white/20 mx-auto rounded-full mt-3" />
+      </motion.div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
         <GitHubContributions />
         <LeetCodeStats />
@@ -74,7 +81,7 @@ const AppContent = () => {
         <Technologies />
         <CodingStats />
         <Experience />
-        <Project />
+        <div id="projects"><Project /></div>
         <div id="achievements"><Achievements /></div>
         <div id="certificates"><Certificates /></div>
         <Contact />

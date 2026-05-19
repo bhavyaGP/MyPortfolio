@@ -1,143 +1,173 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { PROJECTS } from '../constants'
-import { motion, useInView } from "framer-motion"
-import { FaExternalLinkAlt, FaGithub, FaPlay, FaStar } from 'react-icons/fa'
-import { useTheme } from '../context/ThemeContext'
+import { motion } from 'framer-motion'
+import { FaExternalLinkAlt, FaGithub, FaPlay, FaStar, FaUsers } from 'react-icons/fa'
 
 const getYouTubeThumbnail = (embedUrl) => {
-  const match = embedUrl.match(/embed\/([^?]+)/)
+  const match = embedUrl?.match(/embed\/([^?]+)/)
   return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : null
 }
 
-const ProjectCard = ({ project, index, isDarkMode }) => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.4 })
+const VideoEmbed = ({ project, compact = false, aspectPct = 56.25, fill = false }) => {
   const [isPlaying, setIsPlaying] = useState(false)
-
-  const videoSrc = project.demoVideo
-    ? `${project.demoVideo}?autoplay=1&mute=1&rel=0`
-    : null
-
+  const videoSrc = project.demoVideo ? `${project.demoVideo}?autoplay=1&mute=1&rel=0` : null
   const thumbnail = project.demoVideo ? getYouTubeThumbnail(project.demoVideo) : null
 
   return (
-    <motion.div
-      ref={ref}
-      className='mb-16 flex flex-wrap items-start justify-center gap-6'
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.2 }}
-    >
-      {/* Left: video or image */}
-      <div className='w-full lg:w-2/5 flex justify-center lg:justify-start'>
-        {project.demoVideo ? (
-          <div className="w-full relative">
-            {project.featured && (
-              <div className="absolute -top-3 -left-3 z-10 w-8 h-8 flex items-center justify-center liquid-glass-subtle rounded shadow-lg rotate-[-10deg]">
-                <FaStar className="text-yellow-400 text-sm" />
-              </div>
-            )}
-          <div className={`w-full rounded-2xl overflow-hidden liquid-glass ${project.featured ? 'ring-2 ring-yellow-400/40' : ''}`}>
-            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-              {isPlaying ? (
-                <iframe
-                  src={videoSrc}
-                  title={`${project.title} demo`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full"
-                  style={{ border: 'none' }}
-                />
-              ) : (
-                <div className="absolute inset-0 w-full h-full">
-                  {thumbnail && (
-                    <img
-                      src={thumbnail}
-                      alt={`${project.title} preview`}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                    <button
-                      onClick={() => setIsPlaying(true)}
-                      className="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-semibold rounded-full shadow-lg transition-colors backdrop-blur-sm"
-                    >
-                      <FaPlay className="text-sm" /> Start
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
+    <div className={`relative w-full overflow-hidden bg-black/40 ${fill ? 'h-full' : ''} ${compact ? 'rounded-2xl' : 'rounded-3xl'}`}
+      style={fill ? undefined : { paddingBottom: `${aspectPct}%` }}>
+      {isPlaying ? (
+        <iframe
+          src={videoSrc}
+          title={`${project.title} demo`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="absolute inset-0 w-full h-full"
+          style={{ border: 'none' }}
+        />
+      ) : (
+        <div className="absolute inset-0">
+          {thumbnail && (
+            <img src={thumbnail} alt={`${project.title} preview`}
+              className="w-full h-full object-cover" />
+          )}
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <button
+              onClick={() => setIsPlaying(true)}
+              className="flex items-center gap-2 px-5 py-2.5 liquid-glass text-white font-semibold rounded-full shadow-lg hover:bg-white/15 transition-colors"
+            >
+              <FaPlay className="text-xs" /> Play Demo
+            </button>
           </div>
-          </div>
-        ) : (
-          <motion.img
-            className='rounded-2xl shadow-md'
-            width={150}
-            height={150}
-            src={project.image}
-            alt={project.title}
-            initial={{ scale: 0.8 }}
-            whileInView={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
-          />
-        )}
-      </div>
-
-      {/* Right: content */}
-      <div className='w-full max-w-xl lg:w-1/2'>
-        <h6 className={`mb-3 text-xl font-semibold ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
-          {project.title}
-        </h6>
-        <p className={`mb-4 leading-relaxed ${isDarkMode ? 'text-neutral-300' : 'text-gray-700'}`}>
-          {project.description}
-        </p>
-        <div className='flex flex-wrap'>
-          {project.technologies.map((technology, techIndex) => (
-            <span key={techIndex} className='mr-2 mt-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm font-medium text-neutral-200'>
-              {technology}
-            </span>
-          ))}
         </div>
-        <div className="mt-5 flex flex-wrap gap-2">
-          <a
-            href={project.livelink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className='mt-4 inline-flex items-center text-neutral-300 hover:text-white transition-colors'
-          >
-            <FaExternalLinkAlt className='mr-2' /> Live Project
-          </a>
-          <a
-            href={project.githublink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className='mt-4 inline-flex items-center text-neutral-300 hover:text-white transition-colors ml-4'
-          >
-            <FaGithub className='mr-1' /> GitHub Repo
-          </a>
-        </div>
-      </div>
-    </motion.div>
+      )}
+    </div>
   )
 }
 
+const TechTag = ({ label }) => (
+  <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-neutral-300">
+    {label}
+  </span>
+)
+
+const Links = ({ project }) => (
+  <div className="flex items-center gap-4">
+    <a href={project.livelink} target="_blank" rel="noopener noreferrer"
+      className="flex items-center gap-1.5 text-xs font-medium text-neutral-300 hover:text-white transition-colors liquid-glass-subtle px-3 py-1.5 rounded-full">
+      <FaExternalLinkAlt className="text-[10px]" /> Live
+    </a>
+    <a href={project.githublink} target="_blank" rel="noopener noreferrer"
+      className="flex items-center gap-1.5 text-xs font-medium text-neutral-300 hover:text-white transition-colors liquid-glass-subtle px-3 py-1.5 rounded-full">
+      <FaGithub className="text-[10px]" /> GitHub
+    </a>
+  </div>
+)
+
+/* Featured — full-width horizontal card */
+const FeaturedCard = ({ project }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    viewport={{ once: true }}
+    className="liquid-glass-strong rounded-2xl overflow-hidden mb-5 max-w-4xl mx-auto"
+  >
+    <div className="grid grid-cols-1 lg:grid-cols-2">
+      {/* Video */}
+      <div className="relative h-full min-h-[220px]">
+        <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5">
+          <span className="flex items-center gap-1 bg-amber-400/20 border border-amber-400/40 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full">
+            <FaStar className="text-amber-400 text-[9px]" /> Major Project
+          </span>
+          <span className="flex items-center gap-1 bg-green-400/15 border border-green-400/30 text-green-300 text-[10px] font-medium px-2 py-0.5 rounded-full">
+            <FaUsers className="text-[9px]" /> 300+ Users
+          </span>
+        </div>
+        <VideoEmbed project={project} fill />
+      </div>
+
+      {/* Content */}
+      <div className="p-5 flex flex-col justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-neutral-500 text-[10px] font-mono">01</span>
+            <div className="h-px flex-1 bg-white/10" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+          <p className="text-neutral-400 text-xs leading-relaxed line-clamp-3">
+            {project.description}
+          </p>
+        </div>
+        <div>
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {project.technologies.map((t, i) => <TechTag key={i} label={t} />)}
+          </div>
+          <Links project={project} />
+        </div>
+      </div>
+    </div>
+  </motion.div>
+)
+
+/* Regular — compact vertical card */
+const RegularCard = ({ project, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: index * 0.1 }}
+    viewport={{ once: true }}
+    className="liquid-glass rounded-2xl overflow-hidden flex flex-col"
+  >
+    {/* Video */}
+    <VideoEmbed project={project} compact aspectPct={38} />
+
+    {/* Content */}
+    <div className="p-3 flex flex-col gap-2">
+      <div>
+        <h3 className="text-sm font-bold text-white mb-1 leading-snug">{project.title}</h3>
+        <p className="text-neutral-400 text-[11px] leading-relaxed line-clamp-2">
+          {project.description}
+        </p>
+      </div>
+      <div className="flex flex-wrap gap-1">
+        {project.technologies.slice(0, 3).map((t, i) => <TechTag key={i} label={t} />)}
+        {project.technologies.length > 3 && (
+          <span className="text-neutral-500 text-[10px] px-1.5 py-0.5">+{project.technologies.length - 3}</span>
+        )}
+      </div>
+      <Links project={project} />
+    </div>
+  </motion.div>
+)
+
 const Project = () => {
-  const { isDarkMode } = useTheme()
+  const [featured, ...rest] = PROJECTS
 
   return (
-    <div className={`border-b ${isDarkMode ? 'border-neutral-700' : 'border-gray-300'} pb-8 mb-8`}>
-      <h2 className={`my-20 text-center text-4xl font-bold ${isDarkMode ? 'text-neutral-100' : 'text-gray-900'}`}>
-        Projects
-      </h2>
-      <div className="leading-relaxed">
-        {PROJECTS.map((project, index) => (
-          <ProjectCard
-            key={index}
-            project={project}
-            index={index}
-            isDarkMode={isDarkMode}
-          />
+    <div className="border-b border-white/10 pb-16 mb-8">
+      {/* Heading */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="text-center my-16"
+      >
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+          Featured <span className="bg-gradient-to-r from-neutral-200 to-neutral-500 bg-clip-text text-transparent">Projects</span>
+        </h2>
+        <p className="text-neutral-500 text-sm">Things I've built</p>
+        <div className="w-16 h-1 bg-white/20 mx-auto rounded-full mt-3" />
+      </motion.div>
+
+      {/* Featured */}
+      {featured && <FeaturedCard project={featured} />}
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto w-full">
+        {rest.map((project, i) => (
+          <RegularCard key={i} project={project} index={i} />
         ))}
       </div>
     </div>
