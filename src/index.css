@@ -3,8 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* { cursor: none !important; }
-
 @layer components {
   /* Apple-style liquid glass — base */
   .liquid-glass {

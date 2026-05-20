@@ -11,7 +11,7 @@ import Certificates from './components/Certificates'
 import Achievements from './components/Achievements'
 import ScrollToTop from './components/ScrollToTop'
 import PageLoader from './components/PageLoader'
-import CustomCursor from './components/CustomCursor'
+import MonkeyTypeStats from './components/MonkeyTypeStats'
 import { ThemeProvider } from './context/ThemeContext'
 import { useTheme } from './context/ThemeContext'
 import { motion } from 'framer-motion'
@@ -57,13 +57,14 @@ const CodingStats = () => {
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
           Dev <span className="bg-gradient-to-r from-neutral-200 to-neutral-500 bg-clip-text text-transparent">Activity</span>
         </h2>
-        <p className="text-neutral-500 text-sm">GitHub contributions & LeetCode submissions</p>
+        <p className="text-neutral-500 text-sm">GitHub contributions, LeetCode & typing speed</p>
         <div className="w-16 h-1 bg-white/20 mx-auto rounded-full mt-3" />
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         <GitHubContributions />
         <LeetCodeStats />
+        <MonkeyTypeStats />
       </div>
     </div>
   );
@@ -97,8 +98,7 @@ const AppContent = () => {
 const App = () => {
   return (
     <ThemeProvider>
-      <CustomCursor />
-      <PageLoader />
+<PageLoader />
       <AppContent />
       <ScrollToTop />
     </ThemeProvider>
