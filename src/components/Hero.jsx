@@ -146,7 +146,7 @@ const Hero = () => {
         </div>
 
         {/* RIGHT — profile */}
-        <div className="flex justify-center lg:justify-center">
+        <div className="flex justify-center lg:justify-center overflow-hidden sm:overflow-visible">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
