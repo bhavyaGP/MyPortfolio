@@ -1,9 +1,19 @@
 import { EXPERIENCES } from "../constants";
 import {EXPERIENCES_V2} from "../constants";
 import { motion } from "framer-motion";
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaBriefcase, FaCalendarAlt } from "react-icons/fa";
+
+const getVisibleExperiences = () => {
+  try {
+    const hidden = new Set(JSON.parse(localStorage.getItem('bhavya_hidden_experiences') || '[]'))
+    return EXPERIENCES.filter(({ company, year }) => !hidden.has(`${company}__${year}`))
+  } catch {
+    return EXPERIENCES
+  }
+}
 
 const Experience = () => {
+    const experiences = getVisibleExperiences()
     return (
         <div className="border-b border-white/10 pb-16 mb-8">
             <motion.div

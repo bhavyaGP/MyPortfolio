@@ -5,6 +5,11 @@ import { motion } from 'framer-motion'
 import { FaArrowRight, FaDownload, FaTrophy, FaUsers, FaGraduationCap, FaRupeeSign } from 'react-icons/fa'
 import { Button } from './ui/button'
 
+const RESUME_URLS = [
+  'https://drive.google.com/file/d/1ifrcd8J_5Vfi5b0ZiHfcNiKAR5FIjxxp/view?usp=sharing',
+  'https://drive.google.com/file/d/14O-V9dJKSNaT8MSxF9LVBRD62p22rJt0/view?usp=sharing',
+]
+
 const ROLES = [
   'Backend AI Engineer',
   'Full Stack Developer',
@@ -51,6 +56,8 @@ const Typewriter = () => {
 }
 
 const Hero = () => {
+  const resumeUrl = RESUME_URLS[parseInt(localStorage.getItem('bhavya_active_resume_idx') || '0', 10)] || RESUME_URLS[0]
+
   return (
     <div className="min-h-[70vh] flex items-center pb-4">
       <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-6 items-center">

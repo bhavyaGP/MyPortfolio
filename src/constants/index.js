@@ -17,6 +17,15 @@ I also volunteer as a Web Expert at Club Gamma and tutor students in web technol
 
 export const EXPERIENCES = [
   {
+    year: "Oct 2025 – April 2026",
+    role: "Software Engineer Intern",
+    company: "PlaypowerLabs (Remote)",
+    description: `- AI Agent Development: Built an AI agent for automated activity generation within Reading Planet, a comprehensive graded reading program for children aged 3–11, enhancing content creation workflows significantly.
+- Full-Stack Engineering: Developed and maintained features using TypeScript, Express.js backend and Next.js frontend, integrated with Supabase for database and authentication needs.
+- AWS Infrastructure: Worked with AWS services including Cognito (auth), Lambda (serverless functions), DynamoDB (NoSQL storage), and API Gateway, alongside Prismic for content management.`,
+    technologies: ["TypeScript", "Next.js", "Express.js", "Supabase", "AWS Cognito", "AWS Lambda", "DynamoDB", "API Gateway", "Prismic"],
+  },
+  {
     year: "Aug 2025 - Present",
     role: "Backend AI Engineer Intern",
     company: "CodemateAI (Remote)",
@@ -24,7 +33,7 @@ export const EXPERIENCES = [
 - Designed and optimized backend services with Node.js, Express.js, and vector databases to support 400+ active users.
 - Implemented semantic search and retrieval pipelines to improve accuracy and personalization.`,
     technologies: ["JavaScript", "Node.js", "Flask", "OpenAI", "Gemini", "MongoDB", "Pinecone"],
-  }
+  },
 ];
 
 export const EXPERIENCES_V2 = [
