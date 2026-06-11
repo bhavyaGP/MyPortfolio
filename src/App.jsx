@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import About from './components/About'
 import Experience from './components/Experience'
 import Hero from './components/Hero'
@@ -12,6 +13,7 @@ import Achievements from './components/Achievements'
 import ScrollToTop from './components/ScrollToTop'
 import PageLoader from './components/PageLoader'
 import MonkeyTypeStats from './components/MonkeyTypeStats'
+import PrivatePage from './components/PrivatePage'
 import { ThemeProvider } from './context/ThemeContext'
 import { useTheme } from './context/ThemeContext'
 import { motion } from 'framer-motion'
@@ -97,11 +99,20 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <ThemeProvider>
-<PageLoader />
-      <AppContent />
-      <ScrollToTop />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <Routes>
+          <Route path="/private/bhavya" element={<PrivatePage />} />
+          <Route path="*" element={
+            <>
+              <PageLoader />
+              <AppContent />
+              <ScrollToTop />
+            </>
+          } />
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 };
 

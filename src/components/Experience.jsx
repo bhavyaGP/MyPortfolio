@@ -1,8 +1,18 @@
 import { EXPERIENCES } from "../constants";
 import { motion } from "framer-motion";
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaBriefcase, FaCalendarAlt } from "react-icons/fa";
+
+const getVisibleExperiences = () => {
+  try {
+    const hidden = new Set(JSON.parse(localStorage.getItem('bhavya_hidden_experiences') || '[]'))
+    return EXPERIENCES.filter(({ company, year }) => !hidden.has(`${company}__${year}`))
+  } catch {
+    return EXPERIENCES
+  }
+}
 
 const Experience = () => {
+    const experiences = getVisibleExperiences()
     return (
         <div className="border-b border-white/10 pb-16 mb-8">
             <motion.div
@@ -23,7 +33,7 @@ const Experience = () => {
                 {/* Timeline line */}
                 <div className="absolute left-6 top-0 bottom-0 w-px bg-white/10 hidden sm:block" />
 
-                {EXPERIENCES.map(({ year, role, company, description, technologies }, index) => (
+                {experiences.map(({ year, role, company, description, technologies }, index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, x: -30 }}
