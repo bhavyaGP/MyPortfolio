@@ -135,7 +135,8 @@ const Hero = () => {
             </Button>
             <Button variant="glass" size="default" asChild>
               <a
-                href="https://drive.google.com/file/d/14O-V9dJKSNaT8MSxF9LVBRD62p22rJt0/view?usp=sharing"
+                href="https://drive.google.com/file/d/1ifrcd8J_5Vfi5b0ZiHfcNiKAR5FIjxxp/view?usp=drive_link"
+                // href="https://drive.google.com/file/d/14O-V9dJKSNaT8MSxF9LVBRD62p22rJt0/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
               >

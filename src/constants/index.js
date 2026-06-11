@@ -27,6 +27,18 @@ export const EXPERIENCES = [
   }
 ];
 
+export const EXPERIENCES_V2 = [
+  {
+    year: "Oct 2025 – April 2026",
+    role: "Software Engineer Intern",
+    company: "PlaypowerLabs (Remote)",
+    description: `- AI Agent Development: Built an AI agent for automated activity generation within Reading Planet, a comprehensive graded reading program for children aged 3–11, enhancing content creation workflows significantly.
+- Full-Stack Engineering: Developed and maintained features using TypeScript, Express.js backend and Next.js frontend, integrated with Supabase for database and authentication needs.
+- AWS Infrastructure: Worked with AWS services including Cognito (auth), Lambda (serverless functions), DynamoDB (NoSQL storage), and API Gateway, alongside Prismic for content management.`,
+    technologies: ["TypeScript", "Next.js", "Express.js", "Supabase", "AWS Cognito", "AWS Lambda", "DynamoDB", "API Gateway", "Prismic"],
+  }
+];
+
 export const PROJECTS = [
   {
     "title": "QuickLearnAI",

@@ -1,4 +1,5 @@
 import { EXPERIENCES } from "../constants";
+import {EXPERIENCES_V2} from "../constants";
 import { motion } from "framer-motion";
 import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
@@ -23,7 +24,7 @@ const Experience = () => {
                 {/* Timeline line */}
                 <div className="absolute left-6 top-0 bottom-0 w-px bg-white/10 hidden sm:block" />
 
-                {EXPERIENCES.map(({ year, role, company, description, technologies }, index) => (
+                {EXPERIENCES_V2.map(({ year, role, company, description, technologies }, index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, x: -30 }}
