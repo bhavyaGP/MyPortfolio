@@ -13,7 +13,10 @@ const getVisibleExperiences = () => {
 }
 
 const Experience = () => {
-    const experiences = getVisibleExperiences()
+    // const experiences = getVisibleExperiences()
+    console.log("EXPERIENCES_V2:", EXPERIENCES_V2)
+    console.log("EXPERIENCES:", EXPERIENCES)
+
     return (
         <div className="border-b border-white/10 pb-16 mb-8">
             <motion.div
@@ -34,7 +37,7 @@ const Experience = () => {
                 {/* Timeline line */}
                 <div className="absolute left-6 top-0 bottom-0 w-px bg-white/10 hidden sm:block" />
 
-                {EXPERIENCES_V2.map(({ year, role, company, description, technologies }, index) => (
+                {EXPERIENCES.map(({ year, role, company, description, technologies }, index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, x: -30 }}
