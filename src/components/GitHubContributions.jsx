@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaCodeBranch, FaUsers, FaBook, FaCode } from 'react-icons/fa';
 import { Button } from './ui/button';
+import ActivityHeatmap from './ui/activity-heatmap';
 
 const USERNAME = "bhavyagp";
 
@@ -15,11 +16,17 @@ const StatTile = ({ icon, label, value }) => (
 
 const GitHubContributions = () => {
     const [profile, setProfile] = useState(null);
+    const [days, setDays] = useState([]);
 
     useEffect(() => {
         fetch(`https://api.github.com/users/${USERNAME}`)
             .then(r => r.json())
             .then(setProfile)
+            .catch(() => {});
+        // public contributions proxy (GitHub's API has no unauthenticated contribution calendar)
+        fetch(`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`)
+            .then(r => r.json())
+            .then(j => setDays(j.contributions ?? []))
             .catch(() => {});
     }, []);
 
@@ -67,11 +74,9 @@ const GitHubContributions = () => {
                     <span className="w-2 h-2 rounded-full bg-green-400" />
                     <p className="text-green-400 text-xs font-semibold tracking-wide">Contribution Activity</p>
                 </div>
-                <img
-                    src={`https://ghchart.rshah.org/22c55e/${USERNAME}`}
-                    alt="GitHub Contributions"
-                    className="w-full h-auto"
-                    style={{ filter: 'invert(1) hue-rotate(178deg)', display: 'block' }}
+                <ActivityHeatmap
+                    data={days.map(d => ({ date: d.date, value: d.count }))}
+                    color="#22c55e"
                 />
             </div>
 

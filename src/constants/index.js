@@ -18,7 +18,7 @@ I also volunteer as a Web Expert at Club Gamma and tutor students in web technol
 export const EXPERIENCES = [
   {
     year: "Aug 2025 - Present",
-    role: "Backend AI Engineer Intern",
+    role: "Software Engineer Intern",
     company: "CodemateAI (Remote)",
     description: `Building Guruverse AI, an intelligent assistant platform using OpenAI and Gemini SDKs with embedding models for context-aware responses.
 - Designed and optimized backend services with Node.js, Express.js, and vector databases to support 400+ active users.

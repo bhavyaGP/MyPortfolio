@@ -1,0 +1,216 @@
+/* page CSS: only what sits inside a visual and the kit lacks */
+a.tile__media { display: block; }
+.portrait, .develop { margin: 0; border-radius: var(--r-lg); overflow: hidden; height: min(560px, var(--ly-fit)); }
+.portrait > img, .develop > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portrait > img { object-position: 50% 30%; }
+.rows small { display: block; font-weight: 400; color: var(--muted); font-size: var(--t-small); }
+@media (min-width: 640px) and (max-width: 1023px) {
+  #work { --h: 2; }
+  #work .grid > .tile { grid-column: 1 / -1; --tile-ratio: 4 / 3; }
+}
+@media (max-width: 639px) { .phone-hide { display: none; } }
+@media (max-width: 1023px) {
+  .portrait, .develop { height: auto; aspect-ratio: 2 / 1; margin-top: var(--s-7); }
+}
+/* pinned-chapters is not live on a phone and keeps its natural height: give it its two screens so the grid holds */
+@media (max-width: 639px) { main > #hackathons.section[data-moment]:not(.is-live) { min-height: 200lvh; } }
+@media (min-width: 640px) and (max-width: 1023px) { #hackathons:not(.is-live) .mo-pc__visual > img { max-height: 20svh; } }
+@media (max-width: 639px) { .portrait, .develop { aspect-ratio: 4 / 3; } }
+.stackviz { --p-h: 560px; }
+.act { display: grid; align-content: start; gap: var(--s-4); }
+.gh { display: grid; grid-template-rows: repeat(7, 1fr); grid-auto-flow: column; gap: 2px; }
+.gh > i { aspect-ratio: 1; border-radius: 2px; background: var(--line); }
+.gh > i[data-l="1"] { background: color-mix(in oklab, var(--accent) 25%, var(--surface)); }
+.gh > i[data-l="2"] { background: color-mix(in oklab, var(--accent) 50%, var(--surface)); }
+.gh > i[data-l="3"] { background: color-mix(in oklab, var(--accent) 75%, var(--surface)); }
+.gh > i[data-l="4"] { background: var(--accent); }
+.act { align-self: stretch; }
+.act h3, .sub h3 { font: 500 var(--t-card)/1.3 var(--font-text); letter-spacing: -0.01em; }
+.stat { --sh: 264px; min-height: var(--sh); box-sizing: border-box; padding: var(--s-5); background: var(--surface); border-radius: var(--r-lg); display: grid; align-content: space-between; gap: var(--s-4); overflow: hidden; }
+.stat--img { padding: 0; background: none; }
+.stat--img > img { width: 100%; height: 100%; object-fit: contain; object-position: top left; }
+.stat__n { font: var(--display-weight) var(--t-stat)/1.05 var(--font-display); letter-spacing: var(--display-tracking); }
+.stat__n small { display: block; margin-top: var(--s-1); font: 400 var(--t-small)/1.4 var(--font-text); letter-spacing: 0; color: var(--muted); }
+.stat .rows > li { padding-block: var(--s-2); }
+/* below 1024 the hero words sit under the photograph on the page ground */
+@media (max-width: 1023px) { .hero--photo[data-box="none"][data-tone="dark"] { --ink: var(--p-ink); --muted: var(--p-muted); color: var(--p-ink); } }   /* the kit's dark tone outranks its own phone rule */
+.expviz { --p-h: 520px; }
+/* dark mode: the same paper, ink and green, turned over; the terminal and diagrams keep their own grounds */
+html[data-theme="dark"] { color-scheme: dark; --p-bg: #0b1511; --p-surface: #14261d; --p-ink: #e4f1ea; --p-muted: #9ab9a8;
+  --p-accent: #6fd39a; --p-accent-ink: #0b1511; --p-action: #6fd39a; --p-action-ink: #0b1511; }
+html[data-theme="dark"] .panel { --ink: #0d2b1d; --muted: #4a6e5a; --bg: #f3f9f5; --card: #f3f9f5; --frag: #fbfdfc; --accent: #14663a; --accent-ink: #f3f9f5; }
+html[data-theme="dark"] .stat--img { background: #f3f9f5; border-radius: var(--r-lg); }
+.theme-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line-strong); border-radius: var(--r-btn); background: transparent; color: var(--ink); cursor: pointer; transition: background-color 200ms ease, transform 120ms ease; }
+.theme-btn:hover { background: var(--surface); }
+.theme-btn:active { transform: scale(.96); }
+.theme-btn .i-sun, html[data-theme="dark"] .theme-btn .i-moon { display: none; }
+html[data-theme="dark"] .theme-btn .i-sun { display: block; }
+/* the switch: a circle grows from the button (View Transitions); other browsers fade the colours */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { animation: theme-reveal 650ms cubic-bezier(.4, 0, .2, 1) both; }
+@keyframes theme-reveal { from { clip-path: circle(0 at var(--tx, 50%) var(--ty, 0)); } to { clip-path: circle(150vmax at var(--tx, 50%) var(--ty, 0)); } }
+html.theme-fade, html.theme-fade * { transition: background-color 450ms ease, color 450ms ease, border-color 450ms ease !important; }
+
+/* the hero terminal, after the reference: a header line, a profile column, a transcript with a gutter of labels */
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.term { --t-bg: #0e1318; --t-line: #1d252d; --t-dim: #7d8896; --t-ink: #e6edf3; --t-blue: #8ab4f8; --t-green: #86e0a0; --t-red: #ff7b86; --lc: 76px;
+  display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100%; border-radius: 22px; overflow: hidden; background: var(--t-bg); color: var(--t-ink); box-shadow: 0 0 0 1px var(--t-line);
+  font: 400 14px/1.7 "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace; }
+.term p { margin: 0; }
+.term [hidden] { display: none; }
+.term__head { display: flex; justify-content: space-between; gap: var(--s-4); padding: var(--s-5) var(--s-6); border-bottom: 1px solid var(--t-line); color: var(--t-dim); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+.term__main { display: grid; grid-template-columns: 200px minmax(0, 1fr); min-height: 0; }
+.term__side { padding: var(--s-5) var(--s-5) var(--s-5) var(--s-6); border-right: 1px solid var(--t-line); display: grid; align-content: start; overflow: hidden; }
+.term__side .k { color: var(--t-dim); font-size: 13px; margin-top: var(--s-3); }
+.term__side .h { margin: 0 0 var(--s-2); text-transform: uppercase; letter-spacing: .08em; }
+.term__side .v { color: var(--t-ink); overflow-wrap: anywhere; }
+.term__right { display: grid; grid-template-rows: minmax(0, 1fr) auto auto; min-width: 0; min-height: 0; }
+.term__scroll { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #2a343e transparent; padding: var(--s-5) var(--s-6) 0; cursor: text; align-content: start; }
+.term__rows { display: grid; }
+.term .r, .term__in { display: grid; grid-template-columns: var(--lc) minmax(0, 1fr); column-gap: var(--s-3); }
+.term .r { padding-block: 5px; overflow-wrap: anywhere; }
+.term .l { color: var(--t-dim); }
+.term .d { color: var(--t-dim); }
+.term .c-b { color: var(--t-blue); } .term .c-g { color: var(--t-green); } .term .c-r { color: var(--t-red); }
+.term__in { align-items: center; padding: var(--s-2) var(--s-6) var(--s-5); }
+.term__in input { min-width: 0; min-height: 32px; border: 0; background: transparent; color: var(--t-ink); font: inherit; font-size: 16px; caret-color: var(--t-green); caret-shape: block; outline-offset: 4px; }
+.term__in input::placeholder { color: var(--t-dim); }
+.term__in input:focus-visible { outline: 2px solid var(--t-ink); }
+@media (max-width: 1023px) {
+  .term__side, .term__head span + span { display: none; }
+  .term__main { grid-template-columns: minmax(0, 1fr); }
+  .term .ph { display: none; }
+  .term__head { padding: var(--s-3) var(--s-5); }
+  .term__scroll, .term__in { padding-inline: var(--s-5); }
+}
+.term__chips { display: flex; flex-wrap: wrap; gap: var(--s-2); padding: var(--s-4) var(--s-6); border-top: 1px solid var(--t-line); }
+.term__chips span { display: inline-flex; align-items: center; min-height: 36px; padding: 0 var(--s-4); user-select: none; border: 1px solid var(--t-line); border-radius: 6px; background: transparent; color: var(--t-dim); font: inherit; font-size: 13px; cursor: pointer; transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease; }
+.term__chips span:hover { color: var(--t-ink); border-color: var(--t-dim); background: #141b22; }
+.term__chips span:active { transform: translateY(1px); }
+@media (max-width: 1023px) { .term__chips { display: none; } }   /* keyboard users type or press Tab; phones type too */
+@media (prefers-reduced-motion: reduce) { .term__scroll { scroll-behavior: auto; } }
+/* short windows (an app pane, a laptop with a toolbar): give the transcript the room the chrome would take */
+@media (min-width: 1024px) and (max-height: 760px) {
+  .term__head { padding-block: var(--s-3); }
+  .term__chips { padding-block: var(--s-2); }
+  .term__chips span { min-height: 32px; }
+  .term__in { padding-bottom: var(--s-3); }
+  .term__scroll { padding-top: var(--s-3); }
+}
+/* 1024 to 1279: the profile column would squeeze the transcript to about 300px, so the transcript takes the width */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .term__side { display: none; }
+  .term__main { grid-template-columns: minmax(0, 1fr); }
+}
+/* the reference's shape: pill buttons, a round theme button, a deep green fill; mint ground behind diagram panels */
+html[data-radius] { --r-btn: 999px; }
+html { --ground-bg: #dcebe2; --ground-surface: #e9f3ed; --ground-ink: #0d2b1d; --ground-muted: #4a6e5a; --ground-accent: #14663a; }
+.btn--primary { background: linear-gradient(135deg, #17753f, #0a3d28); color: #f3f9f5; border-color: transparent; }
+html[data-theme="dark"] .btn--primary { background: linear-gradient(135deg, #7fe0a8, #4fbf84); color: #0b1511; }
+.term { --t-bg: #0a1510; --t-line: #17261d; }
+.rows .built { grid-column: 1 / -1; margin: 0; padding-left: 0; list-style: none; display: grid; gap: var(--s-2); }
+.rows .links { grid-column: 1 / -1; margin: 0; display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
+/* the coding evaluation architecture: boxes and arrows on one dark card, in the terminal's palette; live text under an image role */
+.arch { --t-bg: #0a1510; --t-box: #0f1c15; --t-line: #17261d; --t-dim: #7d8896; --t-ink: #e6edf3; --t-blue: #8ab4f8; --t-green: #86e0a0; --g: 28px;
+  display: grid; align-content: start; gap: var(--s-5); padding: var(--s-6); border-radius: 22px; background: var(--t-bg); color: var(--t-ink); box-shadow: 0 0 0 1px var(--t-line);
+  font: 400 14px/1.45 "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace; }
+.arch p { margin: 0; }
+.arch__title { display: flex; justify-content: space-between; gap: var(--s-4); padding-bottom: var(--s-4); border-bottom: 1px solid var(--t-line); color: var(--t-dim); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+.arch__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: auto; gap: var(--g); }
+.node { position: relative; display: grid; align-content: start; gap: 2px; padding: var(--s-3) var(--s-3) var(--s-3); border: 1px solid #22362a; border-radius: 12px; background: var(--t-box); min-width: 0; }
+.node .n { color: var(--t-blue); font-size: 13px; }
+.node b { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-weight: 500; }
+.node .ic { height: 20px; width: auto; max-width: 24px; object-fit: contain; }
+.node .s { color: var(--t-dim); font-size: 13px; }
+.node.box { border-style: dashed; border-color: #3a5a47; }
+.node.ok { border-color: #2f6b45; }
+.node.ok b { color: var(--t-green); }
+/* the arrows: a line across the gap and a head, in the direction the node points */
+.node::after, .node::before { content: ""; position: absolute; display: none; }
+.node.r::after { display: block; left: 100%; top: 50%; width: var(--g); height: 1px; background: var(--t-blue); opacity: .6; }
+.node.r::before { display: block; left: calc(100% + var(--g) - 6px); top: calc(50% - 4px); border: 4px solid transparent; border-left: 6px solid var(--t-blue); }
+.node.l::after { display: block; right: 100%; top: 50%; width: var(--g); height: 1px; background: var(--t-blue); opacity: .6; }
+.node.l::before { display: block; right: calc(100% + var(--g) - 6px); top: calc(50% - 4px); border: 4px solid transparent; border-right: 6px solid var(--t-blue); }
+.node.d::after { display: block; left: 50%; top: 100%; width: 1px; height: var(--g); background: var(--t-blue); opacity: .6; }
+.node.d::before { display: block; left: calc(50% - 4px); top: calc(100% + var(--g) - 6px); border: 4px solid transparent; border-top: 6px solid var(--t-blue); }
+.arch__states { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); padding-top: var(--s-4); border-top: 1px solid var(--t-line); color: var(--t-dim); font-size: 13px; }
+.arch__states i { font-style: normal; }
+.arch__states .g { color: var(--t-green); }
+@media (max-width: 639px) {
+  .arch { padding: var(--s-5); --g: 20px; }
+  .arch__title span + span, .node .s { display: none; }
+  .arch__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .arch__grid .node { grid-area: auto !important; }
+  .node::before, .node::after { display: none !important; }
+}
+@media (max-width: 639px) { .stackviz { --p-h: 300px; } }
+/* QuickLearnAI's own map: left to right on wide screens, a grid of cards below; arrows follow the real request paths */
+.qa { padding: var(--s-6); }
+.qa__map { --rh: 54px; --rg: 8px; display: grid; grid-template-columns: 88px 24px 124px 24px 124px 40px 104px 44px minmax(0, 1fr); grid-template-rows: repeat(7, var(--rh)); row-gap: var(--rg); align-items: center; }
+.qa .node { align-self: center; min-height: var(--rh); padding: 8px 12px; box-sizing: border-box; align-content: center; }
+.qa .node b { font-size: 14px; }
+.qa .node.u, .qa .node.role { text-align: left; }
+.qa .node.role { border-color: #2c4a63; }
+.qa .node.role.gt { border-color: #2f6b45; }
+.qa .node.f { height: var(--rh); }
+.qa .node::before, .qa .node::after { display: none !important; }
+.rail, .ar { position: relative; align-self: stretch; }
+.rail i { position: absolute; background: var(--c, var(--t-blue)); opacity: .7; }
+.rail .b { --c: var(--t-blue); } .rail .gr { --c: var(--t-green); }
+.rail .h { height: 1px; } .rail .v { width: 1px; left: 50%; }
+.rail .tk::after { content: ""; position: absolute; right: 0; top: -4px; border: 4px solid transparent; border-left: 6px solid var(--c); }
+.rail .r { left: 50%; right: 0; }
+.ar::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--t-blue); opacity: .7; }
+.ar::after { content: ""; position: absolute; right: 0; top: calc(50% - 4px); border: 4px solid transparent; border-left: 6px solid var(--t-blue); }
+@media (max-width: 1359px) {
+  .qa__map { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; gap: var(--s-3); }
+  .qa .node { grid-area: auto !important; height: auto; }
+  .rail, .ar { display: none; }
+}
+@media (max-width: 639px) { .qa { padding: var(--s-5); } .qa .node .s { display: none; } .qa .arch__title span + span { display: none; } }
+/* dark mode: the figure and the terminal lift one step off the page so their edge reads */
+html[data-theme="dark"] .arch { --t-bg: #10231a; --t-box: #16301f; --t-line: #29463a; box-shadow: 0 0 0 1px #2d4d3e; }
+html[data-theme="dark"] .arch .node { border-color: #2f5a44; }
+html[data-theme="dark"] .arch .node.box { border-color: #4f7c63; }
+html[data-theme="dark"] .term { --t-bg: #0f2118; --t-line: #29463a; box-shadow: 0 0 0 1px #2d4d3e; }
+/* the figures are always dark: the black marks (Flask, LangChain, OpenAI, WebSocket) turn light on them */
+.arch img[src*="flask"], .arch img[src*="langchain"], .arch img[src*="openai"], .arch img[src*="websocket"], .arch img[src*="nextjs"] { filter: invert(1); }
+/* demo videos read as videos: a play badge on the thumbnail, the player swapped in on click */
+.tile__media .play { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: inline-flex; align-items: center; gap: var(--s-2); padding: 10px 18px 10px 14px; border-radius: 999px;
+  background: rgb(10 10 10 / .78); color: #f3f9f5; font: 500 15px/1 var(--font-text); box-shadow: 0 0 0 1px rgb(255 255 255 / .14); transition: background-color 200ms ease, scale 200ms ease; pointer-events: none; }
+a.tile__media:hover .play { background: #14663a; scale: 1.04; }
+.tile__video { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--r-lg); background: #0b0b0b; }
+.tile__links { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
+/* the diagram panels: mint, not the kit's sand, in both themes */
+.panel { --ground-bg: #dcebe2; }
+@media (max-width: 1359px) { .qa .node.f { height: auto; } .qa .node b { overflow-wrap: anywhere; } }
+@media (max-width: 639px) { .arch__states { display: none; } }
+@media (max-width: 639px) { .qa .arch__title { display: none; } }
+@media (max-width: 1023px) { .term { --lc: 44px; } }
+@media (max-width: 639px) { #experience .arch .node .s { display: block; } }
+/* dark mode on neutral black: 60% black ground, 30% greys, 10% green accent; the figures and the terminal use the same blacks in both themes */
+html[data-theme="dark"] { --p-bg: #0a0a0a; --p-surface: #171717; --p-ink: #ededed; --p-muted: #a3a3a3; }
+:root { --p-inv-bg: #0b0b0b; --p-inv-surface: #171717; --p-inv-ink: #ededed; --p-inv-muted: #a3a3a3; }
+.term, html[data-theme="dark"] .term { --t-bg: #0b0b0b; --t-line: #262626; --t-dim: #8a8a8a; box-shadow: 0 0 0 1px #262626; }
+.arch, html[data-theme="dark"] .arch { --t-bg: #0b0b0b; --t-box: #141414; --t-line: #262626; --t-dim: #8a8a8a; box-shadow: 0 0 0 1px #262626; }
+.arch .node, html[data-theme="dark"] .arch .node { border-color: #2a2a2a; }
+.arch .node.box, html[data-theme="dark"] .arch .node.box { border-color: #4a4a4a; }
+.qa .node.role { border-color: #2c4a63; } .qa .node.role.gt, .node.ok { border-color: #2f6b45; }
+html[data-theme="dark"] .term__chips span:hover { background: #1a1a1a; }
+.term__chips span:hover { background: #1a1a1a; }
+.ar2 { align-self: center; display: block; color: var(--t-blue); opacity: .75; }
+.ar2 .arw { display: block; width: 100%; height: 10px; }
+@media (max-width: 1359px) { .ar2 { display: none; } }
+/* the two roles are labels on the map, not boxes */
+.qa .node.role { background: none; border: 0; padding-inline: 4px; }
+.qa .node.role b { color: var(--t-blue); }
+.qa .node.role.gt b { color: var(--t-green); }
+/* the hero line: a name rule above, plain words mixed with mono, after the terminal it sits beside */
+.hero__id { display: flex; align-items: center; gap: var(--s-3); font: 400 13px/1.4 "JetBrains Mono", ui-monospace, monospace; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.hero__id span:first-child { color: var(--ink); }
+.hero__id i { width: 40px; height: 1px; background: var(--line-strong); }
+.hero__h1 { font-size: clamp(40px, 4.2vw, 64px); line-height: 1.04; }
+.hero__h1 .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 400; font-size: .86em; letter-spacing: -0.04em; }
+@media (max-width: 639px) { .hero__id { flex-wrap: wrap; gap: var(--s-2); } .hero__id i { display: none; } }
+@media (max-width: 639px) { .hero__id { display: none; } .hero__h1 { font-size: 30px; } }
+@media (max-width: 639px) { .hero__h1 .l3 { display: none; } }
