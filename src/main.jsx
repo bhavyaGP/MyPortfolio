@@ -5,7 +5,7 @@
     const [{ createRoot }, { default: App }] = await Promise.all([import('react-dom/client'), import('./App.jsx')])
     createRoot(document.getElementById('root')).render(<App />)
   } else {
-    const { default: mount } = await import('./site/mount.js')
+    const { default: mount } = await import('./site/mount.jsx')
     await mount()
   }
 })()

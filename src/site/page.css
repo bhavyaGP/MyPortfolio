@@ -213,3 +213,4 @@ html[data-theme="dark"] .term__chips span:hover { background: #1a1a1a; }
 .hero__h1 .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 400; font-size: .86em; letter-spacing: -0.04em; }
 @media (max-width: 639px) { .hero__id { flex-wrap: wrap; gap: var(--s-2); } .hero__id i { display: none; } }
 @media (max-width: 639px) { .hero__id { display: none; } .hero__h1 { font-size: 30px; } }
+@media (max-width: 639px) { .hero__h1 .l3 { display: none; } }

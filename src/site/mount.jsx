@@ -1,8 +1,8 @@
-import markup from './portfolio.html?raw'
+import { createRoot } from 'react-dom/client'
+import { flushSync } from 'react-dom'
+import App from './App.jsx'
 import pageCss from './page.css?raw'
 
-// The taste-skill kit drives the DOM itself (system.js, motion.js, moments, diagrams), and its checks want
-// header.nav, main and footer.closing straight under <body>: so the page is plain markup, not a React tree.
 const KIT = ['/assets/system.css', '/assets/ui/cards.css', '/assets/motion/motion.css', '/assets/layout/layout.css', '/assets/icons/icon.css', '/assets/diagrams/diagram.css']
 const FONT = 'https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400..700&display=swap'
 const MONO = 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap'
@@ -26,9 +26,9 @@ export default async function mount() {
   setTimeout(() => h.classList.add('mo-safe'), 2500)
   await Promise.all([FONT, MONO, ...KIT].map(link))
   const st = document.createElement('style'); st.textContent = ROOT + pageCss; document.head.append(st)
+  // ponytail: the kit wants header, main and footer straight under <body>, so React renders into body itself
   document.getElementById('root')?.remove()
-  document.body.insertAdjacentHTML('afterbegin', markup)
-  document.body.insertAdjacentHTML('beforeend', '<nav class="actionbar" aria-label="Quick actions"><a class="btn btn--primary" href="mailto:bgprajapati575@gmail.com">Email Bhavya</a></nav>')
+  flushSync(() => createRoot(document.body).render(<App />))
   const url = localStorage.getItem('bhavya_resume_url')
   if (url) document.querySelectorAll('[data-resume]').forEach((a) => a.setAttribute('href', url))
   activity()
