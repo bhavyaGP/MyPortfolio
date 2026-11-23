@@ -7,7 +7,8 @@ const KIT = ['/assets/system.css', '/assets/ui/cards.css', '/assets/motion/motio
 const FONT = 'https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400..700&display=swap'
 const MONO = 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap'
 // 60-30-10: 60% paper (--p-bg), 30% ink and surface (--p-ink, --p-surface), 10% green (--p-accent, --p-action); brass stays as --p-inv-accent only
-const ROOT = `:root{--p-bg:#f3f9f5;--p-surface:#e3efe8;--p-ink:#0d2b1d;--p-muted:#4a6e5a;--p-accent:#14663a;--p-accent-ink:#f3f9f5;--p-action:#0e5c35;--p-action-ink:#f3f9f5;--p-inv-bg:#0a1a12;--p-inv-surface:#12281c;--p-inv-ink:#e4f1ea;--p-inv-muted:#8fb09f;--p-inv-accent:#7fd6a2;--p-inv-accent-ink:#0a1a12;--p-inv-action:#7fd6a2;--p-inv-action-ink:#0a1a12;--font-display:"Albert Sans",system-ui,sans-serif;--font-text:"Albert Sans",system-ui,sans-serif;--display-weight:400;--display-tracking:-0.025em;--display-tracking-xl:-0.035em}`
+// unslop direction: night-time terminals. Ink neutrals (unslop tokens), one green accent for actions, links and focus.
+const ROOT = `:root{--p-bg:#f5f7fa;--p-surface:#eceff4;--p-ink:#111827;--p-muted:#4b5565;--p-accent:#14663a;--p-accent-ink:#ffffff;--p-action:#14663a;--p-action-ink:#ffffff;--p-inv-bg:#0b0d14;--p-inv-surface:#11141c;--p-inv-ink:#eef0f5;--p-inv-muted:#a3a9b8;--p-inv-accent:#6fd39a;--p-inv-accent-ink:#0b0d14;--p-inv-action:#eef0f5;--p-inv-action-ink:#0b0d14;--font-display:"Albert Sans",system-ui,sans-serif;--font-text:"Albert Sans",system-ui,sans-serif;--display-weight:400;--display-tracking:-0.025em;--display-tracking-xl:-0.03em}`
 
 const link = (href) => new Promise((res) => {
   const l = document.createElement('link')
@@ -127,7 +128,7 @@ function theme() {
   const set = (dark) => {
     root.dataset.theme = dark ? 'dark' : 'light'
     btn.setAttribute('aria-pressed', dark); btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode')
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0a0a0a' : '#f3f9f5')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0b0d14' : '#f5f7fa')
     try { localStorage.setItem('theme', root.dataset.theme) } catch { /* private window */ }
   }
   set(root.dataset.theme === 'dark')

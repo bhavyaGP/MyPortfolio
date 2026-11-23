@@ -4,7 +4,7 @@ export default function Hero() {
         <div className="wrap"><div className="hero-text grid hero__grid">
           <div className="hero__text span-6">
             <p className="hero__kicker hero__id"><span>Bhavya Prajapati</span><i aria-hidden="true"></i><span>AI engineering intern at ValuraAI</span></p>
-            <h1 id="hero-h" className="hero__h1">Software engineer.<br />Builds <span className="mono">AI agents</span>.<span className="l3"><br />Ships <span className="mono">to production</span>.</span></h1>
+            <h1 id="hero-h" className="hero__h1">Software engineer<br />Builds <span className="mono">AI agents</span><span className="l3"><br />Ships <span className="mono">to production</span></span></h1>
             <p className="hero__lead">I build backends, retrieval pipelines and the React on top: a Telegram and WhatsApp assistant at ValuraAI, and QuickLearnAI, a learning platform with 300+ live users.</p>
             <div className="btn-row"><a className="btn btn--primary" href="mailto:bgprajapati575@gmail.com">Email Bhavya</a><a className="btn btn--secondary" data-resume href="https://flowcv.com/resume/8dqwp06k81l8" target="_blank" rel="noopener noreferrer">Read the resume</a></div>
           </div>

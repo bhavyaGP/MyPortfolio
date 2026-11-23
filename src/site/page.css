@@ -214,3 +214,45 @@ html[data-theme="dark"] .term__chips span:hover { background: #1a1a1a; }
 @media (max-width: 639px) { .hero__id { flex-wrap: wrap; gap: var(--s-2); } .hero__id i { display: none; } }
 @media (max-width: 639px) { .hero__id { display: none; } .hero__h1 { font-size: 30px; } }
 @media (max-width: 639px) { .hero__h1 .l3 { display: none; } }
+
+/* ---- unslop pass (unslop by @heydamir, CC BY 4.0): ink neutrals, one accent, sentence case, measured corners, quiet motion ---- */
+/* 2. Color: dark theme on the ink ramp; primary is off-white with dark text, the green moves to links, focus and key figures */
+html[data-theme="dark"] { --p-bg: #0b0d14; --p-surface: #11141c; --p-ink: #eef0f5; --p-muted: #a3a9b8;
+  --p-accent: #6fd39a; --p-accent-ink: #0b0d14; --p-action: #eef0f5; --p-action-ink: #0b0d14; }
+.btn--primary, html[data-theme="dark"] .btn--primary { background: var(--action); color: var(--action-ink, #fff); }
+html[data-theme="dark"] .btn--primary { color: #0b0d14; }
+html[data-theme="dark"] .btn--primary:hover { background: #ffffff; }
+/* the dark figures and the terminal sit on the ink ramp in both themes; hairlines are text at 8% */
+.term, html[data-theme="dark"] .term { --t-bg: #0b0d14; --t-line: rgb(238 240 245 / .08); --t-dim: #7a8296; --t-ink: #eef0f5; box-shadow: 0 0 0 1px rgb(238 240 245 / .08); }
+.arch, html[data-theme="dark"] .arch { --t-bg: #0b0d14; --t-box: #11141c; --t-line: rgb(238 240 245 / .08); --t-dim: #7a8296; --t-ink: #eef0f5; box-shadow: 0 0 0 1px rgb(238 240 245 / .08); }
+html[data-theme="dark"] .term, html[data-theme="dark"] .arch { --t-bg: #11141c; --t-box: #1a1e28; }
+.arch .node, html[data-theme="dark"] .arch .node { border-color: rgb(238 240 245 / .10); }
+.arch .node.box, html[data-theme="dark"] .arch .node.box { border-color: rgb(238 240 245 / .22); }
+html[data-theme="dark"] .stat--img { background: #f5f7fa; }
+.term__chips span:hover, html[data-theme="dark"] .term__chips span:hover { background: #1a1e28; }
+.tile__media .play { background: rgb(11 13 20 / .78); }
+/* 5. Type: sentence case, no tracked capitals, no negative tracking under 16px */
+.hero__id, .term__head, .arch__title, .term__side .h { text-transform: none; letter-spacing: 0; }
+.hero__id { font-size: 13px; }
+.hero__h1 { letter-spacing: -0.03em; }
+.hero__h1 .mono { letter-spacing: -0.02em; }
+.stat__n, .rows__value, .tile__price { font-variant-numeric: tabular-nums; }
+/* 7. Details: corners by size, not pills. Controls 10, chips 6, cards 16, nested nodes 16 - 8 = 8 */
+html[data-radius] { --r-btn: 10px; }
+.term__chips span { border-radius: 6px; }
+.term, .arch { border-radius: 16px; }
+.arch .node { border-radius: 8px; }
+.tile__media .play { border-radius: 10px; }
+/* 9. Motion: one curve; hovers change colour only, a press steps down a little */
+.tile__media .play { transition: background-color 160ms cubic-bezier(.22, 1, .36, 1); }
+a.tile__media:hover .play { scale: 1; }
+.theme-btn { transition: background-color 160ms cubic-bezier(.22, 1, .36, 1), transform 120ms cubic-bezier(.22, 1, .36, 1); }
+.theme-btn:active { transform: scale(.97); }
+.term__chips span { transition: color 160ms cubic-bezier(.22, 1, .36, 1), border-color 160ms cubic-bezier(.22, 1, .36, 1), background-color 160ms cubic-bezier(.22, 1, .36, 1); }
+.term__chips span:active { transform: none; }
+#hero-h { font-size: clamp(40px, 4.2vw, 60px); }
+@media (max-width: 639px) { #hero-h { font-size: 34px; } }
+/* the dark surface is one clear step above the page, and the stat boxes carry the ramp's hairline */
+html[data-theme="dark"] { --p-surface: #161a24; }
+.stat { border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent); }
+.stat--img { border: 0; }
