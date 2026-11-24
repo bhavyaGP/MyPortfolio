@@ -4,11 +4,12 @@ import App from './App.jsx'
 import pageCss from './page.css?raw'
 
 const KIT = ['/assets/system.css', '/assets/ui/cards.css', '/assets/motion/motion.css', '/assets/layout/layout.css', '/assets/icons/icon.css', '/assets/diagrams/diagram.css']
-const FONT = 'https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400..700&display=swap'
+const FONT = 'https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap'
 const MONO = 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap'
 // 60-30-10: 60% paper (--p-bg), 30% ink and surface (--p-ink, --p-surface), 10% green (--p-accent, --p-action); brass stays as --p-inv-accent only
 // unslop direction: night-time terminals. Ink neutrals (unslop tokens), one green accent for actions, links and focus.
-const ROOT = `:root{--p-bg:#f5f7fa;--p-surface:#eceff4;--p-ink:#111827;--p-muted:#4b5565;--p-accent:#14663a;--p-accent-ink:#ffffff;--p-action:#14663a;--p-action-ink:#ffffff;--p-inv-bg:#0b0d14;--p-inv-surface:#11141c;--p-inv-ink:#eef0f5;--p-inv-muted:#a3a9b8;--p-inv-accent:#6fd39a;--p-inv-accent-ink:#0b0d14;--p-inv-action:#eef0f5;--p-inv-action-ink:#0b0d14;--font-display:"Albert Sans",system-ui,sans-serif;--font-text:"Albert Sans",system-ui,sans-serif;--display-weight:400;--display-tracking:-0.025em;--display-tracking-xl:-0.03em}`
+// Signal-box panel: enamel-plate grey ground, near-black ink, enamel signal blue for actions; lamps (green, amber, red) stay small and lit.
+const ROOT = `:root{--p-bg:#e9ece7;--p-surface:#dde1da;--p-ink:#11161b;--p-muted:#454d55;--p-accent:#0a4a8a;--p-accent-ink:#ffffff;--p-action:#0a4a8a;--p-action-ink:#ffffff;--p-inv-bg:#0a0f16;--p-inv-surface:#111823;--p-inv-ink:#e8edf3;--p-inv-muted:#9aa6b4;--p-inv-accent:#7db7f2;--p-inv-accent-ink:#0a0f16;--p-inv-action:#e8edf3;--p-inv-action-ink:#0a0f16;--font-display:"Barlow Semi Condensed","Barlow",system-ui,sans-serif;--font-text:"Barlow",system-ui,sans-serif;--display-weight:600;--display-tracking:-0.01em;--display-tracking-xl:-0.015em}`
 
 const link = (href) => new Promise((res) => {
   const l = document.createElement('link')
@@ -16,6 +17,16 @@ const link = (href) => new Promise((res) => {
   document.head.append(l)
 })
 const script = (src) => { const s = document.createElement('script'); s.type = 'module'; s.src = src; document.head.append(s) }
+
+// The nav is a line diagram: the station for the section in view is lit (aria-current).
+function stations() {
+  const links = [...document.querySelectorAll('.nav__link')]
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return
+    links.forEach((l) => l.toggleAttribute('aria-current', l.getAttribute('href') === '#' + e.target.id))
+  }), { rootMargin: '-45% 0px -50% 0px' })
+  links.forEach((l) => { const s = document.querySelector(l.getAttribute('href')); if (s) io.observe(s) })
+}
 
 export default async function mount() {
   const h = document.documentElement
@@ -36,6 +47,7 @@ export default async function mount() {
   videos()
   terminal()
   theme()
+  stations()
   ;['/assets/system.js', '/assets/motion/motion.js', '/assets/layout/layout.js', '/assets/diagrams/mount.js'].forEach(script)
 }
 
@@ -73,7 +85,7 @@ const CMDS = {
   pwd: ['/home/bhavya/portfolio'],
   stack: STACK,
   hackathons: ['1st place   HackTheSpring 2025', 'runner-up   YORK.ie Hackathon 2025', 'runner-up   CVM University Hackathon 2025'],
-  valuraai: ['telegram  https://web.telegram.org/k/#@valura_ai_bot', 'whatsapp  https://wa.me/918460730331', 'screener  https://indweb-stg.valura.ai/dashboard/screener-agent'],
+  valuraai: ['telegram  https://web.telegram.org/k/#@valura_ai_bot', 'whatsapp  https://wa.me/918460730331', 'screener  https://global.valura.ai/dashboard/screener-agent'],
   contact: ['bgprajapati575@gmail.com', 'github.com/bhavyagp', 'linkedin.com/in/bhavya-prajapati-a8b001256'],
   sudo: ['bhavya is not in the sudoers file. This incident will be reported to nobody.'],
 }
@@ -128,7 +140,7 @@ function theme() {
   const set = (dark) => {
     root.dataset.theme = dark ? 'dark' : 'light'
     btn.setAttribute('aria-pressed', dark); btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode')
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0b0d14' : '#f5f7fa')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0a0f16' : '#e9ece7')
     try { localStorage.setItem('theme', root.dataset.theme) } catch { /* private window */ }
   }
   set(root.dataset.theme === 'dark')

@@ -14,7 +14,7 @@ export default function Experience() {
                   <li>AI Screener: an LLM turns plain English into a typed filter, an engine runs it on stored market data, and results stream to the web app.</li>
                   <li>Screener UI in Next.js with a table, charts, a compare view and saved screens.</li>
                 </ul>
-                <p className="links"><a className="link" href="https://web.telegram.org/k/#@valura_ai_bot" target="_blank" rel="noopener noreferrer">Try the Telegram bot</a><a className="link" href="https://wa.me/918460730331" target="_blank" rel="noopener noreferrer">Try the WhatsApp bot</a><a className="link" href="https://indweb-stg.valura.ai/dashboard/screener-agent" target="_blank" rel="noopener noreferrer">Try the AI Screener</a></p></li>
+                <p className="links"><a className="link" href="https://web.telegram.org/k/#@valura_ai_bot" target="_blank" rel="noopener noreferrer">Try the Telegram bot</a><a className="link" href="https://wa.me/918460730331" target="_blank" rel="noopener noreferrer">Try the WhatsApp bot</a><a className="link" href="https://global.valura.ai/dashboard/screener-agent" target="_blank" rel="noopener noreferrer">Try the AI Screener</a></p></li>
               <li><span className="rows__name">CodemateAI<small>Backend AI engineer intern, remote</small></span><span className="rows__value">Aug 2025 – Aug 2026</span><p>I built Guruverse AI on the OpenAI and Gemini SDKs with embeddings. My Node.js and vector-database backend served 400+ active users.</p></li>
               <li><span className="rows__name">CHARUSAT University<small>B.Tech, Computer Engineering</small></span><span className="rows__value">2022 – 2026</span></li>
             </ul>
