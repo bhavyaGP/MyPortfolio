@@ -18,15 +18,11 @@ const link = (href) => new Promise((res) => {
 })
 const script = (src) => { const s = document.createElement('script'); s.type = 'module'; s.src = src; document.head.append(s) }
 
-// "Hello, visitor" in English plus 19 Indian languages, fading in and out once per session. Click, any key or Skip ends it;
-// reduced motion skips it. Bodo, Santali and Meitei are left out until a native speaker can supply them. Have the others checked too.
-const HELLO = [
-  ['en', 'Hello, visitor'], ['hi', 'नमस्ते, आगंतुक'], ['gu', 'નમસ્તે, મુલાકાતી'], ['bn', 'নমস্কার, দর্শনার্থী'], ['ta', 'வணக்கம், பார்வையாளரே'],
-  ['te', 'నమస్కారం, సందర్శకుడా'], ['kn', 'ನಮಸ್ಕಾರ, ಸಂದರ್ಶಕರೇ'], ['ml', 'നമസ്കാരം, സന്ദർശകരേ'], ['mr', 'नमस्कार, पाहुणे'], ['pa', 'ਸਤ ਸ੍ਰੀ ਅਕਾਲ, ਮਹਿਮਾਨ'],
-  ['or', 'ନମସ୍କାର, ଅତିଥି'], ['as', 'নমস্কাৰ, দৰ্শনাৰ্থী'], ['ur', 'السلام علیکم، زائر', 'rtl'], ['sa', 'नमो नमः, अतिथे'], ['ne', 'नमस्ते, आगन्तुक'],
-  ['kok', 'नमस्कार, पाहुणो'], ['mai', 'प्रणाम, आगंतुक'], ['sd', 'سلام، مهمان', 'rtl'], ['ks', 'آداب، مہمان', 'rtl'], ['doi', 'नमस्ते, मेहमान'],
-]
-function greeting() {
+// "Hello" written on, after Apple's intro: three scripts (English, Hindi, Gujarati), each in a handwriting face and revealed
+// left to right like a pen stroke, then faded. Plays once per session; click, any key or Skip ends it; reduced motion skips it.
+const HELLO = [['en', 'hello', 'Great Vibes'], ['hi', 'नमस्ते', 'Kalam'], ['gu', 'નમસ્તે', 'Shrikhand']]
+const HELLO_FONTS = 'https://fonts.googleapis.com/css2?family=Great+Vibes&family=Kalam:wght@400&family=Shrikhand&display=swap'
+async function greeting() {
   try { if (sessionStorage.getItem('greeted') || matchMedia('(prefers-reduced-motion: reduce)').matches) return; sessionStorage.setItem('greeted', '1') } catch { return }
   const el = document.createElement('div')
   el.className = 'hello'; el.setAttribute('role', 'presentation')
@@ -35,16 +31,18 @@ function greeting() {
   const t = el.querySelector('.hello__t'), skip = el.querySelector('button')
   let i = 0, done = false, timer
   const end = () => { if (done) return; done = true; clearTimeout(timer); document.removeEventListener('keydown', end); el.classList.add('is-out'); setTimeout(() => el.remove(), 500) }
-  const show = () => {
-    if (i >= HELLO.length) return end()
-    const [lang, text, dir] = HELLO[i]
-    t.lang = lang; t.dir = dir || 'ltr'; t.textContent = text
-    t.classList.add('is-on')
-    const hold = i < 3 ? 550 : 220   // the first three are readable, the rest sweep by
-    timer = setTimeout(() => { t.classList.remove('is-on'); i++; timer = setTimeout(show, 140) }, hold)
-  }
   el.addEventListener('click', end); document.addEventListener('keydown', end)
   skip.focus({ preventScroll: true })
+  await Promise.race([link(HELLO_FONTS).then(() => Promise.all(HELLO.map(([, s, f]) => document.fonts.load(`64px "${f}"`, s)))), new Promise((r) => setTimeout(r, 1200))])
+  const show = () => {
+    if (done) return
+    if (i >= HELLO.length) return end()
+    const [lang, text, font] = HELLO[i]
+    t.className = 'hello__t'; t.lang = lang; t.textContent = text; t.style.fontFamily = `"${font}", "Nirmala UI", cursive`
+    void t.offsetWidth                                   // restart the write-on
+    t.classList.add('is-writing')
+    timer = setTimeout(() => { t.classList.add('is-fading'); timer = setTimeout(() => { i++; show() }, 280) }, 1250)   // 900ms stroke + a short hold
+  }
   show()
 }
 
