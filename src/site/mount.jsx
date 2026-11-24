@@ -18,6 +18,36 @@ const link = (href) => new Promise((res) => {
 })
 const script = (src) => { const s = document.createElement('script'); s.type = 'module'; s.src = src; document.head.append(s) }
 
+// "Hello, visitor" in English plus 19 Indian languages, fading in and out once per session. Click, any key or Skip ends it;
+// reduced motion skips it. Bodo, Santali and Meitei are left out until a native speaker can supply them. Have the others checked too.
+const HELLO = [
+  ['en', 'Hello, visitor'], ['hi', 'नमस्ते, आगंतुक'], ['gu', 'નમસ્તે, મુલાકાતી'], ['bn', 'নমস্কার, দর্শনার্থী'], ['ta', 'வணக்கம், பார்வையாளரே'],
+  ['te', 'నమస్కారం, సందర్శకుడా'], ['kn', 'ನಮಸ್ಕಾರ, ಸಂದರ್ಶಕರೇ'], ['ml', 'നമസ്കാരം, സന്ദർശകരേ'], ['mr', 'नमस्कार, पाहुणे'], ['pa', 'ਸਤ ਸ੍ਰੀ ਅਕਾਲ, ਮਹਿਮਾਨ'],
+  ['or', 'ନମସ୍କାର, ଅତିଥି'], ['as', 'নমস্কাৰ, দৰ্শনাৰ্থী'], ['ur', 'السلام علیکم، زائر', 'rtl'], ['sa', 'नमो नमः, अतिथे'], ['ne', 'नमस्ते, आगन्तुक'],
+  ['kok', 'नमस्कार, पाहुणो'], ['mai', 'प्रणाम, आगंतुक'], ['sd', 'سلام، مهمان', 'rtl'], ['ks', 'آداب، مہمان', 'rtl'], ['doi', 'नमस्ते, मेहमान'],
+]
+function greeting() {
+  try { if (sessionStorage.getItem('greeted') || matchMedia('(prefers-reduced-motion: reduce)').matches) return; sessionStorage.setItem('greeted', '1') } catch { return }
+  const el = document.createElement('div')
+  el.className = 'hello'; el.setAttribute('role', 'presentation')
+  el.innerHTML = '<p class="hello__t" aria-hidden="true"></p><button class="hello__skip" type="button">Skip</button>'
+  document.documentElement.append(el)
+  const t = el.querySelector('.hello__t'), skip = el.querySelector('button')
+  let i = 0, done = false, timer
+  const end = () => { if (done) return; done = true; clearTimeout(timer); document.removeEventListener('keydown', end); el.classList.add('is-out'); setTimeout(() => el.remove(), 500) }
+  const show = () => {
+    if (i >= HELLO.length) return end()
+    const [lang, text, dir] = HELLO[i]
+    t.lang = lang; t.dir = dir || 'ltr'; t.textContent = text
+    t.classList.add('is-on')
+    const hold = i < 3 ? 550 : 220   // the first three are readable, the rest sweep by
+    timer = setTimeout(() => { t.classList.remove('is-on'); i++; timer = setTimeout(show, 140) }, hold)
+  }
+  el.addEventListener('click', end); document.addEventListener('keydown', end)
+  skip.focus({ preventScroll: true })
+  show()
+}
+
 // The nav is a line diagram: the station for the section in view is lit (aria-current).
 function stations() {
   const links = [...document.querySelectorAll('.nav__link')]
@@ -41,6 +71,7 @@ export default async function mount() {
   // ponytail: the kit wants header, main and footer straight under <body>, so React renders into body itself
   document.getElementById('root')?.remove()
   flushSync(() => createRoot(document.body).render(<App />))
+  greeting()
   const url = localStorage.getItem('bhavya_resume_url')
   if (url) document.querySelectorAll('[data-resume]').forEach((a) => a.setAttribute('href', url))
   activity()
