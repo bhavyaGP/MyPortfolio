@@ -1,10 +1,10 @@
 export default function Footer() {
   return (
-    <footer className="footer closing" id="contact" aria-labelledby="close-h">
+    <footer className="footer closing" id="contact" data-word="Contact" aria-labelledby="close-h">
       <div className="wrap">
-        <div className="closing__cta close--word">
+        <div className="closing__cta close--word glass">
           <div className="section-head--split">
-            <div><h2 id="close-h">Work with Bhavya on backend and AI</h2><p className="t-lead">Open to opportunities and collaborations.</p></div>
+            <div><h2 id="close-h">Work with Bhavya on backend and AI</h2><p className="t-lead">Open to opportunities and collaborations.</p><p className="band">Replies by email</p></div>
             <a className="btn btn--primary" href="mailto:bgprajapati575@gmail.com">Email Bhavya<svg className="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path className="m-arrow__stem" d="M1 6h8"/><path className="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
           </div>
         </div>

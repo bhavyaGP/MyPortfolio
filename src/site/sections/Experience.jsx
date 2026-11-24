@@ -3,10 +3,10 @@ export default function Experience() {
     <section className="section" id="experience" style={{ '--hm': '2' }} aria-labelledby="experience-h">
         <div className="wrap grid grid--top">
           <div className="span-6">
-            <div className="section-head">
+            <div className="section-head" data-word="Experience">
               <h2 id="experience-h">Backend experience and education</h2>
             </div>
-            <ul className="rows">
+            <ul className="rows glass">
               <li><span className="rows__name">ValuraAI, current<small>AI engineering intern</small></span><span className="rows__value">Now</span>
                 <ul className="built">
                   <li>Telegram and WhatsApp assistant: a chat links to one financial account by Telegram deep link or Mini App, or by SMS code on WhatsApp.</li>
@@ -19,7 +19,7 @@ export default function Experience() {
               <li><span className="rows__name">CHARUSAT University<small>B.Tech, Computer Engineering</small></span><span className="rows__value">2022 – 2026</span></li>
             </ul>
           </div>
-          <div className="span-6 start-7 arch" role="img" aria-label="ValuraAI architecture: Telegram and WhatsApp chats reach the ValuraAI API, which calls the AI agents on OpenAI and keeps links and sessions in PostgreSQL and Redis. The Next.js web app runs the AI Screener, and Twilio sends WhatsApp sign-in codes.">
+          <div className="span-6 start-7 arch glass" role="img" aria-label="ValuraAI architecture: Telegram and WhatsApp chats reach the ValuraAI API, which calls the AI agents on OpenAI and keeps links and sessions in PostgreSQL and Redis. The Next.js web app runs the AI Screener, and Twilio sends WhatsApp sign-in codes.">
             <p className="arch__title"><span>ValuraAI · chat and screener</span><span>Express · FastAPI</span></p>
             <div className="arch__grid">
               <div className="node r" style={{ 'gridArea': '1 / 1' }}><span className="n">01</span><b>Chats</b><span className="s">Telegram, WhatsApp</span></div>

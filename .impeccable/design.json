@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T00:00:00Z",
+  "title": "Design System: Bhavya Prajapati",
+  "extensions": {
+    "colorMeta": {
+      "night-window": { "role": "neutral", "displayName": "Night Window", "canonical": "#050505", "tonalRamp": ["#000000", "#050505", "#111111", "#1e1e1e", "#262626", "#3d3d3d", "#5c5c5c", "#7f7f7f"] },
+      "dawn-window": { "role": "neutral", "displayName": "Dawn Window", "canonical": "#f1f1f1", "tonalRamp": ["#7f7f7f", "#a3a3a3", "#c2c2c2", "#cfcfcf", "#e0e0e0", "#ebebeb", "#f1f1f1", "#ffffff"] },
+      "intro-black": { "role": "neutral", "displayName": "Intro Black", "canonical": "#000000", "tonalRamp": ["#000000", "#0a0a0a", "#141414", "#1e1e1e", "#262626", "#3d3d3d", "#5c5c5c", "#7f7f7f"] },
+      "white-ink": { "role": "primary", "displayName": "White Ink", "canonical": "#ffffff", "tonalRamp": ["#7f7f7f", "#a3a3a3", "#bdbdbd", "#d4d4d4", "#e0e0e0", "#ebebeb", "#f5f5f5", "#ffffff"] },
+      "black-ink": { "role": "primary", "displayName": "Black Ink", "canonical": "#0a0a0a", "tonalRamp": ["#000000", "#0a0a0a", "#161616", "#262626", "#3d3d3d", "#525252", "#7f7f7f", "#a3a3a3"] },
+      "night-grey": { "role": "neutral", "displayName": "Night Grey (muted, dark theme)", "canonical": "#a3a3a3", "tonalRamp": ["#262626", "#3d3d3d", "#5c5c5c", "#7f7f7f", "#8f8f8f", "#a3a3a3", "#bdbdbd", "#d4d4d4"] },
+      "dawn-grey": { "role": "neutral", "displayName": "Dawn Grey (muted, light theme)", "canonical": "#525252", "tonalRamp": ["#141414", "#262626", "#3d3d3d", "#525252", "#6b6b6b", "#7f7f7f", "#a3a3a3", "#c2c2c2"] },
+      "word-night": { "role": "neutral", "displayName": "Word Night", "canonical": "#1e1e1e", "tonalRamp": ["#050505", "#111111", "#1e1e1e", "#262626", "#333333", "#3d3d3d", "#4a4a4a", "#5c5c5c"] },
+      "word-night-hero": { "role": "neutral", "displayName": "Word Night Hero", "canonical": "#262626", "tonalRamp": ["#050505", "#111111", "#1e1e1e", "#262626", "#333333", "#3d3d3d", "#4a4a4a", "#5c5c5c"] },
+      "word-dawn": { "role": "neutral", "displayName": "Word Dawn", "canonical": "#cfcfcf", "tonalRamp": ["#7f7f7f", "#a3a3a3", "#b5b5b5", "#c2c2c2", "#cfcfcf", "#dcdcdc", "#e8e8e8", "#f1f1f1"] },
+      "word-dawn-hero": { "role": "neutral", "displayName": "Word Dawn Hero", "canonical": "#c2c2c2", "tonalRamp": ["#7f7f7f", "#a3a3a3", "#b5b5b5", "#c2c2c2", "#cfcfcf", "#dcdcdc", "#e8e8e8", "#f1f1f1"] },
+      "raster-night": { "role": "neutral", "displayName": "Night Raster", "canonical": "rgb(255 255 255 / .065)" },
+      "raster-dawn": { "role": "neutral", "displayName": "Dawn Raster", "canonical": "rgb(0 0 0 / .07)" },
+      "smoke-night": { "role": "neutral", "displayName": "Night Smoke", "canonical": "rgb(0 0 0 / .45)" },
+      "smoke-dawn": { "role": "neutral", "displayName": "Dawn Smoke", "canonical": "rgb(12 12 12 / .84)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display (hero name)", "purpose": "His name, two lines across the window behind the hero panes; word-hero grey; 22vw tablet, 25vw phone; drifts with scroll." },
+      "anchor-word": { "displayName": "Anchor word", "purpose": "One word per section, hung below the section head and behind the first panes; word grey; 30vw on phones; drifts on scroll." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings, balanced wrap, ink." },
+      "title": { "displayName": "Title", "purpose": "The hero statement inside its glass pane." },
+      "title-tile": { "displayName": "Tile title", "purpose": "Project tile headings." },
+      "body": { "displayName": "Body", "purpose": "Section leads (60ch) and tile copy (52ch), muted for leads." },
+      "body-sm": { "displayName": "UI", "purpose": "Nav links and buttons." },
+      "label": { "displayName": "Label band", "purpose": "The mono strip of facts on every pane; muted, hairline below. Mono also sets the terminal and the figures; nowhere else." }
+    },
+    "glass": {
+      "tint": { "dawn": "rgb(255 255 255 / .18)", "night": "rgb(255 255 255 / .04)" },
+      "sheen": { "dawn": "rgb(255 255 255 / .45)", "night": "rgb(255 255 255 / .09)" },
+      "rim": { "dawn": "rgb(255 255 255 / 1)", "night": "rgb(255 255 255 / .5)" },
+      "edge": { "dawn": "rgb(0 0 0 / .09)", "night": "rgb(255 255 255 / .1)" },
+      "blur": { "dawn": "2px", "night": "1.5px", "fallback": "16px", "navDrop": "7px" },
+      "lift": { "dawn": 1.03, "night": 1.45 },
+      "refraction": "Chromium only: per-pane SVG feDisplacementMap in backdrop-filter, map drawn at half resolution from the pane's rounded-rect signed distance; band = min(max(r,16)*1.6, 56, w/3, h/3); scale = band*1.2; redrawn on resize. Stack: url(#id) blur(var(--glass-blur)) saturate(1.4) brightness(var(--glass-lift)).",
+      "smoke": "Terminal and figures: smoke body (dawn rgb(12 12 12 / .84), night rgb(0 0 0 / .45)) under a white 8% sheen, rim white 45%, edge white 12%, inner boxes white 4%, text white."
+    },
+    "shadows": [
+      { "name": "pane-dawn", "value": "0 28px 56px -30px rgb(0 0 0 / .32)", "purpose": "Drop shadow of every glass pane in light theme." },
+      { "name": "pane-night", "value": "0 30px 60px -24px rgb(0 0 0 / .9)", "purpose": "Drop shadow of every glass pane in dark theme." },
+      { "name": "rim", "value": "inset 0 1px 0 var(--glass-rim)", "purpose": "The lit top edge of a drop." },
+      { "name": "edge", "value": "inset 0 0 0 1px var(--glass-edge)", "purpose": "The pane's outline; replaces borders." },
+      { "name": "inner-glow", "value": "inset 0 -12px 28px -16px var(--glass-sheen)", "purpose": "Thickness at the bottom of the drop." },
+      { "name": "intro-rim", "value": "drop-shadow(0 18px 30px rgb(0 0 0 / .35))", "purpose": "Under the intro words' rim stroke." }
+    ],
+    "motion": [
+      { "name": "word-drift", "value": "translate 4vw to -8vw, linear, animation-timeline: view()", "purpose": "Anchor words drift sideways across their section's view; the hero name over scroll 0 to 100vh. Only with scroll timelines and no reduced motion." },
+      { "name": "nav-state", "value": "160ms cubic-bezier(.22, 1, .36, 1)", "purpose": "Nav link colour and background." },
+      { "name": "intro-in", "value": "opacity 520ms cubic-bezier(.22, 1, .36, 1); scale .9 to 1 over 1200ms cubic-bezier(.16, 1, .3, 1)", "purpose": "Each intro word arriving; holds 1500ms." },
+      { "name": "intro-out", "value": "380ms cubic-bezier(.4, 0, 1, 1); overlay fade 450ms cubic-bezier(.22, 1, .36, 1)", "purpose": "Word leaving and the intro closing. Click, any key or Skip ends it; reduced motion skips it." },
+      { "name": "kit-default", "value": "180ms cubic-bezier(.2, .8, .2, 1)", "purpose": "Button colour transitions from the kit." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "639px", "note": "max-width; pane radius 22px, pane padding 24px" },
+      { "name": "tablet", "value": "1023px", "note": "max-width; hero stacks, nav links hide" }
+    ],
+    "window": {
+      "raster": "1px vertical lines every 32px at raster colour; horizontals every 32px at half strength (night rgb(255 255 255 / .03), dawn rgb(0 0 0 / .035)).",
+      "cursor": "Figma-style arrow, black fill with 1.6px white outline, hotspot 5 3; same arrow for pointer; inputs, textareas and contenteditable keep the caret.",
+      "focus": "2px solid ink outline, 3px offset."
+    }
+  },
+  "components": [
+    {
+      "name": "Glass Pane",
+      "kind": "card",
+      "refersTo": "glass-pane",
+      "description": "The one module for every panel; always over type or raster, never nested.",
+      "html": "<div class=\"ds-window\"><span class=\"ds-word\">Work</span><div class=\"ds-glass\"><p class=\"ds-band\">React · Express · Flask · 300+ users</p><h3 class=\"ds-title\">QuickLearnAI project</h3><p class=\"ds-body\">Students upload documents for AI quizzes and document chat.</p></div></div>",
+      "css": ".ds-window { position: relative; padding: 48px 24px; background: linear-gradient(90deg, rgb(0 0 0 / .07) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(rgb(0 0 0 / .035) 1px, transparent 1px) 0 0 / 32px 32px, #f1f1f1; overflow: hidden; } .ds-word { position: absolute; left: 8px; top: 24px; font: 700 160px/.8 'Barlow Semi Condensed', Barlow, sans-serif; letter-spacing: -0.04em; color: #cfcfcf; } .ds-glass { position: relative; max-width: 420px; padding: 32px; border-radius: 28px; background: linear-gradient(180deg, rgb(255 255 255 / .45), transparent 38%), rgb(255 255 255 / .18); box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgb(0 0 0 / .09), inset 0 -12px 28px -16px rgb(255 255 255 / .45), 0 28px 56px -30px rgb(0 0 0 / .32); -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5); color: #0a0a0a; } .ds-band { margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid rgb(0 0 0 / .09); font: 500 13px/1.4 'JetBrains Mono', ui-monospace, monospace; color: #525252; } .ds-title { margin: 0 0 8px; font: 700 32px/1 'Barlow Semi Condensed', Barlow, sans-serif; } .ds-body { margin: 0; font: 400 18px/1.5 Barlow, sans-serif; color: #525252; }"
+    },
+    {
+      "name": "Smoked Glass (terminal)",
+      "kind": "custom",
+      "refersTo": "smoked-pane",
+      "description": "Terminal and architecture figures: dark smoke in both themes so the mono stays white.",
+      "html": "<div class=\"ds-window-n\"><span class=\"ds-word-n\">Bhavya</span><div class=\"ds-smoke\"><p class=\"ds-row\"><span class=\"ds-l\">$</span>bhavya whoami --verbose</p><p class=\"ds-row\"><span class=\"ds-l ds-dim\">out</span>3 shipped · 300+ users on QuickLearnAI</p></div></div>",
+      "css": ".ds-window-n { position: relative; padding: 48px 24px; background: linear-gradient(90deg, rgb(255 255 255 / .065) 1px, transparent 1px) 0 0 / 32px 32px, #050505; overflow: hidden; } .ds-word-n { position: absolute; left: 8px; top: 20px; font: 700 160px/.8 'Barlow Semi Condensed', sans-serif; letter-spacing: -0.045em; color: #262626; } .ds-smoke { position: relative; max-width: 460px; padding: 24px; border-radius: 28px; background: linear-gradient(180deg, rgb(255 255 255 / .08), transparent 30%), rgb(0 0 0 / .45); box-shadow: inset 0 1px 0 rgb(255 255 255 / .45), inset 0 0 0 1px rgb(255 255 255 / .12), 0 30px 60px -24px rgb(0 0 0 / .9); -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5); color: #fff; font: 400 14px/1.6 'JetBrains Mono', ui-monospace, monospace; } .ds-row { margin: 0; } .ds-l { display: inline-block; width: 4ch; color: #fff; } .ds-dim { color: #8f8f8f; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid ink pill; one per view (Email Bhavya). White on the night window.",
+      "html": "<button class=\"ds-btn-primary\">Email Bhavya</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; height: 44px; padding: 0 24px; border: 0; border-radius: 999px; background: #0a0a0a; color: #f1f1f1; font: 500 16px/1 Barlow, sans-serif; transition: background-color 180ms cubic-bezier(.2, .8, .2, 1); } .ds-btn-primary:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button (glass pill)",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "An ink pill at 8% with the glass rim and edge, no backdrop: it sits inside a pane and glass never nests (Resume).",
+      "html": "<div class=\"ds-window\"><span class=\"ds-word\">Resume</span><button class=\"ds-btn-secondary\">Resume</button></div>",
+      "css": ".ds-window { position: relative; padding: 48px 24px; background: linear-gradient(90deg, rgb(0 0 0 / .07) 1px, transparent 1px) 0 0 / 32px 32px, #f1f1f1; overflow: hidden; } .ds-word { position: absolute; left: 8px; top: 16px; font: 700 120px/.8 'Barlow Semi Condensed', sans-serif; color: #cfcfcf; } .ds-btn-secondary { position: relative; height: 44px; padding: 0 24px; border: 0; border-radius: 999px; background: linear-gradient(180deg, rgb(255 255 255 / .45), transparent 38%), rgb(255 255 255 / .18); box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgb(0 0 0 / .09), 0 28px 56px -30px rgb(0 0 0 / .32); -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5); color: #0a0a0a; font: 500 16px/1 Barlow, sans-serif; } .ds-btn-secondary:hover { background: linear-gradient(180deg, rgb(255 255 255 / .55), transparent 38%), rgb(255 255 255 / .26); } .ds-btn-secondary:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation (logo drop + link drop)",
+      "kind": "nav",
+      "refersTo": "nav-drop",
+      "description": "Two pill drops 56px tall; links muted at rest, 8% ink on hover, 14% ink for the current section.",
+      "html": "<div class=\"ds-nav\"><a class=\"ds-logo\" href=\"#\">Bhavya Prajapati</a><nav class=\"ds-pill\"><a class=\"ds-link\" href=\"#\" aria-current=\"true\">Work</a><a class=\"ds-link\" href=\"#\">Experience</a><a class=\"ds-link\" href=\"#\">Stack</a><a class=\"ds-cta\" href=\"#\">Email Bhavya</a></nav></div>",
+      "css": ".ds-nav { display: flex; gap: 16px; align-items: center; padding: 18px; background: linear-gradient(90deg, rgb(0 0 0 / .07) 1px, transparent 1px) 0 0 / 32px 32px, #f1f1f1; } .ds-logo, .ds-pill { border-radius: 999px; background: linear-gradient(180deg, rgb(255 255 255 / .45), transparent 38%), rgb(241 241 241 / .45); box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgb(0 0 0 / .09), 0 28px 56px -30px rgb(0 0 0 / .32); -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); } .ds-logo { display: inline-flex; align-items: center; height: 56px; padding: 0 20px 0 16px; font: 600 19px/1 'Barlow Semi Condensed', sans-serif; color: #0a0a0a; text-decoration: none; } .ds-pill { display: flex; align-items: center; gap: 2px; padding: 6px; } .ds-link { display: inline-flex; align-items: center; height: 44px; padding: 0 16px; border-radius: 999px; font: 500 16px/1 Barlow, sans-serif; color: #525252; text-decoration: none; transition: color 160ms cubic-bezier(.22, 1, .36, 1), background-color 160ms cubic-bezier(.22, 1, .36, 1); } .ds-link:hover { color: #0a0a0a; background: rgb(10 10 10 / .08); } .ds-link[aria-current] { color: #0a0a0a; background: rgb(10 10 10 / .14); } .ds-link:focus-visible, .ds-cta:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; } .ds-cta { display: inline-flex; align-items: center; height: 44px; margin-left: 4px; padding: 0 24px; border-radius: 999px; background: #0a0a0a; color: #f1f1f1; font: 500 15px/1 Barlow, sans-serif; text-decoration: none; }"
+    },
+    {
+      "name": "Label Band",
+      "kind": "chip",
+      "refersTo": "label-band",
+      "description": "The facts strip on every pane: where, when, stack, result.",
+      "html": "<p class=\"ds-band\">Now · ValuraAI · AI engineering intern</p>",
+      "css": ".ds-band { display: block; margin: 0; padding-bottom: 8px; border-bottom: 1px solid rgb(0 0 0 / .09); font: 500 13px/1.4 'JetBrains Mono', ui-monospace, monospace; color: #525252; }"
+    },
+    {
+      "name": "Section Head with Anchor Word",
+      "kind": "custom",
+      "refersTo": "anchor-word",
+      "description": "Heading on the window; the section's word hangs below it in grey, behind the first panes. Nothing above the heading.",
+      "html": "<div class=\"ds-sec\"><div class=\"ds-head\"><h2 class=\"ds-h2\">Hackathon results, 2025</h2><p class=\"ds-lead\">Three podiums in one year.</p></div><span class=\"ds-anchor\" aria-hidden=\"true\">Hackathons</span></div>",
+      "css": ".ds-sec { position: relative; padding: 48px 24px 160px; background: linear-gradient(90deg, rgb(255 255 255 / .065) 1px, transparent 1px) 0 0 / 32px 32px, #050505; overflow: hidden; color: #fff; } .ds-head { position: relative; z-index: 1; } .ds-h2 { margin: 0 0 12px; font: 700 48px/.98 'Barlow Semi Condensed', sans-serif; letter-spacing: -0.02em; } .ds-lead { margin: 0; font: 400 18px/1.5 Barlow, sans-serif; color: #a3a3a3; } .ds-anchor { position: absolute; left: 16px; bottom: 16px; font: 700 140px/.8 'Barlow Semi Condensed', sans-serif; letter-spacing: -0.04em; color: #1e1e1e; white-space: nowrap; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Night Window",
+    "overview": "The page is a black window at night. A fine line raster runs across the pane, his name and each section's anchor word sit huge and grey on it, and every panel is a drop of liquid glass in front of that lettering, so the drops visibly bend the letters at their rims. The light theme is the same window at dawn: a pale grey pane, pale grey lettering, dark ink. Nothing else changes between the two.\n\nThe system is monochrome by law. Pure black, white and greys carry every role; depth comes from glass, rim light and a soft drop shadow rather than from colour. Type is condensed and heavy where it is scenery (name, anchor words, headings), plain Barlow where it is reading, and JetBrains Mono only where the page shows machine facts: the terminal, the architecture figures and the label bands.\n\nThere is one pane module, repeated like a meter bridge: one radius, one rim, one sheen, one shadow, used for the nav, the statement, the project tiles, the rows, the hackathon chapters, the activity cards and the closing call. It refuses the flat dark developer hero and frosted cards over an empty ground.",
+    "keyCharacteristics": [
+      "Monochrome: black, white and greys only, in both themes.",
+      "A 32px line raster on the window ground; giant grey lettering behind the panes.",
+      "One liquid-glass module everywhere, with real rim refraction in Chromium.",
+      "Smoked glass for the terminal and figures, dark in both themes so the mono stays white.",
+      "A mono label band on every pane: facts only (where, when, stack, result).",
+      "An intro of four words made of heavy glass on pure black."
+    ],
+    "rules": [
+      { "name": "The No Hue Rule", "body": "Every colour on the page is a neutral. Terminal states that were once green, blue and red are greys (#fff, #bdbdbd, #d4d4d4); the GitHub heat cells are ink mixed into the ground at 22, 45, 70 and 100%.", "section": "colors" },
+      { "name": "The Scenery Grey Rule", "body": "Anchor words and the hero name stay within a few steps of the window. They are decorative, `aria-hidden` where duplicated, and never carry information.", "section": "colors" },
+      { "name": "The Mono Means Machine Rule", "body": "JetBrains Mono is used only in the terminal, the architecture figures and the label bands. Headings, buttons and navigation are never mono.", "section": "typography" },
+      { "name": "The No Kicker Rule", "body": "Nothing sits above a heading: no eyebrow, no tracked uppercase label. The anchor word hangs below the head, and the label band holds facts inside the pane.", "section": "typography" },
+      { "name": "The Something Behind Rule", "body": "Glass always has type or raster behind it. A pane over flat, empty ground is not glass; move it over the lettering or do not use the module.", "section": "elevation" },
+      { "name": "The One Drop Rule", "body": "Glass is never nested inside glass. Inside a pane, actions are solid ink or plain links.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** keep every colour a neutral: black, white or a grey from the palette.",
+      "**Do** build every panel from the one glass module (28px, rim, sheen, shadow) and let mount.jsx add the refraction.",
+      "**Do** put type or raster behind every pane: the hero name or a section's anchor word.",
+      "**Do** give every pane a label band with facts, in 13px JetBrains Mono.",
+      "**Do** use smoked glass for terminal and figure content in both themes.",
+      "**Do** keep the primary button solid ink and the secondary a glass pill on lettering."
+    ],
+    "donts": [
+      "**Don't** introduce any hue: no accent colour, no coloured states, no tinted greys.",
+      "**Don't** put kickers, eyebrows or tracked labels above headings.",
+      "**Don't** place glass over flat ground; glass must always have type or raster behind it.",
+      "**Don't** nest glass inside glass.",
+      "**Don't** use JetBrains Mono outside the terminal, the figures and the label bands.",
+      "**Don't** draw pane edges with borders; the rim and edge insets are the outline."
+    ]
+  }
+}

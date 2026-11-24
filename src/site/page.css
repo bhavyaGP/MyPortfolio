@@ -1564,13 +1564,169 @@ a {
 .nav__logo { font: 600 20px/1 var(--font-display); }
 @media (max-width: 1023px) { .nav__link { color: var(--ink); } .nav__link[aria-current]::after { display: none; } }
 
-/* ---- the greeting: Hello, visitor in India's languages, once per session ---- */
-.hello { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: var(--p-bg); color: var(--p-ink); cursor: pointer; transition: opacity 450ms cubic-bezier(.22, 1, .36, 1); }
+
+/* ---- black and white: pure black and white grounds, greys for steps, no hue anywhere ---- */
+html[data-theme="dark"] { --p-bg: #000; --p-surface: #111; --p-ink: #fff; --p-muted: #a3a3a3; --p-accent: #fff; --p-accent-ink: #000; --p-action: #fff; --p-action-ink: #000; }
+.term, .arch, html[data-theme="dark"] .term, html[data-theme="dark"] .arch { --t-bg: #000; --t-box: #0d0d0d; --t-line: rgb(255 255 255 / .14); --t-dim: #8f8f8f; --t-ink: #fff; --t-blue: #bdbdbd; --t-green: #fff; --t-red: #d4d4d4; }
+.term, .arch { border-color: rgb(255 255 255 / .18); }
+html[data-theme="light"] .term, html[data-theme="light"] .arch { border-color: transparent; }
+.arch .node, html[data-theme="dark"] .arch .node { border-color: rgb(255 255 255 / .16); }
+.arch .node.box { border-color: rgb(255 255 255 / .36); }
+.node.ok, .qa .node.role, .qa .node.role.gt { border-color: rgb(255 255 255 / .3); }
+.term__chips span:hover, html[data-theme="dark"] .term__chips span:hover { background: #161616; }
+html[data-theme="dark"] .stat--img, .stat--img { background: #fff; }
+.gh > i[data-l="1"] { background: color-mix(in oklab, var(--ink) 22%, var(--bg, transparent)); }
+.gh > i[data-l="2"] { background: color-mix(in oklab, var(--ink) 45%, var(--bg, transparent)); }
+.gh > i[data-l="3"] { background: color-mix(in oklab, var(--ink) 70%, var(--bg, transparent)); }
+.gh > i[data-l="4"] { background: var(--ink); }
+.tile__media .play { background: #000; color: #fff; }
+a.tile__media:hover .play { background: #262626; }
+::selection { background: var(--ink); color: var(--bg); }
+
+
+/* ---- Night window: a black pane at night, the name and each section's word huge behind it, every panel a drop of liquid glass ---- */
+/* light is the same window at dawn. Panes share one module (radius, rim, depth); mount.jsx adds the rim refraction in Chromium. */
+:root, html[data-theme="light"] {
+  --p-bg: #f1f1f1; --win: #f1f1f1; --raster-v: rgb(0 0 0 / .07); --raster-h: rgb(0 0 0 / .035); --word: #cfcfcf; --word-hero: #c2c2c2;
+  --glass-tint: rgb(255 255 255 / .18); --glass-sheen: rgb(255 255 255 / .45); --glass-rim: rgb(255 255 255 / 1); --glass-edge: rgb(0 0 0 / .09);
+  --glass-shadow: 0 28px 56px -30px rgb(0 0 0 / .32); --glass-blur: 2px; --glass-lift: 1.03; --smoke: rgb(12 12 12 / .84); --pane-r: 28px;
+}
+html[data-theme="dark"] {
+  --p-bg: #050505; --win: #050505; --raster-v: rgb(255 255 255 / .065); --raster-h: rgb(255 255 255 / .03); --word: #1e1e1e; --word-hero: #262626;
+  --glass-tint: rgb(255 255 255 / .04); --glass-sheen: rgb(255 255 255 / .09); --glass-rim: rgb(255 255 255 / .5); --glass-edge: rgb(255 255 255 / .1);
+  --glass-shadow: 0 30px 60px -24px rgb(0 0 0 / .9); --glass-blur: 1.5px; --glass-lift: 1.45; --smoke: rgb(0 0 0 / .45);
+}
+html { background: var(--win); scrollbar-color: color-mix(in oklab, var(--ink) 30%, var(--win)) var(--win); }
+body { background: linear-gradient(90deg, var(--raster-v) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(var(--raster-h) 1px, transparent 1px) 0 0 / 32px 32px, var(--win); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.section, .ground-surface, .section.ground-surface, .footer { background: transparent !important; }
+
+/* the glass module: one radius, one rim, one depth, everywhere */
+.glass { position: relative; border: 0 !important; border-radius: var(--pane-r); background: linear-gradient(180deg, var(--glass-sheen), transparent 38%), var(--glass-tint) !important;
+  box-shadow: inset 0 1px 0 var(--glass-rim), inset 0 0 0 1px var(--glass-edge), inset 0 -12px 28px -16px var(--glass-sheen), var(--glass-shadow) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5); }
+/* smoked glass for the terminal and the figures: dark in both themes, so the mono stays white */
+.term.glass, .arch.glass { --t-bg: transparent; --t-box: rgb(255 255 255 / .04); background: linear-gradient(180deg, rgb(255 255 255 / .08), transparent 30%), var(--smoke) !important; color: #fff;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .45), inset 0 0 0 1px rgb(255 255 255 / .12), var(--glass-shadow) !important; }
+
+/* anchor words: each section's name, huge and grey behind its panes; it drifts sideways as you scroll so the rims keep bending it */
+.section, .footer { position: relative; overflow-x: clip; isolation: isolate; }
+/* the window needs no screen-multiple sections; only the pinned hackathon chapter keeps its scroll room */
+.section:not(#hackathons) { min-height: 0 !important; }
+.section [data-word] { position: relative; }
+.section [data-word]::after, .footer[data-word]::before { content: attr(data-word); position: absolute; z-index: -1; top: calc(100% + var(--s-5)); left: -0.04em; pointer-events: none; white-space: nowrap;
+  font: 700 clamp(120px, 21vw, 320px)/.8 var(--font-display); letter-spacing: -0.04em; color: var(--word); }
+.footer[data-word]::before { top: clamp(8px, 2vw, 32px); }
+.footer[data-word] > * { position: relative; z-index: 1; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section [data-word]::after, .footer[data-word]::before { animation: word-drift linear both; animation-timeline: view(); }
+    .hero__name { animation: word-drift linear both; animation-timeline: scroll(); animation-range: 0 100vh; }
+  }
+}
+@keyframes word-drift { from { translate: 4vw 0; } to { translate: -8vw 0; } }
+
+/* sections: room above for the word, the heading sits on its lower half */
+.section { padding-block: clamp(96px, 9vw, 150px); border: 0; }
+.footer { padding-block: clamp(150px, 15vw, 230px) var(--s-8); border: 0; }
+.section-head { display: block; padding-top: 0; margin-bottom: var(--s-7); }
+.section-head::before { display: none; }
+.section-head h2, #hackathons h2, #experience h2 { margin: 0 0 var(--s-3); font: 700 clamp(36px, 4.4vw, 64px)/.98 var(--font-display); letter-spacing: -0.02em; text-wrap: balance; color: var(--ink); }
+.section-head p { max-width: 60ch; font-size: 18px; color: var(--muted); }
+
+/* hero: the name is the window's lettering; the terminal and the statement are two drops over its second line */
+.hero.hero--split { position: relative; min-height: 100svh; padding: 0 0 var(--s-8); border: 0; overflow-x: clip; }
+.hero__name { position: absolute; z-index: 0; top: 92px; left: -0.035em; margin: 0; pointer-events: none; white-space: nowrap;
+  font: 700 clamp(104px, 26vw, 400px)/.8 var(--font-display); letter-spacing: -0.045em; color: var(--word-hero); }
+.hero .wrap { position: relative; z-index: 1; }
+.hero__grid { margin-top: clamp(240px, 21.5vw, 320px); align-items: start; }
+.hero__media { grid-column: 1 / span 7 !important; grid-row: 1; }
+.hero__text { grid-column: 8 / -1 !important; grid-row: 1; align-self: start; margin-top: var(--s-6); padding: var(--s-6); }
+.hero__id { margin: 0 0 var(--s-4); font-size: 16px; color: var(--muted); }
+#hero-h { font: 600 clamp(28px, 2.8vw, 42px)/1.04 var(--font-display); }
+
+/* buttons: the primary is solid ink; the secondary is a small drop */
+.btn { border-radius: 999px; }
+.btn--drop { border: 0 !important; background: color-mix(in oklab, var(--ink) 8%, transparent) !important; box-shadow: inset 0 1px 0 var(--glass-rim), inset 0 0 0 1px var(--glass-edge); color: var(--ink); }
+.btn--drop:hover { background: color-mix(in oklab, var(--ink) 14%, transparent) !important; }
+
+/* nav: the logo on the window, the links in one drop at the top centre */
+.nav { position: fixed; inset: 18px 0 auto; z-index: 50; height: 56px; display: flex; align-items: center; padding-inline: var(--s-6); background: none; border: 0; backdrop-filter: none; pointer-events: none; }
+.nav > * { pointer-events: auto; }
+.nav__logo { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 10px; height: 56px; padding: 0 20px 0 16px; font: 600 19px/1 var(--font-display); color: var(--ink); }
+.nav :is(.nav__logo, .nav__pill) { --pane-r: 999px; --glass-blur: 7px; --glass-tint: color-mix(in oklab, var(--win) 45%, transparent); }
+.nav__pill { position: absolute; left: 50%; top: 0; transform: translateX(-50%); --pane-r: 999px; --glass-blur: 7px; --glass-tint: color-mix(in oklab, var(--win) 45%, transparent); display: flex; align-items: center; gap: 2px; padding: 6px; color: var(--ink); }
+.nav__pill .nav__link { position: static; display: inline-flex; align-items: center; height: 44px; padding: 0 var(--s-4); border-radius: 999px; background: none; font: 500 16px/1 var(--font-text); color: var(--muted); transition: color 160ms cubic-bezier(.22, 1, .36, 1), background-color 160ms cubic-bezier(.22, 1, .36, 1); }
+.nav__pill .nav__link::before, .nav__pill .nav__link::after { display: none; }
+.nav__pill .nav__link:hover { color: var(--ink); background: color-mix(in oklab, var(--ink) 8%, transparent); }
+.nav__pill .nav__link[aria-current] { color: var(--ink); background: color-mix(in oklab, var(--ink) 14%, transparent); }
+.nav__pill .theme-btn { width: 44px; height: 44px; margin-left: var(--s-1); border: 0; background: none; color: var(--ink); }
+.nav__pill .nav__cta { height: 44px; margin-left: var(--s-1); padding-inline: var(--s-5); font-size: 15px; }
+
+/* panes: work, experience, hackathons, awards, figures, activity, closing */
+#work .grid { gap: var(--s-6); }
+#work .tile.glass, #awards .tile.glass { padding: var(--s-4) var(--s-4) var(--s-6); }
+#work .tile.glass > :not(.tile__media), #awards .tile.glass > :not(.tile__media) { margin-inline: var(--s-3); }
+.glass .tile__media, .glass .tile__media img { border-radius: calc(var(--pane-r) - 12px); }
+#work .tile h3 { font: 700 clamp(28px, 2.6vw, 40px)/1 var(--font-display); }
+#work .tile p { font-size: 18px; max-width: 52ch; }
+.rows.glass { padding: var(--s-3) var(--s-6); }
+.rows.glass > li { border-color: var(--glass-edge); }
+.rows.glass > li:last-child { border-bottom: 0; }
+.mo-pc__step.glass { padding: var(--s-6); overflow: hidden; }
+.mo-pc__step .band { grid-column: 1; margin-bottom: 0; }
+@media (max-width: 1023px) { #hackathons { min-height: 0 !important; } }
+.act.glass { padding: var(--s-6); }
+.act.glass .stat { background: transparent; border: 0; padding: 0; }
+.closing__cta.glass { align-self: start; height: auto; padding: var(--s-7); margin-bottom: var(--s-7); }
+.closing__links { border: 0; }
+.footer__legal { border-color: var(--glass-edge); }
+
+@media (max-width: 1023px) {
+  .nav { padding-inline: var(--s-5); }
+  .nav__pill { left: auto; right: var(--s-4); transform: none; }
+  .nav__pill .nav__link { display: none; }
+  .hero__media, .hero__text { grid-column: 1 / -1 !important; grid-row: auto; }
+  .hero__text { margin-top: var(--s-5); }
+  .hero__grid { margin-top: clamp(220px, 44vw, 360px); }
+  .hero__name { font-size: 22vw; top: 100px; }
+}
+@media (max-width: 639px) {
+  :root { --pane-r: 22px; }
+  .nav__logo { font-size: 17px; }
+  .nav__pill .nav__cta { display: none; }
+  .hero__name { font-size: 25vw; }
+  .hero__grid { margin-top: 56vw; }
+  .hero__text { padding: var(--s-5); }
+  .section [data-word]::after, .footer[data-word]::before { font-size: 30vw; }
+  .footer { padding-top: 34vw; }
+  .rows.glass { padding: var(--s-2) var(--s-5); }
+  .closing__cta.glass, .mo-pc__step.glass, .act.glass { padding: var(--s-5); }
+}
+
+/* the label band: one mono strip on every pane, facts only (where, when, stack, result) */
+.band { display: block; margin: 0 0 var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--glass-edge); font: 500 13px/1.4 "JetBrains Mono", ui-monospace, monospace; color: var(--muted); }
+.hero__text .band { margin: var(--s-5) 0 0; padding: var(--s-3) 0 0; border-bottom: 0; border-top: 1px solid var(--glass-edge); }
+.closing__cta .band { margin: var(--s-3) 0 0; border: 0; padding: 0; }
+
+/* the greeting: four words, each a heavy drop of liquid glass over the page (mount.jsx masks it, bends what is behind, draws the rim) */
+.hello { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; cursor: inherit; transition: opacity 450ms cubic-bezier(.22, 1, .36, 1);
+  background: linear-gradient(90deg, rgb(255 255 255 / .05) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(rgb(255 255 255 / .025) 1px, transparent 1px) 0 0 / 32px 32px, #000; color: #fff; }
 .hello.is-out { opacity: 0; pointer-events: none; }
-.hello__t { margin: 0; padding: 0.15em 0.3em; text-align: center; font-size: clamp(64px, 14vw, 168px); line-height: 1.25; letter-spacing: 0; color: var(--p-ink);
-  -webkit-mask-image: linear-gradient(90deg, #000 42%, transparent 58%); mask-image: linear-gradient(90deg, #000 42%, transparent 58%);
-  -webkit-mask-size: 260% 100%; mask-size: 260% 100%; -webkit-mask-position: 100% 0; mask-position: 100% 0; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; opacity: 0; }
-.hello__t.is-writing { opacity: 1; -webkit-mask-position: 0 0; mask-position: 0 0; transition: mask-position 900ms cubic-bezier(.45, .05, .35, 1), -webkit-mask-position 900ms cubic-bezier(.45, .05, .35, 1); }
-.hello__t.is-fading { opacity: 0; transition: opacity 280ms cubic-bezier(.22, 1, .36, 1); }
-.hello__skip { position: absolute; right: var(--s-6); bottom: var(--s-6); min-height: 44px; padding: 0 var(--s-5); border: 1px solid color-mix(in oklab, var(--ink) 24%, transparent); border-radius: 999px; background: none; color: var(--muted); font: 500 15px/1 var(--font-text); cursor: pointer; }
-.hello__skip:hover { color: var(--ink); }
+.hello__word, .hello__rim { position: absolute; left: 50%; top: 50%; translate: -50% -50%; opacity: 0; scale: .9; pointer-events: none;
+  transition: opacity 240ms cubic-bezier(.4, 0, 1, 1), scale 240ms cubic-bezier(.4, 0, 1, 1); }
+.hello__word { background: linear-gradient(180deg, rgb(255 255 255 / .36), rgb(255 255 255 / .08) 52%, rgb(255 255 255 / .2)); -webkit-backdrop-filter: blur(10px) brightness(2.6); backdrop-filter: blur(10px) brightness(2.6); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+.hello__rim { filter: drop-shadow(0 18px 30px rgb(0 0 0 / .35)); }
+.hello.is-in :is(.hello__word, .hello__rim) { opacity: 1; scale: 1; transition: opacity calc(var(--hello-in, 1200ms) * .45) cubic-bezier(.22, 1, .36, 1), scale var(--hello-in, 1200ms) cubic-bezier(.16, 1, .3, 1); }
+.hello__skip { position: absolute; right: var(--s-6); bottom: var(--s-6); min-height: 44px; padding: 0 var(--s-5); border: 1px solid rgb(255 255 255 / .24); border-radius: 999px; background: none; color: #a3a3a3; font: 500 15px/1 var(--font-text); }
+.hello__skip:hover { color: #fff; }
+
+/* the cursor: a sharp black arrow with a white outline, legible on the window in both themes; text fields keep their caret */
+html, html *:not(input, textarea, [contenteditable]) { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M5 3.5v17.2l4.6-4.4 2.9 6.6 2.9-1.3-2.9-6.5h6.3z' fill='%23000' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, auto !important; }
+:is(a, button, [role="button"], label, summary, .term__chips span, .term__scroll) { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M5 3.5v17.2l4.6-4.4 2.9 6.6 2.9-1.3-2.9-6.5h6.3z' fill='%23000' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, pointer !important; }
+
+/* work and awards: the word hangs at the foot of the section, behind the text half of the tiles, not behind their photos */
+.section .wrap[data-word]::after { top: auto; bottom: calc(-1 * var(--s-4)); }
+/* closed hackathon rows sit on the bent letters: keep their titles readable */
+[data-moment="pinned-chapters"].is-live .mo-pc__step.glass:not(.is-on) h3 { color: color-mix(in oklab, var(--ink) 72%, transparent); }
+@media (max-width: 639px) { .band__now { display: none; } }

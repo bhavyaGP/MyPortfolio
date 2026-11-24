@@ -1,15 +1,16 @@
 export default function Hero() {
   return (
     <section className="hero hero--split" data-enter aria-labelledby="hero-h">
-        <div className="wrap"><div className="hero-text grid hero__grid">
-          <div className="hero__text span-6">
-            <p className="hero__kicker hero__id"><span>Bhavya Prajapati</span><i aria-hidden="true"></i><span>AI engineering intern at ValuraAI</span></p>
+        <div className="wrap"><p className="hero__name" aria-hidden="true">Bhavya<br />Prajapati</p><div className="hero-text grid hero__grid">
+          <div className="hero__text span-6 glass">
+
             <h1 id="hero-h" className="hero__h1">Software engineer<br />Builds <span className="mono">AI agents</span><span className="l3"><br />Ships <span className="mono">to production</span></span></h1>
             <p className="hero__lead">I build backends, retrieval pipelines and the React on top: a Telegram and WhatsApp assistant at ValuraAI, and QuickLearnAI, a learning platform with 300+ live users.</p>
-            <div className="btn-row"><a className="btn btn--primary" href="mailto:bgprajapati575@gmail.com">Email Bhavya</a><a className="btn btn--secondary" data-resume href="https://flowcv.com/resume/8dqwp06k81l8" target="_blank" rel="noopener noreferrer">Read the resume</a></div>
+            <div className="btn-row"><a className="btn btn--primary" href="mailto:bgprajapati575@gmail.com">Email Bhavya</a><a className="btn btn--secondary btn--drop" data-resume href="https://flowcv.com/resume/8dqwp06k81l8" target="_blank" rel="noopener noreferrer">Read the resume</a></div>
+            <p className="band"><span className="band__now">Now · </span>ValuraAI · AI engineering intern</p>
           </div>
           <div className="hero__media span-6 start-7">
-            <div className="term">
+            <div className="term glass">
               <div className="term__head"><span>Portfolio · bhavya@main</span><span>Simulated · type “help”</span></div>
               <div className="term__main">
                 <div className="term__side" role="img" aria-label="Profile: AI engineering intern at ValuraAI, previously CodemateAI, B.Tech at CHARUSAT, working with Node.js, Flask and React, 300+ users on QuickLearnAI, based in Gujarat, India">

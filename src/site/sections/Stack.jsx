@@ -3,12 +3,12 @@ export default function Stack() {
     <section className="section ground-surface g2" id="stack" style={{ '--h': '2', '--hm': '2' }} aria-labelledby="stack-h">
         <div className="wrap">
         <div>
-          <div className="section-head">
+          <div className="section-head" data-word="Stack">
             <h2 id="stack-h">QuickLearnAI architecture and stack</h2>
             <p className="phone-hide">Node serves user management. Flask serves the AI APIs.</p>
           </div>
           <div className="grid">
-          <div className="span-12 arch qa" role="img" aria-label="System architecture of QuickLearnAI. A user reaches the Node server, which serves user management APIs. AI requests go to the Flask server. From there, students get coding assignments with CodeBox, Monaco and AI evaluation, YouTube videos turned into flash cards with LangChain, a PDF and PPT chatbot with RAG, LlamaIndex, OpenAI and a vector database, smart quizzes and mind maps, and question bank generation. Students and teachers share live quizzes over WebSockets. Teachers also get the complete assignment ecosystem with auto test cases, an in-browser editor and rubric reports.">
+          <div className="span-12 arch qa glass" role="img" aria-label="System architecture of QuickLearnAI. A user reaches the Node server, which serves user management APIs. AI requests go to the Flask server. From there, students get coding assignments with CodeBox, Monaco and AI evaluation, YouTube videos turned into flash cards with LangChain, a PDF and PPT chatbot with RAG, LlamaIndex, OpenAI and a vector database, smart quizzes and mind maps, and question bank generation. Students and teachers share live quizzes over WebSockets. Teachers also get the complete assignment ecosystem with auto test cases, an in-browser editor and rubric reports.">
             <p className="arch__title"><span>System architecture · QuickLearnAI</span><span>React · Express · Socket.IO · Flask · LlamaIndex</span></p>
             <div className="qa__map">
               <div className="node u" style={{ 'gridRow': '1 / 8', 'gridColumn': '1' }}><b>User</b></div>
@@ -43,14 +43,14 @@ export default function Stack() {
             <div className="section-head sub">
               <h3>Coding evaluation architecture</h3>
             </div>
-            <ul className="rows">
+            <ul className="rows glass">
               <li><span className="rows__name">Sandboxed runs</span><p className="phone-hide">Student code runs in a self-hosted CodeBox sandbox, with time and memory limits on every run.</p></li>
               <li><span className="rows__name">Weighted tests</span><p className="phone-hide">Each question has sample and hidden test cases with weights. Hidden details are redacted from stored results.</p></li>
               <li><span className="rows__name">Reports without scores</span><p className="phone-hide">An LLM writes feedback on the code, but the score always comes from the tests.</p></li>
               <li><span className="rows__name">Teacher in the loop</span><p className="phone-hide">Auto-evaluation creates drafts. Students see a result only after the teacher confirms it.</p></li>
             </ul>
           </div>
-          <div className="span-6 start-7 arch" role="img" aria-label="Architecture of the coding evaluation. The student's code editor in the React client calls the Express assignment API, which checks enrolment and the deadline and sends the code to the CodeBox sandbox. The sandbox runs sample and hidden tests, and scoring turns the weighted results into a score on the server. A Flask service uses OpenAI to write feedback without a score. The result is saved as a draft evaluation, a teacher reviews and confirms it, and only then does the student see the result. A submission moves from in progress to submitted, evaluating, graded and released.">
+          <div className="span-6 start-7 arch glass" role="img" aria-label="Architecture of the coding evaluation. The student's code editor in the React client calls the Express assignment API, which checks enrolment and the deadline and sends the code to the CodeBox sandbox. The sandbox runs sample and hidden tests, and scoring turns the weighted results into a score on the server. A Flask service uses OpenAI to write feedback without a score. The result is saved as a draft evaluation, a teacher reviews and confirms it, and only then does the student see the result. A submission moves from in progress to submitted, evaluating, graded and released.">
             <p className="arch__title"><span>Coding evaluation · QuickLearnAI</span><span>Express · Flask · CodeBox</span></p>
             <div className="arch__grid">
               <div className="node r d" style={{ 'gridArea': '1 / 1' }}><span className="n">01</span><b>Code editor</b><span className="s">Monaco: run, save, submit</span></div>

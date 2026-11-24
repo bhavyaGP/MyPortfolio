@@ -9,7 +9,7 @@ const MONO = 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;5
 // 60-30-10: 60% paper (--p-bg), 30% ink and surface (--p-ink, --p-surface), 10% green (--p-accent, --p-action); brass stays as --p-inv-accent only
 // unslop direction: night-time terminals. Ink neutrals (unslop tokens), one green accent for actions, links and focus.
 // Signal-box panel: enamel-plate grey ground, near-black ink, enamel signal blue for actions; lamps (green, amber, red) stay small and lit.
-const ROOT = `:root{--p-bg:#e9ece7;--p-surface:#dde1da;--p-ink:#11161b;--p-muted:#454d55;--p-accent:#0a4a8a;--p-accent-ink:#ffffff;--p-action:#0a4a8a;--p-action-ink:#ffffff;--p-inv-bg:#0a0f16;--p-inv-surface:#111823;--p-inv-ink:#e8edf3;--p-inv-muted:#9aa6b4;--p-inv-accent:#7db7f2;--p-inv-accent-ink:#0a0f16;--p-inv-action:#e8edf3;--p-inv-action-ink:#0a0f16;--font-display:"Barlow Semi Condensed","Barlow",system-ui,sans-serif;--font-text:"Barlow",system-ui,sans-serif;--display-weight:600;--display-tracking:-0.01em;--display-tracking-xl:-0.015em}`
+const ROOT = `:root{--p-bg:#ffffff;--p-surface:#f2f2f2;--p-ink:#0a0a0a;--p-muted:#525252;--p-accent:#0a0a0a;--p-accent-ink:#ffffff;--p-action:#0a0a0a;--p-action-ink:#ffffff;--p-inv-bg:#000000;--p-inv-surface:#111111;--p-inv-ink:#ffffff;--p-inv-muted:#a3a3a3;--p-inv-accent:#ffffff;--p-inv-accent-ink:#000000;--p-inv-action:#ffffff;--p-inv-action-ink:#000000;--font-display:"Barlow Semi Condensed","Barlow",system-ui,sans-serif;--font-text:"Barlow",system-ui,sans-serif;--display-weight:600;--display-tracking:-0.01em;--display-tracking-xl:-0.015em}`
 
 const link = (href) => new Promise((res) => {
   const l = document.createElement('link')
@@ -18,32 +18,121 @@ const link = (href) => new Promise((res) => {
 })
 const script = (src) => { const s = document.createElement('script'); s.type = 'module'; s.src = src; document.head.append(s) }
 
-// "Hello" written on, after Apple's intro: three scripts (English, Hindi, Gujarati), each in a handwriting face and revealed
-// left to right like a pen stroke, then faded. Plays once per session; click, any key or Skip ends it; reduced motion skips it.
-const HELLO = [['en', 'hello', 'Great Vibes'], ['hi', 'नमस्ते', 'Kalam'], ['gu', 'નમસ્તે', 'Shrikhand']]
-const HELLO_FONTS = 'https://fonts.googleapis.com/css2?family=Great+Vibes&family=Kalam:wght@400&family=Shrikhand&display=swap'
+// The greeting: Hello, Kem cho, Hola, Ciao, Aloha, Bonjour, each a heavy word made of liquid glass on black.
+// The letters bend the page behind them (Chromium: a displacement map drawn from the word's own blurred outline) and carry a lit rim.
+// Plays on every load; click, any key or Skip ends it; reduced motion skips it.
+const HELLO = ['Hello', 'Kem cho', 'Hola', 'Ciao', 'Aloha', 'Bonjour']
+const HELLO_FONT = '"Barlow Semi Condensed"'   // loaded with the page fonts
+const pen = (text, font, px, w, h, k) => {
+  const c = document.createElement('canvas'); c.width = Math.ceil(w * k); c.height = Math.ceil(h * k)
+  const x = c.getContext('2d', { willReadFrequently: true }); x.scale(k, k)
+  x.font = `700 ${px}px ${font}, "Nirmala UI", sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle'
+  return [c, x]
+}
 async function greeting() {
-  try { if (sessionStorage.getItem('greeted') || matchMedia('(prefers-reduced-motion: reduce)').matches) return; sessionStorage.setItem('greeted', '1') } catch { return }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
   const el = document.createElement('div')
   el.className = 'hello'; el.setAttribute('role', 'presentation')
-  el.innerHTML = '<p class="hello__t" aria-hidden="true"></p><button class="hello__skip" type="button">Skip</button>'
+  el.innerHTML = '<div class="hello__word"></div><canvas class="hello__rim"></canvas><button class="hello__skip" type="button">Skip</button>'
+    + '<svg width="0" height="0" aria-hidden="true" style="position:absolute"><filter id="hello-f" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB" x="0" y="0"></filter></svg>'
   document.documentElement.append(el)
-  const t = el.querySelector('.hello__t'), skip = el.querySelector('button')
+  const word = el.querySelector('.hello__word'), rim = el.querySelector('.hello__rim'), f = el.querySelector('filter'), skip = el.querySelector('button')
+  const chromium = navigator.userAgentData?.brands?.some((b) => b.brand === 'Chromium')
   let i = 0, done = false, timer
   const end = () => { if (done) return; done = true; clearTimeout(timer); document.removeEventListener('keydown', end); el.classList.add('is-out'); setTimeout(() => el.remove(), 500) }
   el.addEventListener('click', end); document.addEventListener('keydown', end)
   skip.focus({ preventScroll: true })
-  await Promise.race([link(HELLO_FONTS).then(() => Promise.all(HELLO.map(([, s, f]) => document.fonts.load(`64px "${f}"`, s)))), new Promise((r) => setTimeout(r, 1200))])
+  await Promise.race([document.fonts.load(`700 64px ${HELLO_FONT}`, HELLO.join(" ")), new Promise((r) => setTimeout(r, 1200))])
   const show = () => {
     if (done) return
     if (i >= HELLO.length) return end()
-    const [lang, text, font] = HELLO[i]
-    t.className = 'hello__t'; t.lang = lang; t.textContent = text; t.style.fontFamily = `"${font}", "Nirmala UI", cursive`
-    void t.offsetWidth                                   // restart the write-on
-    t.classList.add('is-writing')
-    timer = setTimeout(() => { t.classList.add('is-fading'); timer = setTimeout(() => { i++; show() }, 280) }, 1250)   // 900ms stroke + a short hold
+    const text = HELLO[i], font = HELLO_FONT, dpr = devicePixelRatio || 1
+    const w = Math.round(Math.min(innerWidth * 0.94, 1400)), h = Math.round(Math.min(innerHeight * 0.56, 460))
+    const px = Math.min(h * 0.7, 100 * w * 0.86 / pen(text, font, 100, 1, 1, 1)[1].measureText(text).width)
+    // the glass body: an element masked to the word, its backdrop bent and lifted
+    const [mc, mx] = pen(text, font, px, w, h, dpr); mx.fillText(text, w / 2, h / 2)
+    const mask = `url(${mc.toDataURL()})`
+    Object.assign(word.style, { width: w + 'px', height: h + 'px', maskImage: mask, webkitMaskImage: mask, maskSize: '100% 100%', webkitMaskSize: '100% 100%' })
+    if (chromium) {
+      // height field: the word blurred; its slope pushes the backdrop sideways at every edge, like a thick drop of glass
+      const k = 0.5, cw = Math.ceil(w * k), ch = Math.ceil(h * k)
+      const [, hx] = pen(text, font, px, w, h, k); hx.filter = `blur(${Math.max(2, px * k / 12)}px)`; hx.fillText(text, w / 2, h / 2)
+      const a = hx.getImageData(0, 0, cw, ch).data, out = hx.createImageData(cw, ch), d = out.data
+      const at = (x, y) => a[(Math.min(ch - 1, Math.max(0, y)) * cw + Math.min(cw - 1, Math.max(0, x))) * 4 + 3]
+      for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) {
+        const o = (y * cw + x) * 4
+        d[o] = 128 + Math.max(-127, Math.min(127, (at(x + 1, y) - at(x - 1, y)) * 2)); d[o + 1] = 128 + Math.max(-127, Math.min(127, (at(x, y + 1) - at(x, y - 1)) * 2)); d[o + 2] = 128; d[o + 3] = 255
+      }
+      const mapC = document.createElement('canvas'); mapC.width = cw; mapC.height = ch; mapC.getContext('2d').putImageData(out, 0, 0)
+      f.setAttribute('width', w); f.setAttribute('height', h)
+      f.innerHTML = `<feImage href="${mapC.toDataURL()}" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="${Math.round(px * 0.32)}" xChannelSelector="R" yChannelSelector="G"/>`
+      word.style.backdropFilter = 'url(#hello-f) blur(1.5px) saturate(1.3) brightness(2.6)'
+    }
+    // the rim: a thin outline, brightest along the top where the light catches it
+    rim.width = w * dpr; rim.height = h * dpr; rim.style.width = w + 'px'; rim.style.height = h + 'px'
+    const rx = rim.getContext('2d')
+    rx.setTransform(dpr, 0, 0, dpr, 0, 0); rx.clearRect(0, 0, w, h)
+    rx.font = `700 ${px}px ${font}, "Nirmala UI", sans-serif`; rx.textAlign = 'center'; rx.textBaseline = 'middle'
+    const g = rx.createLinearGradient(0, h / 2 - px / 2, 0, h / 2 + px / 2), ink = '255 255 255'   // the intro is black in both themes
+    g.addColorStop(0, `rgb(${ink} / .95)`); g.addColorStop(0.55, `rgb(${ink} / .22)`); g.addColorStop(1, `rgb(${ink} / .55)`)
+    rx.lineWidth = Math.max(1.4, px / 110); rx.strokeStyle = g; rx.strokeText(text, w / 2, h / 2)
+    // the intro speeds up: Hello holds, Kem cho a little less, then each word comes faster; Bonjour gets a short last beat
+    const last = i === HELLO.length - 1, hold = last ? 650 : Math.max(220, 1300 * 0.62 ** i), gap = Math.max(110, 360 * 0.7 ** i)
+    el.style.setProperty('--hello-in', Math.max(320, 1200 * 0.7 ** i) + 'ms')
+    el.classList.remove('is-in'); void el.offsetWidth; el.classList.add('is-in')
+    timer = setTimeout(() => { el.classList.remove('is-in'); timer = setTimeout(() => { i++; show() }, gap) }, hold)
   }
   show()
+}
+
+// Liquid glass: every .glass pane bends what sits behind it at its rim, like a drop on a window.
+// Chromium takes an SVG filter in backdrop-filter, so each pane gets a displacement map drawn to its own size and corner;
+// other browsers keep the CSS blur and rim (page.css). Maps are redrawn when a pane changes size.
+const NS = 'http://www.w3.org/2000/svg'
+function glassMap(w, h, r, band) {
+  const k = 2, cw = Math.ceil(w / k), ch = Math.ceil(h / k)   // half resolution, stretched back by feImage
+  const c = document.createElement('canvas'); c.width = cw; c.height = ch
+  const ctx = c.getContext('2d'), img = ctx.createImageData(cw, ch), d = img.data
+  const hx = w / 2 - r, hy = h / 2 - r
+  for (let j = 0; j < ch; j++) for (let i = 0; i < cw; i++) {
+    const px = (i + 0.5) * k - w / 2, py = (j + 0.5) * k - h / 2
+    const qx = Math.abs(px) - hx, qy = Math.abs(py) - hy
+    const out = Math.hypot(Math.max(qx, 0), Math.max(qy, 0))
+    const depth = -(out + Math.min(Math.max(qx, qy), 0) - r)   // distance inside the rounded edge
+    let nx = 0, ny = 0, m = 0
+    if (depth < band) {
+      m = (1 - Math.max(depth, 0) / band) ** 2
+      if (qx > 0 && qy > 0) { nx = qx / out; ny = qy / out } else if (qx > qy) nx = 1; else ny = 1
+      nx *= Math.sign(px); ny *= Math.sign(py)
+    }
+    const o = (j * cw + i) * 4
+    d[o] = 128 - nx * m * 127; d[o + 1] = 128 - ny * m * 127; d[o + 2] = 128; d[o + 3] = 255
+  }
+  ctx.putImageData(img, 0, 0)
+  return c.toDataURL()
+}
+function glass() {
+  if (!navigator.userAgentData?.brands?.some((b) => b.brand === 'Chromium')) return
+  const svg = document.createElementNS(NS, 'svg')
+  svg.setAttribute('aria-hidden', 'true'); svg.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden'
+  document.body.append(svg)
+  let n = 0
+  const draw = (el) => {
+    const w = el.offsetWidth, h = el.offsetHeight
+    if (!w || !h) return
+    const r = Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0, w / 2, h / 2)
+    const id = el.dataset.glass ||= 'lg' + n++
+    const band = Math.min(Math.max(r, 16) * 1.6, 56, w / 3, h / 3)   // the rim's width; the push stays under it so nothing folds over
+    let f = svg.getElementById(id)
+    if (!f) { f = document.createElementNS(NS, 'filter'); f.id = id; svg.append(f) }
+    f.setAttribute('x', 0); f.setAttribute('y', 0); f.setAttribute('width', w); f.setAttribute('height', h)
+    f.setAttribute('filterUnits', 'userSpaceOnUse'); f.setAttribute('color-interpolation-filters', 'sRGB')
+    f.innerHTML = `<feImage href="${glassMap(w, h, r, band)}" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none" result="m"/>`
+      + `<feDisplacementMap in="SourceGraphic" in2="m" scale="${Math.round(band * 1.2)}" xChannelSelector="R" yChannelSelector="G"/>`
+    el.style.backdropFilter = `url(#${id}) blur(var(--glass-blur)) saturate(1.4) brightness(var(--glass-lift))`
+  }
+  const ro = new ResizeObserver((es) => es.forEach((e) => draw(e.target)))
+  document.querySelectorAll('.glass').forEach((el) => ro.observe(el))
 }
 
 // The nav is a line diagram: the station for the section in view is lit (aria-current).
@@ -77,6 +166,7 @@ export default async function mount() {
   terminal()
   theme()
   stations()
+  glass()
   ;['/assets/system.js', '/assets/motion/motion.js', '/assets/layout/layout.js', '/assets/diagrams/mount.js'].forEach(script)
 }
 
@@ -169,7 +259,7 @@ function theme() {
   const set = (dark) => {
     root.dataset.theme = dark ? 'dark' : 'light'
     btn.setAttribute('aria-pressed', dark); btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode')
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0a0f16' : '#e9ece7')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#000000' : '#ffffff')
     try { localStorage.setItem('theme', root.dataset.theme) } catch { /* private window */ }
   }
   set(root.dataset.theme === 'dark')

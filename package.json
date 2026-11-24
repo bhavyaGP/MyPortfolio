@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --max-http-header-size=65536 node_modules/vite/bin/vite.js",
+    "dev": "bun --bun vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "bun --bun vite preview"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.5.0",

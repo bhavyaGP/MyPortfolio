@@ -7,14 +7,14 @@ related_targets: []
 
 # Portfolio (index route), Experience mode
 
-Audience: hiring managers deciding in minutes; action: email or resume. Proof: running terminal, architecture figures, demos, hackathon photos, live GitHub data. Untouched: terminal and commands, demos and figures, theme switch, all sections and content in fixed order. Unresolved: none; ValuraAI screenshots and a production screener URL are absent.
+Audience: hiring managers; action: email or resume. Pinned by the user: pure black and white (greys only), liquid glass that is actually visible, rounded borders, the iOS-style Hello intro. Untouched: terminal and commands, demos and figures, theme switch, all sections and content in fixed order.
 
 ## Direction contract
 
-THESIS: The page is a railway signal-box track diagram: his work is the line, sections are stations, and lit lamps show what is running. It refuses the dark-IDE-with-green-accent developer page.
-OWN-WORLD: Enamel-plate grey ground (#e8ebe6) with near-black ink, enamel signal blue for actions, lamp colours (go green, caution amber, stop red) used only as small lit lamps. Corners 2px like enamel plates, 1.5px ink keylines, track rules (1px lines with square junction lamps) between sections. Barlow Semi Condensed signage headlines, Barlow text, JetBrains Mono only inside the terminal and figures. Dark theme is the night panel: blue-black ground, same lamps.
-STORY: A recruiter sees a named engineer whose line of work is already running, believes it from the terminal and diagrams, and emails or opens the resume.
-FIRST VIEWPORT: Left, the signage headline "Software engineer / Builds AI agents / Ships to production" with name rule and the Email action; right, the terminal as the control desk, with a track rule and three lamps (ValuraAI, QuickLearnAI, coding evaluation) running under it. Header nav is a line diagram: stations on a track, the current one lit.
-FORM: signal-box mimic panel, position 6 of my grounded list (assigned), seed: seed:40320da32d4e2f29.
+THESIS: The page is a black window at night and every panel is a drop of liquid glass on it; his name and each section's anchor word sit huge behind the glass so the drops visibly bend them. It refuses the flat dark developer hero and frosted cards over an empty ground.
+OWN-WORLD: Near-black pane (#050505), a fine vertical line raster and giant dark-grey type (#1c1c1c to #262626) behind everything, white ink. Glass: one module (radius 28px, bright top rim, dark inner bottom, real SVG displacement refraction plus blur) for nav, terminal, statement, project panes and figures. Light theme is the same window at dawn: white pane, pale grey type, dark ink. Every pane carries a label band (date, stack, result). Barlow Semi Condensed for anchor words, Barlow for text, JetBrains Mono for terminal and figures.
+STORY: The visitor sees his name bent through a drop, reads the statement on glass, types into the terminal, scrolls past anchor words (Work, Experience, Hackathons, Awards, Stack, Activity) each refracted by its panes; believes it; emails.
+FIRST VIEWPORT: Giant "Bhavya Prajapati" in dark grey across the window behind; glass pill nav on top; terminal drop at 7 of 12 columns lower left, statement drop with Email and Resume glass pills at right; both sit over the name so the letters bend at their rims.
+FORM: night window with liquid-glass drops, position 5 of my grounded list (assigned), seed: seed:16390d43dca68fc1. Raises: one pane module repeated like a meter bridge (VU Meter Bridge); label bands on every pane (Brine Calendar); one anchor word per section (Push Pin Poster).
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

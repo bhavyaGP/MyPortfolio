@@ -9,3 +9,4 @@
     await mount()
   }
 })()
+export {}   // an ES module marker: Vite 8 treats a file with no import or export as a script
