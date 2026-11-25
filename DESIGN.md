@@ -19,44 +19,44 @@ colors:
   smoke-dawn: "rgb(12 12 12 / .84)"
 typography:
   display:
-    fontFamily: "Barlow Semi Condensed, Barlow, system-ui, sans-serif"
+    fontFamily: "Geist, Geist, system-ui, sans-serif"
     fontSize: "clamp(104px, 24vw, 370px)"
     fontWeight: 700
     lineHeight: 0.8
     letterSpacing: "-0.045em"
   anchor-word:
-    fontFamily: "Barlow Semi Condensed, Barlow, system-ui, sans-serif"
+    fontFamily: "Geist, Geist, system-ui, sans-serif"
     fontSize: "clamp(120px, 21vw, 320px)"
     fontWeight: 700
     lineHeight: 0.8
     letterSpacing: "-0.04em"
   headline:
-    fontFamily: "Barlow Semi Condensed, Barlow, system-ui, sans-serif"
+    fontFamily: "Geist, Geist, system-ui, sans-serif"
     fontSize: "clamp(36px, 4.4vw, 64px)"
     fontWeight: 700
     lineHeight: 0.98
     letterSpacing: "-0.02em"
   title:
-    fontFamily: "Barlow Semi Condensed, Barlow, system-ui, sans-serif"
+    fontFamily: "Geist, Geist, system-ui, sans-serif"
     fontSize: "clamp(28px, 2.8vw, 42px)"
     fontWeight: 600
     lineHeight: 1.04
   title-tile:
-    fontFamily: "Barlow Semi Condensed, Barlow, system-ui, sans-serif"
+    fontFamily: "Geist, Geist, system-ui, sans-serif"
     fontSize: "clamp(28px, 2.6vw, 40px)"
     fontWeight: 700
     lineHeight: 1
   body:
-    fontFamily: "Barlow, system-ui, sans-serif"
+    fontFamily: "Geist, system-ui, sans-serif"
     fontSize: "18px"
     fontWeight: 400
   body-sm:
-    fontFamily: "Barlow, system-ui, sans-serif"
+    fontFamily: "Geist, system-ui, sans-serif"
     fontSize: "16px"
     fontWeight: 500
     lineHeight: 1
   label:
-    fontFamily: "JetBrains Mono, ui-monospace, monospace"
+    fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "13px"
     fontWeight: 500
     lineHeight: 1.4
@@ -128,7 +128,7 @@ components:
 
 The page is a black window at night. A fine line raster runs across the pane, his name and each section's anchor word sit huge and grey on it, and every panel is a drop of liquid glass in front of that lettering, so the drops visibly bend the letters at their rims. The light theme is the same window at dawn: a pale grey pane, pale grey lettering, dark ink. Nothing else changes between the two.
 
-The system is monochrome by law. Pure black, white and greys carry every role; depth comes from glass, rim light and a soft drop shadow rather than from colour. Type is condensed and heavy where it is scenery (name, anchor words, headings), plain Barlow where it is reading, and JetBrains Mono only where the page shows machine facts: the terminal, the architecture figures and the label bands.
+The system is monochrome by law. Pure black, white and greys carry every role; depth comes from glass, rim light and a soft drop shadow rather than from colour. Type is condensed and heavy where it is scenery (name, anchor words, headings), plain Geist where it is reading, and Geist Mono only where the page shows machine facts: the terminal, the architecture figures and the label bands.
 
 There is one pane module, repeated like a meter bridge: one radius, one rim, one sheen, one shadow, used for the nav, the statement, the project tiles, the rows, the hackathon chapters, the activity cards and the closing call. It refuses the flat dark developer hero and frosted cards over an empty ground.
 
@@ -165,9 +165,9 @@ A greyscale palette with no hue anywhere: the window, the ink, and a ladder of g
 
 ## Typography
 
-**Display Font:** Barlow Semi Condensed (with Barlow, system-ui)
-**Body Font:** Barlow (with system-ui)
-**Label/Mono Font:** JetBrains Mono (with ui-monospace)
+**Display Font:** Geist (with Geist, system-ui)
+**Body Font:** Geist (with system-ui)
+**Label/Mono Font:** Geist Mono (with ui-monospace)
 
 **Character:** A heavy condensed grotesque for the lettering on the window and the headings, a calm humanist grotesque for reading, and a mono that appears only where the page shows machine output.
 
@@ -177,10 +177,10 @@ A greyscale palette with no hue anywhere: the window, the ink, and a ladder of g
 - **Headline** (700, clamp(36px, 4.4vw, 64px), 0.98, -0.02em): section headings, balanced wrap.
 - **Title** (600, clamp(28px, 2.8vw, 42px), 1.04): the hero statement. Tile titles take 700 at clamp(28px, 2.6vw, 40px), line height 1.
 - **Body** (400, 18px): section leads (max 60ch) and tile copy (max 52ch). Kit body is 16px.
-- **Label** (500, 13px, 1.4, JetBrains Mono): the label band on every pane; muted grey; sentence case, no tracking.
+- **Label** (500, 13px, 1.4, Geist Mono): the label band on every pane; muted grey; sentence case, no tracking.
 
 ### Named Rules
-**The Mono Means Machine Rule.** JetBrains Mono is used only in the terminal, the architecture figures and the label bands. Headings, buttons and navigation are never mono.
+**The Mono Means Machine Rule.** Geist Mono is used only in the terminal, the architecture figures and the label bands. Headings, buttons and navigation are never mono.
 
 **The No Kicker Rule.** Nothing sits above a heading: no eyebrow, no tracked uppercase label. The anchor word hangs below the head, and the label band holds facts inside the pane.
 
@@ -215,7 +215,7 @@ Soft, generous corners from one value: panes at 28px (22px on phones), pills at 
 ## Components
 
 ### Buttons
-- **Shape:** pill (999px), 44px tall, 24px side padding, Barlow 500 16px.
+- **Shape:** pill (999px), 44px tall, 24px side padding, Geist 500 16px.
 - **Primary:** solid ink: black-ink on light, white-ink on dark, with the window colour as its label. As built, its fill does not change on hover (the kit's hover mixes the action toward the ink, which is the same colour here). One primary per view: Email Bhavya.
 - **Secondary:** an ink pill at 8% with the glass rim and edge but no backdrop (it sits inside a pane, and glass never nests). Hover lifts the ink to 14%. Used for Resume.
 - **Focus:** a 2px ink outline, 3px offset, on everything.
@@ -231,19 +231,25 @@ Soft, generous corners from one value: panes at 28px (22px on phones), pills at 
 The terminal and the three architecture figures. Same radius and refraction, but the body is smoke (black at 84% at dawn, 45% at night) with a white rim at 45% and a white edge at 12%, so mono text stays white in both themes. Inner boxes are white at 4%.
 
 ### Label band
-A mono strip on every pane: 13px JetBrains Mono 500, muted grey, 8px under it and a 1px edge-colour hairline below. In the hero statement it moves to the bottom with the hairline above; in the closing call it has no rule. Facts only: where, when, stack, result.
+A mono strip on every pane: 13px Geist Mono 500, muted grey, 8px under it and a 1px edge-colour hairline below. In the hero statement it moves to the bottom with the hairline above; in the closing call it has no rule. Facts only: where, when, stack, result.
 
 ### Navigation
-Two drops at the top, 18px from the edge, 56px tall. The logo drop (pill, Barlow Semi Condensed 600 19px) sits on the left; the link drop sits centred and holds the section links (Barlow 500 16px, muted at rest), the theme switch and the email pill. Hover tints 8% ink, the current section 14% ink, colour and background easing 160ms. Both drops use a lighter glass: blur 7px and a 45% window-colour tint. Below 1024px the links hide and the link drop moves right.
+Two drops at the top, 18px from the edge, 56px tall. The logo drop (pill, Geist 600 19px) sits on the left; the link drop sits centred and holds the section links (Geist 500 16px, muted at rest), the theme switch and the email pill. Hover tints 8% ink, the current section 14% ink, colour and background easing 160ms. Both drops use a lighter glass: blur 7px and a 45% window-colour tint. Below 1024px the links hide and the link drop moves right.
 
 ### Anchor words
 Each section head carries a `data-word`; the word renders as a pseudo-element below the head, behind the first panes, in word grey. With scroll-driven animation available and motion allowed it drifts sideways from 4vw to -8vw across the section's view, so the rims keep bending different letters. The hero name drifts the same way over the first 100vh.
 
 ### Intro
-On load, a pure black ground with a white raster at 5% and six words in turn: Hello, Kem cho, Hola, Ciao, Aloha, Bonjour (Barlow Semi Condensed 700). Each word is heavy glass: an element masked to the letters that bends and brightens (2.6) what is behind, with a white rim stroke brightest at the top. The pace accelerates: Hello holds 1.3s, Kem cho 0.8s, then each word comes faster (0.5s, 0.3s, 0.2s) with shorter gaps and quicker rises from 0.9 scale; Bonjour holds 0.65s as the landing beat. About 5s in all. A click, any key or the Skip pill ends it; reduced motion skips it entirely.
+On load, a pure black ground with a white raster at 5% and six words in turn: Hello, Kem cho, Hola, Ciao, Aloha, Bonjour (Geist 700). Each word is heavy glass: an element masked to the letters that bends and brightens (2.6) what is behind, with a white rim stroke brightest at the top. The pace accelerates: Hello holds 1.3s, Kem cho 0.8s, then each word comes faster (0.5s, 0.3s, 0.2s) with shorter gaps and quicker rises from 0.9 scale; Bonjour holds 0.65s as the landing beat. About 5s in all. A click, any key or the Skip pill ends it; reduced motion skips it entirely.
 
 ### Cursor
 A sharp Figma-style arrow, black with a white outline, legible on both windows; the pointer state uses the same arrow. Text fields and editable areas keep their caret.
+
+### Chapters (scroll choreography)
+After iamsrikanth.com, kept to the window's greys. A numbered rail at the left edge (from 1100px; the italic chapter name shows from 1500px). Chapters marked `data-flip` (Experience, Hackathons, Contact) turn the window to the other theme as they cross the middle of the screen; the switch keeps the visitor's own choice. Headings and huge marks come out of a blur (`animation-timeline: view()`). The statement and the work titles sharpen word by word (`[data-fill]`). The ledger counts up once. Work holds one glass browser window still and swaps the demo in view. Experience sets the start year of each role huge beside its pane, rows alternating. Awards are dealt as tilted cards, the middle one inverted. Stack opens with a wheel of tool names turned by scroll. An ASCII portrait, drawn from the profile photo in the anchor-word grey, sits fixed behind the page. All of it is in `src/site/scroll.js` and `src/site/chapters.css`; reduced motion gets the static layout.
+
+### Neko
+The pointer-chasing cat is Neko.js by Louis Abraham (GPL v3), loaded in `index.html` with `data-autostart`; `mount.jsx` re-attaches it after React renders into `<body>`.
 
 ## Do's and Don'ts
 
@@ -251,7 +257,7 @@ A sharp Figma-style arrow, black with a white outline, legible on both windows; 
 - **Do** keep every colour a neutral: black, white or a grey from the palette.
 - **Do** build every panel from the one glass module (28px, rim, sheen, shadow) and let mount.jsx add the refraction.
 - **Do** put type or raster behind every pane: the hero name or a section's anchor word.
-- **Do** give every pane a label band with facts, in 13px JetBrains Mono.
+- **Do** give every pane a label band with facts, in 13px Geist Mono.
 - **Do** use smoked glass for terminal and figure content in both themes.
 - **Do** keep the primary button solid ink and the secondary a glass pill on lettering.
 
@@ -260,5 +266,5 @@ A sharp Figma-style arrow, black with a white outline, legible on both windows; 
 - **Don't** put kickers, eyebrows or tracked labels above headings.
 - **Don't** place glass over flat ground; glass must always have type or raster behind it.
 - **Don't** nest glass inside glass.
-- **Don't** use JetBrains Mono outside the terminal, the figures and the label bands.
+- **Don't** use Geist Mono outside the terminal, the figures and the label bands.
 - **Don't** draw pane edges with borders; the rim and edge insets are the outline.

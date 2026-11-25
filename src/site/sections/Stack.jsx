@@ -1,6 +1,26 @@
+// The tools, on a wheel that turns as you scroll: the name in front is sharp, the rest tilt away and blur (scroll.js turns it).
+const TOOLS = ['Node.js', 'Express', 'Flask', 'FastAPI', 'React', 'Next.js', 'Tailwind CSS', 'LangChain', 'LlamaIndex', 'OpenAI', 'Gemini', 'PostgreSQL', 'MongoDB', 'Redis', 'Pinecone', 'Socket.IO', 'Twilio', 'Docker', 'Git']
+
+// One box of the QuickLearnAI architecture; scroll.js draws the wires between boxes from data-wire on the map.
+function SysNode({ id, icon, name, sub, port }) {
+  return (
+    <div className="sys__node" data-id={id}>
+      <span className="sys__ic"><img src={`/assets/icons/${icon}.svg`} alt="" width="22" height="22" /></span>
+      <span className="sys__txt"><b>{name}</b><small>{sub}</small></span>
+      {port && <span className="sys__port">{port}</span>}
+    </div>
+  )
+}
+
 export default function Stack() {
   return (
     <section className="section ground-surface g2" id="stack" style={{ '--h': '2', '--hm': '2' }} aria-labelledby="stack-h">
+        <div className="drum" role="img" aria-label={'Tools: ' + TOOLS.join(', ')}>
+          <div className="drum__stage">
+            <p className="drum__note">The tools behind every project and figure on this page.</p>
+            <ul className="drum__wheel" aria-hidden="true">{TOOLS.map((t, i) => <li key={t} style={{ '--i': i }}>{t}</li>)}</ul>
+          </div>
+        </div>
         <div className="wrap">
         <div>
           <div className="section-head" data-word="Stack">
@@ -8,33 +28,23 @@ export default function Stack() {
             <p className="phone-hide">Node serves user management. Flask serves the AI APIs.</p>
           </div>
           <div className="grid">
-          <div className="span-12 arch qa glass" role="img" aria-label="System architecture of QuickLearnAI. A user reaches the Node server, which serves user management APIs. AI requests go to the Flask server. From there, students get coding assignments with CodeBox, Monaco and AI evaluation, YouTube videos turned into flash cards with LangChain, a PDF and PPT chatbot with RAG, LlamaIndex, OpenAI and a vector database, smart quizzes and mind maps, and question bank generation. Students and teachers share live quizzes over WebSockets. Teachers also get the complete assignment ecosystem with auto test cases, an in-browser editor and rubric reports.">
-            <p className="arch__title"><span>System architecture · QuickLearnAI</span><span>React · Express · Socket.IO · Flask · LlamaIndex</span></p>
-            <div className="qa__map">
-              <div className="node u" style={{ 'gridRow': '1 / 8', 'gridColumn': '1' }}><b>User</b></div>
-              <span className="ar2" style={{ 'gridRow': '1 / 8', 'gridColumn': '2' }}><svg className="arw" viewBox="0 0 24 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 5H22" stroke="currentColor" strokeWidth="1"/><path d="M18 1.5 23 5l-5 3.5z" fill="currentColor"/></svg></span>
-              <div className="node" style={{ 'gridRow': '1 / 8', 'gridColumn': '3' }}><b>Node server</b><span className="s">User management APIs</span></div>
-              <span className="ar2" style={{ 'gridRow': '1 / 8', 'gridColumn': '4' }}><svg className="arw" viewBox="0 0 24 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 5H22" stroke="currentColor" strokeWidth="1"/><path d="M18 1.5 23 5l-5 3.5z" fill="currentColor"/></svg></span>
-              <div className="node" style={{ 'gridRow': '1 / 8', 'gridColumn': '5' }}><b>Flask server</b><span className="s">AI APIs</span></div>
-              <div className="rail" style={{ 'gridRow': '1 / 8', 'gridColumn': '6' }}>
-                <i className="h b" style={{ 'top': '213px', 'left': '0', 'width': '50%' }}></i><i className="v b" style={{ 'top': '151px', 'height': '217px' }}></i>
-                <i className="h tk b" style={{ 'top': '151px', 'left': '50%', 'right': '0' }}></i><i className="h tk gr" style={{ 'top': '368px', 'left': '50%', 'right': '0' }}></i>
+          <div className="span-12 arch sys glass" role="img" aria-label="High-level architecture of QuickLearnAI. The React and Vite client on port 5173 calls three servers: the Node Express server on port 3001 through VITE_API_URL, the Flask server on Uvicorn on port 5001 through VITE_GEN_PROXY, and the Socket.IO server on port 5002 through VITE_SOCKET_URL. The Node server also proxies AI requests to Flask through AI_API_URL. Node and Flask both read and write MongoDB and Redis.">
+            <p className="arch__title"><span>High-level architecture · QuickLearnAI</span><span>React · Express · Flask · Socket.IO · MongoDB · Redis</span></p>
+            <div className="sys__map">
+              <div className="sys__tier"><p className="sys__k">Frontend</p>
+                <SysNode id="client" icon="react" name="Client" sub="React / Vite" port=":5173" />
               </div>
-              <div className="node role" style={{ 'gridRow': '1 / 6', 'gridColumn': '7' }}><b>Students</b></div>
-              <div className="node role gt" style={{ 'gridRow': '6 / 8', 'gridColumn': '7' }}><b>Teachers</b></div>
-              <div className="rail" style={{ 'gridRow': '1 / 8', 'gridColumn': '8' }}>
-                <i className="v b" style={{ 'top': '27px', 'height': '310px' }}></i><i className="v gr" style={{ 'top': '337px', 'height': '62px' }}></i>
-                <i className="h b" style={{ 'top': '151px', 'left': '0', 'width': '50%' }}></i><i className="h gr" style={{ 'top': '368px', 'left': '0', 'width': '50%' }}></i>
-                <i className="h r tk b" style={{ 'top': '27px' }}></i><i className="h r tk b" style={{ 'top': '89px' }}></i><i className="h r tk b" style={{ 'top': '151px' }}></i><i className="h r tk b" style={{ 'top': '213px' }}></i><i className="h r tk b" style={{ 'top': '275px' }}></i><i className="h r tk b" style={{ 'top': '337px' }}></i><i className="h r tk gr" style={{ 'top': '399px' }}></i>
+              <div className="sys__tier"><p className="sys__k">Backend</p>
+                <SysNode id="node" icon="nodejs" name="Node server" sub="Express" port=":3001" />
+                <SysNode id="flask" icon="flask" name="Flask server" sub="Uvicorn" port=":5001" />
+                <SysNode id="socket" icon="websocket" name="Socket server" sub="Socket.IO" port=":5002" />
               </div>
-              <div className="node f" style={{ 'gridRow': '1', 'gridColumn': '9' }}><b>Coding assignment</b><span className="s">CodeBox sandbox, Monaco editor, polling, AI evaluation</span></div>
-              <div className="node f" style={{ 'gridRow': '2', 'gridColumn': '9' }}><b>YouTube videos to flash cards</b><span className="s">LangChain, YouTube transcripts, chunking, batch processing</span></div>
-              <div className="node f" style={{ 'gridRow': '3', 'gridColumn': '9' }}><b>PDF and PPT chatbot</b><span className="s">RAG, LlamaIndex, OpenAI, vector DB, SSE streaming</span></div>
-              <div className="node f" style={{ 'gridRow': '4', 'gridColumn': '9' }}><b>Smart quiz and mind map</b><span className="s">LLM responses, Mermaid rendering</span></div>
-              <div className="node f" style={{ 'gridRow': '5', 'gridColumn': '9' }}><b>Question bank generation</b><span className="s">DuckDuckGo search, guardrails, PDF compilation</span></div>
-              <div className="node f" style={{ 'gridRow': '6', 'gridColumn': '9' }}><b>Live quiz ecosystem</b><span className="s">Quiz creation, conduction, evaluation, analysis, WebSockets</span></div>
-              <div className="node f" style={{ 'gridRow': '7', 'gridColumn': '9' }}><b>Complete assignment ecosystem</b><span className="s">Auto test cases, in-browser editor, rubric reports</span></div>
+              <div className="sys__tier"><p className="sys__k">Data</p>
+                <SysNode id="mongo" icon="mongodb" name="MongoDB" sub="Document database" />
+                <SysNode id="redis" icon="redis" name="Redis" sub="In-memory store" />
+              </div>
             </div>
+            <p className="sys__ai">Flask serves the AI: coding evaluation · YouTube to flash cards · PDF and PPT chat · quizzes and mind maps · question banks · live quizzes</p>
           </div>
           </div>
         </div>

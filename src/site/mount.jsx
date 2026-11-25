@@ -2,14 +2,16 @@ import { createRoot } from 'react-dom/client'
 import { flushSync } from 'react-dom'
 import App from './App.jsx'
 import pageCss from './page.css?raw'
+import chaptersCss from './chapters.css?raw'
+import scroll from './scroll.js'
 
 const KIT = ['/assets/system.css', '/assets/ui/cards.css', '/assets/motion/motion.css', '/assets/layout/layout.css', '/assets/icons/icon.css', '/assets/diagrams/diagram.css']
-const FONT = 'https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap'
-const MONO = 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap'
+const FONT = 'https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap'
+const MONO = 'https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap'
 // 60-30-10: 60% paper (--p-bg), 30% ink and surface (--p-ink, --p-surface), 10% green (--p-accent, --p-action); brass stays as --p-inv-accent only
 // unslop direction: night-time terminals. Ink neutrals (unslop tokens), one green accent for actions, links and focus.
 // Signal-box panel: enamel-plate grey ground, near-black ink, enamel signal blue for actions; lamps (green, amber, red) stay small and lit.
-const ROOT = `:root{--p-bg:#ffffff;--p-surface:#f2f2f2;--p-ink:#0a0a0a;--p-muted:#525252;--p-accent:#0a0a0a;--p-accent-ink:#ffffff;--p-action:#0a0a0a;--p-action-ink:#ffffff;--p-inv-bg:#000000;--p-inv-surface:#111111;--p-inv-ink:#ffffff;--p-inv-muted:#a3a3a3;--p-inv-accent:#ffffff;--p-inv-accent-ink:#000000;--p-inv-action:#ffffff;--p-inv-action-ink:#000000;--font-display:"Barlow Semi Condensed","Barlow",system-ui,sans-serif;--font-text:"Barlow",system-ui,sans-serif;--display-weight:600;--display-tracking:-0.01em;--display-tracking-xl:-0.015em}`
+const ROOT = `:root{--p-bg:#ffffff;--p-surface:#f2f2f2;--p-ink:#0a0a0a;--p-muted:#525252;--p-accent:#0a0a0a;--p-accent-ink:#ffffff;--p-action:#0a0a0a;--p-action-ink:#ffffff;--p-inv-bg:#000000;--p-inv-surface:#111111;--p-inv-ink:#ffffff;--p-inv-muted:#a3a3a3;--p-inv-accent:#ffffff;--p-inv-accent-ink:#000000;--p-inv-action:#ffffff;--p-inv-action-ink:#000000;--font-display:"Geist",system-ui,sans-serif;--font-text:"Geist",system-ui,sans-serif;--display-weight:600;--display-tracking:-0.01em;--display-tracking-xl:-0.015em}`
 
 const link = (href) => new Promise((res) => {
   const l = document.createElement('link')
@@ -22,15 +24,15 @@ const script = (src) => { const s = document.createElement('script'); s.type = '
 // The letters bend the page behind them (Chromium: a displacement map drawn from the word's own blurred outline) and carry a lit rim.
 // Plays on every load; click, any key or Skip ends it; reduced motion skips it.
 const HELLO = ['Hello', 'Kem cho', 'Hola', 'Ciao', 'Aloha', 'Bonjour']
-const HELLO_FONT = '"Barlow Semi Condensed"'   // loaded with the page fonts
+const HELLO_FONT = '"Geist"'   // loaded with the page fonts
 const pen = (text, font, px, w, h, k) => {
   const c = document.createElement('canvas'); c.width = Math.ceil(w * k); c.height = Math.ceil(h * k)
   const x = c.getContext('2d', { willReadFrequently: true }); x.scale(k, k)
   x.font = `700 ${px}px ${font}, "Nirmala UI", sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle'
   return [c, x]
 }
-async function greeting() {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+async function greeting(after) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return after()
   const el = document.createElement('div')
   el.className = 'hello'; el.setAttribute('role', 'presentation')
   el.innerHTML = '<div class="hello__word"></div><canvas class="hello__rim"></canvas><button class="hello__skip" type="button">Skip</button>'
@@ -39,7 +41,7 @@ async function greeting() {
   const word = el.querySelector('.hello__word'), rim = el.querySelector('.hello__rim'), f = el.querySelector('filter'), skip = el.querySelector('button')
   const chromium = navigator.userAgentData?.brands?.some((b) => b.brand === 'Chromium')
   let i = 0, done = false, timer
-  const end = () => { if (done) return; done = true; clearTimeout(timer); document.removeEventListener('keydown', end); el.classList.add('is-out'); setTimeout(() => el.remove(), 500) }
+  const end = () => { if (done) return; done = true; clearTimeout(timer); document.removeEventListener('keydown', end); el.classList.add('is-out'); setTimeout(() => { el.remove(); after() }, 500) }
   el.addEventListener('click', end); document.addEventListener('keydown', end)
   skip.focus({ preventScroll: true })
   await Promise.race([document.fonts.load(`700 64px ${HELLO_FONT}`, HELLO.join(" ")), new Promise((r) => setTimeout(r, 1200))])
@@ -135,16 +137,6 @@ function glass() {
   document.querySelectorAll('.glass').forEach((el) => ro.observe(el))
 }
 
-// The nav is a line diagram: the station for the section in view is lit (aria-current).
-function stations() {
-  const links = [...document.querySelectorAll('.nav__link')]
-  const io = new IntersectionObserver((es) => es.forEach((e) => {
-    if (!e.isIntersecting) return
-    links.forEach((l) => l.toggleAttribute('aria-current', l.getAttribute('href') === '#' + e.target.id))
-  }), { rootMargin: '-45% 0px -50% 0px' })
-  links.forEach((l) => { const s = document.querySelector(l.getAttribute('href')); if (s) io.observe(s) })
-}
-
 export default async function mount() {
   const h = document.documentElement
   try { h.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') } catch { h.dataset.theme = 'light' }
@@ -154,19 +146,20 @@ export default async function mount() {
   setTimeout(() => h.classList.add('m-enter-done'), 700)
   setTimeout(() => h.classList.add('mo-safe'), 2500)
   await Promise.all([FONT, MONO, ...KIT].map(link))
-  const st = document.createElement('style'); st.textContent = ROOT + pageCss; document.head.append(st)
+  const st = document.createElement('style'); st.textContent = ROOT + pageCss + chaptersCss; document.head.append(st)
   // ponytail: the kit wants header, main and footer straight under <body>, so React renders into body itself
   document.getElementById('root')?.remove()
   flushSync(() => createRoot(document.body).render(<App />))
-  greeting()
+  // the cat (neko.js, index.html) only arrives once the Hello intro has gone, then chases the pointer
+  greeting(() => { window.neko ||= window.createNeko?.({ fps: 60, speed: 40 }) })
   const url = localStorage.getItem('bhavya_resume_url')
   if (url) document.querySelectorAll('[data-resume]').forEach((a) => a.setAttribute('href', url))
   activity()
   videos()
   terminal()
-  theme()
-  stations()
+  const setFlip = theme()
   glass()
+  scroll({ setFlip })
   ;['/assets/system.js', '/assets/motion/motion.js', '/assets/layout/layout.js', '/assets/diagrams/mount.js'].forEach(script)
 }
 
@@ -254,22 +247,33 @@ function terminal() {
 }
 
 // Light and dark: the choice is kept; the switch grows a circle from the button, or fades where View Transitions are missing.
+// Chapters marked data-flip show the other side (scroll.js calls the returned setFlip), so the window turns night/dawn as you read.
 function theme() {
   const root = document.documentElement, btn = document.getElementById('theme-toggle')
-  const set = (dark) => {
+  let base = root.dataset.theme === 'dark', flip = false
+  const show = () => {
+    const dark = base !== flip
     root.dataset.theme = dark ? 'dark' : 'light'
-    btn.setAttribute('aria-pressed', dark); btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode')
+    btn.setAttribute('aria-pressed', base); btn.setAttribute('aria-label', base ? 'Switch to light mode' : 'Switch to dark mode')
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#000000' : '#ffffff')
-    try { localStorage.setItem('theme', root.dataset.theme) } catch { /* private window */ }
   }
-  set(root.dataset.theme === 'dark')
+  const set = (dark) => { base = dark; show(); try { localStorage.setItem('theme', dark ? 'dark' : 'light') } catch { /* private window */ } }
+  show()
   btn.addEventListener('click', (e) => {
-    const dark = root.dataset.theme !== 'dark'
+    const dark = !base
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return set(dark)
     if (!document.startViewTransition) { root.classList.add('theme-fade'); set(dark); setTimeout(() => root.classList.remove('theme-fade'), 500); return }
     root.style.setProperty('--tx', e.clientX + 'px'); root.style.setProperty('--ty', e.clientY + 'px')
     document.startViewTransition(() => set(dark))
   })
+  let fade
+  return (f) => {
+    if (f === flip) return
+    flip = f
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return show()
+    root.classList.add('theme-turn'); show()
+    clearTimeout(fade); fade = setTimeout(() => root.classList.remove('theme-turn'), 800)
+  }
 }
 
 // A demo thumbnail plays in place on click; without script the link opens the video on YouTube.

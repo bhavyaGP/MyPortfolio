@@ -1,10 +1,11 @@
-// The logo and the links each float in a liquid-glass drop over the window (mount.jsx bends the page behind them).
+// One small liquid-glass pill at the top centre, after iamsrikanth.com: the mark, the links, the theme switch and Email
+// (mount.jsx bends the page behind it).
 export default function Header() {
   return (
     <header className="nav">
       <a className="skip-link" href="#top">Skip to content</a>
-      <a className="nav__logo glass" href="#top"><span className="mark" data-mark="dots" aria-hidden="true"></span>Bhavya Prajapati</a>
       <nav className="nav__pill glass" aria-label="Main">
+        <a className="nav__mark" href="#top" aria-label="Bhavya Prajapati, back to top"><span className="mark" data-mark="dots" aria-hidden="true"></span></a>
         <a className="nav__link" href="#work">Work</a>
         <a className="nav__link" href="#experience">Experience</a>
         <a className="nav__link" href="#hackathons">Hackathons</a>

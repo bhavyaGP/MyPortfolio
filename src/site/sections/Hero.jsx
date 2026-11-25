@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="hero hero--split" data-enter aria-labelledby="hero-h">
+    <section className="hero hero--split" id="hero" data-enter aria-labelledby="hero-h">
         <div className="wrap"><p className="hero__name" aria-hidden="true">Bhavya<br />Prajapati</p><div className="hero-text grid hero__grid">
           <div className="hero__text span-6 glass">
 

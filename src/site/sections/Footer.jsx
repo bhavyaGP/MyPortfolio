@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="footer closing" id="contact" data-word="Contact" aria-labelledby="close-h">
+    <footer className="footer closing" id="contact" data-flip data-word="Contact" aria-labelledby="close-h">
       <div className="wrap">
         <div className="closing__cta close--word glass">
           <div className="section-head--split">

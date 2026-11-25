@@ -1,6 +1,6 @@
 export default function Hackathons() {
   return (
-    <section className="section" id="hackathons" style={{ '--h': '2', '--hm': '2' }} data-moment="pinned-chapters" aria-labelledby="hackathons-h">
+    <section className="section" id="hackathons" data-flip style={{ '--h': '2', '--hm': '2' }} data-moment="pinned-chapters" aria-labelledby="hackathons-h">
         <div className="wrap mo-pc__grid">
           <div className="mo-pc__text">
             <h2 id="hackathons-h" data-word="Hackathons">Hackathon results, 2025</h2>

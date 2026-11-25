@@ -295,7 +295,7 @@ html.theme-fade * {
   background: var(--t-bg);
   color: var(--t-ink);
   box-shadow: 0 0 0 1px var(--t-line);
-  font: 400 14px/1.7 "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  font: 400 14px/1.7 "Geist Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
 }
 
 .term p {
@@ -593,7 +593,7 @@ html {
   background: var(--t-bg);
   color: var(--t-ink);
   box-shadow: 0 0 0 1px var(--t-line);
-  font: 400 14px/1.45 "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  font: 400 14px/1.45 "Geist Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
 }
 
 .arch p {
@@ -1132,7 +1132,7 @@ html[data-theme="dark"] .term__chips span:hover {
   display: flex;
   align-items: center;
   gap: var(--s-3);
-  font: 400 13px/1.4 "JetBrains Mono", ui-monospace, monospace;
+  font: 400 13px/1.4 "Geist Mono", ui-monospace, monospace;
   text-transform: uppercase;
   letter-spacing: .06em;
   color: var(--muted);
@@ -1154,7 +1154,7 @@ html[data-theme="dark"] .term__chips span:hover {
 }
 
 .hero__h1 .mono {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "Geist Mono", ui-monospace, monospace;
   font-weight: 400;
   font-size: .86em;
   letter-spacing: -0.04em;
@@ -1541,7 +1541,7 @@ a {
 }
 
 .hero__h1 .mono {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "Geist Mono", ui-monospace, monospace;
 }
 .hero__media { background: none; border-radius: 0; overflow: visible; align-content: start; }
 .hero__media > .term { height: auto; min-height: 0; }
@@ -1705,7 +1705,7 @@ body { background: linear-gradient(90deg, var(--raster-v) 1px, transparent 1px) 
 }
 
 /* the label band: one mono strip on every pane, facts only (where, when, stack, result) */
-.band { display: block; margin: 0 0 var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--glass-edge); font: 500 13px/1.4 "JetBrains Mono", ui-monospace, monospace; color: var(--muted); }
+.band { display: block; margin: 0 0 var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--glass-edge); font: 500 13px/1.4 "Geist Mono", ui-monospace, monospace; color: var(--muted); }
 .hero__text .band { margin: var(--s-5) 0 0; padding: var(--s-3) 0 0; border-bottom: 0; border-top: 1px solid var(--glass-edge); }
 .closing__cta .band { margin: var(--s-3) 0 0; border: 0; padding: 0; }
 
@@ -1721,9 +1721,9 @@ body { background: linear-gradient(90deg, var(--raster-v) 1px, transparent 1px) 
 .hello__skip { position: absolute; right: var(--s-6); bottom: var(--s-6); min-height: 44px; padding: 0 var(--s-5); border: 1px solid rgb(255 255 255 / .24); border-radius: 999px; background: none; color: #a3a3a3; font: 500 15px/1 var(--font-text); }
 .hello__skip:hover { color: #fff; }
 
-/* the cursor: a sharp black arrow with a white outline, legible on the window in both themes; text fields keep their caret */
-html, html *:not(input, textarea, [contenteditable]) { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M5 3.5v17.2l4.6-4.4 2.9 6.6 2.9-1.3-2.9-6.5h6.3z' fill='%23000' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, auto !important; }
-:is(a, button, [role="button"], label, summary, .term__chips span, .term__scroll) { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M5 3.5v17.2l4.6-4.4 2.9 6.6 2.9-1.3-2.9-6.5h6.3z' fill='%23000' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, pointer !important; }
+/* the cursor: a dark rounded arrow with a thick white rim and a soft shadow, legible in both themes; text fields keep their caret */
+html, html *:not(input, textarea, [contenteditable]) { cursor: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%2732%27%20height=%2732%27%20viewBox=%270%200%2032%2032%27%3E%3Cfilter%20id=%27s%27%20x=%27-30%25%27%20y=%27-30%25%27%20width=%27160%25%27%20height=%27160%25%27%3E%3CfeDropShadow%20dx=%270%27%20dy=%271.5%27%20stdDeviation=%271.5%27%20flood-opacity=%27.35%27/%3E%3C/filter%3E%3Cpath%20filter=%27url%28%23s%29%27%20d=%27M6%205.5%2026.5%2013.2%2016.4%2016.4%2013.2%2026.5Z%27%20fill=%27%23000%27%20stroke=%27%23fff%27%20stroke-width=%272.6%27%20stroke-linejoin=%27round%27/%3E%3C/svg%3E") 6 6, auto !important; }
+:is(a, button, [role="button"], label, summary, .term__chips span, .term__scroll) { cursor: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%2732%27%20height=%2732%27%20viewBox=%270%200%2032%2032%27%3E%3Cfilter%20id=%27s%27%20x=%27-30%25%27%20y=%27-30%25%27%20width=%27160%25%27%20height=%27160%25%27%3E%3CfeDropShadow%20dx=%270%27%20dy=%271.5%27%20stdDeviation=%271.5%27%20flood-opacity=%27.35%27/%3E%3C/filter%3E%3Cpath%20filter=%27url%28%23s%29%27%20d=%27M6%205.5%2026.5%2013.2%2016.4%2016.4%2013.2%2026.5Z%27%20fill=%27%23000%27%20stroke=%27%23fff%27%20stroke-width=%272.6%27%20stroke-linejoin=%27round%27/%3E%3C/svg%3E") 6 6, pointer !important; }
 
 /* work and awards: the word hangs at the foot of the section, behind the text half of the tiles, not behind their photos */
 .section .wrap[data-word]::after { top: auto; bottom: calc(-1 * var(--s-4)); }

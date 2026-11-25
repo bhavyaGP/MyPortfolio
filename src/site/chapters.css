@@ -1,0 +1,213 @@
+/* ---- Chapters: the layout and scroll choreography after iamsrikanth.com, in the night window's own greys ---- */
+
+/* chapters take the height their content needs; the kit's one-screen sections would clip the work list, the years and the wheel */
+main > .section:not(#hackathons), footer.closing { height: auto !important; min-height: 0 !important; }
+main > .section:not(#hackathons) > .wrap, footer.closing > .wrap { height: auto !important; }
+
+/* a numbered rail at the left edge; the chapter in view shows its name */
+.rail { position: fixed; left: var(--s-5); top: 50%; translate: 0 -50%; z-index: 40; display: none; flex-direction: column; gap: 2px; font: 500 13px/1 var(--font-text); font-variant-numeric: tabular-nums; }
+.rail a { display: flex; align-items: center; gap: var(--s-2); min-height: 22px; color: color-mix(in oklab, var(--ink) 34%, var(--win)); text-decoration: none; transition: color 300ms cubic-bezier(.22, 1, .36, 1); }
+.rail a:hover { color: var(--ink); }
+.rail__n { width: 1.1em; }
+.rail__l { display: inline-flex; align-items: center; gap: var(--s-2); max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; font: 500 15px/1 var(--font-text);
+  transition: max-width 500ms cubic-bezier(.22, 1, .36, 1), opacity 300ms ease; }
+.rail__l::before { content: ""; flex: none; width: 18px; height: 1px; background: currentColor; }
+.rail a[aria-current] { color: var(--ink); }
+.rail a[aria-current] .rail__l { max-width: 140px; opacity: 1; }
+@media (min-width: 1100px) { .rail { display: flex; } }
+@media (min-width: 1100px) and (max-width: 1499px) { .rail__l { display: none; } }
+
+/* the window turns over between chapters: a slower fade than the theme switch */
+/* only the window itself fades; text and panes switch at once (fading every element under the glass cost seconds a frame) */
+html.theme-turn, html.theme-turn body { transition: background-color 700ms cubic-bezier(.4, 0, .2, 1); }
+/* Lenis (scroll.js) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* the ASCII portrait: behind the hero, right of centre, in the anchor-word grey; the hero's glass panes bend it like the lettering */
+.ascii { position: absolute; z-index: 0; right: max(-6vw, calc(50vw - 780px)); bottom: 0; pointer-events: none; color: color-mix(in oklab, var(--ink) 26%, var(--win)); }
+html .ascii.ascii { transition: none !important; }   /* its colour is read once per redraw, so it must not be mid-fade */
+main, .footer { position: relative; z-index: 1; }
+@media (max-width: 1023px) { .ascii { opacity: .55; right: -18vw; } }
+
+/* words sharpen into ink as they cross the screen: --p from scroll.js, --i and --n per word */
+[data-fill].is-split .w { display: inline-block; --k: clamp(0, calc(var(--p, 0) * (var(--n) + 2) - var(--i)), 1);
+  opacity: calc(.16 + .84 * var(--k)); filter: blur(calc((1 - var(--k)) * 7px)); }
+
+/* the statement and the ledger */
+.intro { padding-block: clamp(120px, 14vw, 220px) clamp(96px, 9vw, 150px); }
+.statement { max-width: 17ch; margin: 0 auto; text-align: center; font: 700 clamp(44px, 6.4vw, 96px)/.98 var(--font-display); letter-spacing: -0.025em; text-wrap: balance; color: var(--ink); }
+.statement__sub { max-width: 52ch; margin: var(--s-6) auto 0; text-align: center; font-size: 18px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+.ledger { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-6); margin: clamp(96px, 11vw, 180px) 0 0; padding: 0; list-style: none; }
+.ledger > li { padding-top: var(--s-5); border-top: 1px solid color-mix(in oklab, var(--ink) 22%, transparent); }
+.ledger__n { margin: 0; font: 700 clamp(64px, 7.4vw, 112px)/.9 var(--font-display); letter-spacing: -0.035em; font-variant-numeric: tabular-nums; color: var(--ink); }
+.ledger__n sup { margin-left: .04em; font-size: .42em; vertical-align: .95em; letter-spacing: 0; color: var(--muted); }
+.ledger__t { max-width: 24ch; margin: var(--s-3) 0 0; font-size: 18px; line-height: 1.4; color: var(--muted); }
+@media (max-width: 1023px) { .ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s-7); } }
+
+/* chapter headings and the huge marks come out of a blur as they arrive */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    :is(.section-head h2, #hackathons h2, .xp__mark, .ledger > li, .closing__cta h2) { animation: unblur linear both; animation-timeline: view(); animation-range: entry 0% cover 32%; }
+    .fan { animation: fan-in linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+  }
+}
+@keyframes unblur { from { opacity: .1; filter: blur(14px); translate: 0 24px; } to { opacity: 1; filter: none; translate: none; } }
+
+/* Work: titles on the left fill with ink; the glass window on the right holds still and swaps demos */
+#work .section-head { margin-bottom: var(--s-6); }
+.show { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(32px, 5vw, 80px); }
+.show__item { display: flex; flex-direction: column; justify-content: center; min-height: 82svh; }
+.show__item > p { max-width: 44ch; font-size: 18px; line-height: 1.5; color: var(--muted); }
+.show__title { margin: var(--s-2) 0 var(--s-4); font: 700 clamp(56px, 6vw, 96px)/.92 var(--font-display); letter-spacing: -0.03em; color: var(--ink); }
+.show__item .band { max-width: 40ch; }
+.show__item .tile__links { margin-top: var(--s-4); }
+.show__stage { position: sticky; top: calc(50svh - min(19vw, 250px)); align-self: start; margin-block: calc(41svh - min(19vw, 250px)); }
+.show__win { padding: 0 var(--s-3) var(--s-3); overflow: hidden; }
+.show__bar { display: flex; align-items: center; gap: 7px; height: 44px; margin: 0; padding-inline: var(--s-2); }
+.show__bar i { width: 11px; height: 11px; border-radius: 50%; background: color-mix(in oklab, var(--ink) 22%, transparent); }
+.show__url { margin-inline: auto; padding: 4px 14px; border-radius: 999px; background: color-mix(in oklab, var(--ink) 7%, transparent); font-size: 13px; color: var(--muted); transform: translateX(-20px); }
+.show__shots { position: relative; aspect-ratio: 16 / 10; border-radius: calc(var(--pane-r) - 12px); overflow: hidden; background: #000; }
+.show__shots .tile__media { position: absolute; inset: 0; display: block; margin: 0; opacity: 0; scale: 1.04; filter: blur(8px);
+  transition: opacity 500ms ease, scale 900ms cubic-bezier(.16, 1, .3, 1), filter 600ms cubic-bezier(.16, 1, .3, 1); }
+.show__shots .tile__media.is-on { opacity: 1; scale: 1; filter: none; z-index: 1; }
+.show__shots .tile__media img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+.show__shots .tile__video { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; border: 0; }
+@media (max-width: 1023px) {
+  .show { grid-template-columns: 1fr; }
+  .show__stage { display: none; }
+  .show__item { min-height: 0; padding-block: var(--s-7); }
+  .show__item .tile__media { order: -1; display: block; margin-bottom: var(--s-5); border-radius: 16px; overflow: hidden; }
+  .show__item .tile__media img { width: 100%; height: auto; }
+}
+
+/* Experience: the year each role began, huge in the window; the role on glass beside it, rows alternating */
+.xp { display: grid; gap: clamp(64px, 8vw, 128px); margin: var(--s-7) 0 0; padding: 0; list-style: none; }
+.xp__row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(32px, 5vw, 80px); align-items: start; }
+.xp__row:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.xp__row:nth-child(even) .xp__mark { order: 2; text-align: right; }
+.xp__mark { position: sticky; top: 22svh; margin: 0; font: 700 clamp(120px, 15vw, 240px)/.8 var(--font-display); letter-spacing: -0.05em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.xp__col { display: grid; gap: var(--s-5); }
+.xp__body { padding: var(--s-6); }
+.xp__body h3 { margin: 0; font: 700 clamp(32px, 3.2vw, 48px)/1 var(--font-display); letter-spacing: -0.02em; }
+.xp__role { margin: var(--s-2) 0 0; font-size: 18px; color: var(--muted); }
+.xp__body > p:not(.band, .xp__role) { margin: var(--s-4) 0 0; font-size: 18px; line-height: 1.5; max-width: 60ch; }
+.xp__body .built { margin: var(--s-4) 0 0; padding-left: 1.1em; display: grid; gap: var(--s-2); font-size: 18px; line-height: 1.5; }
+.xp__body .links { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); margin: var(--s-5) 0 0; }
+.xp .arch { margin: 0; }
+@media (max-width: 1023px) {
+  .xp__row, .xp__row:nth-child(even) { grid-template-columns: 1fr; }
+  .xp__row:nth-child(even) .xp__mark { order: 0; text-align: left; }
+  .xp__mark { position: static; margin-bottom: var(--s-4); font-size: clamp(88px, 26vw, 160px); }
+}
+
+/* Awards: three cards dealt across the table, the middle one inverted; they settle as they arrive and straighten under the pointer */
+#awards .grid { align-items: start; }
+.fan { rotate: var(--tilt); transition: rotate 500ms cubic-bezier(.22, 1, .36, 1), translate 500ms cubic-bezier(.22, 1, .36, 1); }
+.fan:nth-child(2) { translate: 0 48px; }
+.fan:hover { rotate: 0deg; translate: 0 -8px; }
+.fan--smoke { background: linear-gradient(180deg, rgb(255 255 255 / .08), transparent 30%), var(--smoke) !important; color: #fff; --ink: #fff; --muted: #b5b5b5; --glass-edge: rgb(255 255 255 / .14);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .4), inset 0 0 0 1px rgb(255 255 255 / .12), var(--glass-shadow) !important; }
+html[data-theme="dark"] .fan--smoke { background: linear-gradient(180deg, rgb(255 255 255 / .5), transparent 40%), rgb(240 240 240 / .9) !important; color: #0a0a0a; --ink: #0a0a0a; --muted: #4a4a4a; --glass-edge: rgb(0 0 0 / .1); }
+@keyframes fan-in { from { opacity: .2; rotate: calc(var(--tilt) * 3); translate: 0 120px; filter: blur(6px); } }
+@media (max-width: 1023px) { .fan, .fan:nth-child(2) { rotate: none; translate: none; } }
+
+/* Stack: a wheel of tool names that turns with the scroll */
+.drum { position: relative; z-index: 1; --drum-r: clamp(200px, 26vw, 360px); }
+.drum.is-live { height: 320svh; }
+.drum__stage { position: relative; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); align-items: center; width: min(100% - 2 * var(--gut), var(--container)); margin-inline: auto; }
+.drum.is-live .drum__stage { position: sticky; top: 0; height: 100svh; perspective: 1100px; perspective-origin: 20% 50%; overflow: clip; }
+.drum__note { grid-column: 2; grid-row: 1; margin: 0; max-width: 24ch; font-size: 18px; line-height: 1.45; color: var(--muted); }
+.drum__wheel { grid-column: 1; grid-row: 1; margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); font: 700 clamp(40px, 5vw, 72px)/1 var(--font-display); letter-spacing: -0.03em; color: var(--ink); }
+.drum.is-live .drum__wheel { position: relative; display: block; height: 100%; transform-style: preserve-3d; transform: translateZ(calc(-1 * var(--drum-r))); }   /* the front name sits at the screen plane, full size */
+.drum.is-live .drum__wheel li { position: absolute; left: 0; top: 50%; margin-top: -.5em; white-space: nowrap; transform-origin: 0 50%; backface-visibility: hidden; color: color-mix(in oklab, var(--ink) 55%, var(--win)); will-change: transform, filter; font-size: clamp(56px, 7.6vw, 120px); }
+.drum.is-live .drum__wheel li.is-front { color: var(--ink); }
+@media (max-width: 1023px) {
+  .drum__stage { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; }
+  .drum__note { grid-column: 1; grid-row: 2; align-self: end; padding-bottom: 14svh; }
+  .drum.is-live .drum__wheel li { font-size: clamp(44px, 12vw, 72px); }
+  .drum.is-live { height: 240svh; }
+}
+
+
+/* ---- Type scale (Geist): one ramp for every heading, so no chapter shouts louder than another ----
+   name 16vw · anchor word 14vw · year mark · stat · h2 · h3 · lead 18px · body 16px · band 13px mono */
+:root {
+  --t-name: clamp(72px, 15.5vw, 236px);
+  --t-anchor: clamp(80px, 13vw, 200px);
+  --t-mark: clamp(80px, 9vw, 136px);
+  --t-stat: clamp(48px, 4.6vw, 68px);
+  --t-h2: clamp(32px, 3.4vw, 48px);
+  --t-h3: clamp(24px, 2.2vw, 32px);
+}
+.hero__name, html .hero__name { font-size: var(--t-name); letter-spacing: -0.05em; }
+.section [data-word]::after, .footer[data-word]::before { font-size: var(--t-anchor); letter-spacing: -0.05em; }
+.section-head h2, #hackathons h2, #experience h2, .statement, .closing__cta h2 { font-size: var(--t-h2); line-height: 1.05; letter-spacing: -0.03em; font-weight: 600; }
+.statement { max-width: 22ch; }
+.show__title, .xp__body h3, #work .tile h3, #awards .tile h3, .act h3, .sub h3 { font-size: var(--t-h3); line-height: 1.1; letter-spacing: -0.02em; font-weight: 600; }
+.ledger__n { font-size: var(--t-stat); letter-spacing: -0.04em; font-weight: 600; }
+.xp__mark { font-size: var(--t-mark); letter-spacing: -0.06em; font-weight: 600; }
+.drum.is-live .drum__wheel li { font-size: var(--t-stat); font-weight: 600; letter-spacing: -0.04em; }
+#hero-h { font-size: clamp(26px, 2.4vw, 36px); letter-spacing: -0.025em; }
+@media (max-width: 1023px) {
+  .hero__name, html .hero__name { font-size: 19vw; }
+  .section [data-word]::after, .footer[data-word]::before { font-size: 22vw; }
+  .xp__mark { font-size: clamp(72px, 20vw, 120px); }
+}
+
+/* ---- Nav: one compact pill at the top centre, after iamsrikanth.com (36px items, 13px labels, the mark inside) ---- */
+.nav { inset: 14px 0 auto; height: 48px; justify-content: center; padding-inline: var(--s-4); }
+.nav__pill { position: static; transform: none; gap: 0; padding: 6px; }
+.nav__pill .nav__link { height: 36px; padding: 0 14px; font: 500 13px/1 var(--font-text); }
+.nav__pill .theme-btn { width: 36px; height: 36px; margin-left: 2px; }
+.nav__pill .theme-btn svg { width: 16px; height: 16px; }
+.nav__pill .nav__cta { height: 36px; min-height: 36px; margin-left: 6px; padding: 0 16px; font: 500 13px/1 var(--font-text); }
+.nav__mark { display: grid; place-items: center; width: 36px; height: 36px; margin-right: 4px; border-radius: 999px; color: var(--ink); transition: background-color 160ms ease; }
+.nav__mark:hover { background: color-mix(in oklab, var(--ink) 8%, transparent); }
+@media (max-width: 1023px) {
+  .nav { padding-inline: var(--s-4); }
+  .nav__pill { right: auto; }
+}
+
+/* ---- QuickLearnAI architecture: three tiers of icon boxes on the smoked figure, wires drawn by scroll.js ---- */
+.sys { padding: var(--s-6); }
+.sys__map { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(64px, 12vw, 190px); align-items: stretch; margin-top: var(--s-6); }
+.sys__tier { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 36px; }
+.sys__tier > .sys__node:nth-child(2) { margin-top: auto; }   /* the labels share the top line; the boxes centre below */
+.sys__tier > .sys__node:last-child { margin-bottom: auto; }
+.sys .sys__k { margin: 0 0 var(--s-4); font: 500 12px/1 "Geist Mono", ui-monospace, monospace; letter-spacing: .06em; color: rgb(255 255 255 / .5); }
+.sys__node { display: flex; align-items: center; gap: var(--s-3); padding: 12px 14px; border-radius: 16px; background: linear-gradient(180deg, rgb(255 255 255 / .07), rgb(255 255 255 / .02));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .16), inset 0 0 0 1px rgb(255 255 255 / .12), 0 12px 24px -16px rgb(0 0 0 / .8); color: #fff;
+  transition: box-shadow 200ms ease, translate 200ms cubic-bezier(.22, 1, .36, 1); }
+.sys__node:hover { translate: 0 -2px; box-shadow: inset 0 1px 0 rgb(255 255 255 / .24), inset 0 0 0 1px rgb(255 255 255 / .3), 0 16px 28px -16px rgb(0 0 0 / .9); }
+.sys__ic { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 12px; background: rgb(255 255 255 / .08); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
+.sys__ic img { width: 22px; height: 22px; object-fit: contain; filter: brightness(0) invert(1); }   /* every logo in white: the page keeps no hue */
+.sys__txt { display: grid; gap: 2px; min-width: 0; }
+.sys__txt b { font: 600 15px/1.2 var(--font-text); }
+.sys__txt small { font-size: 13px; color: rgb(255 255 255 / .6); }
+.sys__port { margin-left: auto; padding: 3px 8px; border-radius: 999px; background: rgb(255 255 255 / .08); font: 500 12px/1.2 "Geist Mono", ui-monospace, monospace; color: rgb(255 255 255 / .75); }
+.sys__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.sys__wire { fill: none; stroke: rgb(255 255 255 / .38); stroke-width: 1.25; }
+.sys__wire--data { stroke: rgb(255 255 255 / .2); stroke-dasharray: 3 4; }
+.sys__flow { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 2 46; opacity: .85; animation: sys-flow 2.4s linear infinite; }
+.sys__end { fill: #fff; }
+@keyframes sys-flow { to { stroke-dashoffset: -48; } }
+.sys__tags { position: absolute; inset: 0; pointer-events: none; }
+.sys__tag { position: absolute; translate: -100% -140%; padding: 2px 7px; border-radius: 6px; background: rgb(10 10 10 / .85); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14);
+  white-space: nowrap; font: 500 11px/1.4 "Geist Mono", ui-monospace, monospace; color: rgb(255 255 255 / .8); }
+.sys__tag--side { translate: 0 -50%; }
+.sys__ai { margin: var(--s-6) 0 0; padding-top: var(--s-4); border-top: 1px solid rgb(255 255 255 / .12); font: 500 13px/1.6 "Geist Mono", ui-monospace, monospace; color: rgb(255 255 255 / .6); }
+@media (prefers-reduced-motion: reduce) { .sys__flow { display: none; } }
+@media (max-width: 767px) {
+  .sys { padding: var(--s-5) var(--s-4); }
+  .sys__map { column-gap: 22px; }
+  .sys__node { flex-direction: column; align-items: flex-start; gap: var(--s-2); padding: 10px; }
+  .sys__ic { width: 30px; height: 30px; border-radius: 9px; }
+  .sys__ic img { width: 16px; height: 16px; }
+  .sys__txt b { font-size: 13px; }
+  .sys__txt small { font-size: 11px; }
+  .sys__port { margin-left: 0; font-size: 11px; }
+  .sys__tags { display: none; }
+}
