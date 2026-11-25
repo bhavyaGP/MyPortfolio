@@ -42,7 +42,13 @@ export default function Experience() {
                 <p className="band">Aug 2025 – Aug 2026 · remote</p>
                 <h3>CodemateAI</h3>
                 <p className="xp__role">Backend AI engineer intern</p>
-                <p>I built Guruverse AI on the OpenAI and Gemini SDKs with embeddings. My Node.js and vector-database backend served 400+ active users.</p>
+                <ul className="built">
+                  <li>Codemate Build: an AI app builder that turns plain-English requirements and design prompts into working web interfaces and code.</li>
+                  <li>Design Mode with responsive desktop and mobile frames, and click-to-edit: select any element on a frame and change its text, style or structure, synced to the code in a CodeMirror view.</li>
+                  <li>Agents route each request to frontend and backend services, with a terminal, live preview, downloads and deploys. Next.js, React, TypeScript, FastAPI, Zustand.</li>
+                  <li>Guruverse AI on the OpenAI and Gemini SDKs with embeddings: my Node.js and vector-database backend served 400+ active users.</li>
+                </ul>
+                <p className="links"><a className="link" href="https://build.codemate.ai/" target="_blank" rel="noopener noreferrer">Try Codemate Build</a><a className="link" href="https://github.com/bhavyaGP/codemate-build/tree/FE" target="_blank" rel="noopener noreferrer">Read the Codemate Build code</a></p>
               </div>
             </div>
           </li>
